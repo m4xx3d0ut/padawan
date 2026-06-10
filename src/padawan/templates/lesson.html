@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}{{ lesson.title }} - Padawan{% endblock %}
+{% block content %}
+<section class="lesson-shell">
+  <div class="lesson-left">
+    <div class="panel">
+      <div class="course-actions">
+        <a class="pill" href="/courses">Courses</a>
+        <span class="pill">{{ course.track }}</span>
+        <span class="pill">{{ course_card.completion_percent }}%</span>
+      </div>
+      <h2>{{ course.title }}</h2>
+      <p class="muted">{{ course.summary }}</p>
+    </div>
+    <nav class="lesson-nav" aria-label="Lessons">
+      <h3>Lessons</h3>
+      <ol>
+        {% for item in course.lessons %}
+        <li>
+          <a href="/courses/{{ course.id }}/lessons/{{ item.id }}">{{ item.title }}</a>
+          <small class="status-{{ lesson_statuses[item.id] }}">{{ lesson_statuses[item.id] }}</small>
+        </li>
+        {% endfor %}
+      </ol>
+    </nav>
+    <article class="panel concept">
+      <h2>{{ lesson.title }}</h2>
+      {{ concept_html | safe }}
+    </article>
+  </div>
+
+  <div class="lesson-right">
+    <section class="panel">
+      <h2>{{ module.title }}</h2>
+      <p>{{ lesson.prompt }}</p>
+      <div class="lesson-actions">
+        <button
+          type="button"
+          hx-post="/lessons/{{ lesson.id }}/hint?course_id={{ course.id }}"
+          hx-target="#hint"
+          hx-swap="innerHTML"
+        >Reveal Hint</button>
+        <button
+          type="button"
+          data-ask-codex
+          data-course-id="{{ course.id }}"
+          data-lesson-id="{{ lesson.id }}"
+          {% if not codex_status.installed %}disabled{% endif %}
+        >Ask Codex To Explain</button>
+      </div>
+      <div id="hint"></div>
+    </section>
+
+    <section class="panel">
+      <div class="runtime-actions">
+        <span class="pill">{{ lesson.runtime }}</span>
+        <span data-run-status class="pill status-not-started">idle</span>
+        <button
+          class="primary"
+          type="button"
+          data-run-lesson
+          data-course-id="{{ course.id }}"
+          data-lesson-id="{{ lesson.id }}"
+          data-runtime="{{ lesson.runtime }}"
+        >Run</button>
+      </div>
+      <textarea class="editor" data-editor spellcheck="false">{{ lesson.starter_code }}</textarea>
+      <ul data-run-messages class="muted"></ul>
+    </section>
+
+    <section class="runtime-output" aria-label="Runtime output">
+      <header>
+        <strong>Runtime Shell</strong>
+        <span class="muted">temporary workspace</span>
+      </header>
+      <pre class="terminal" data-terminal>No output yet.</pre>
+    </section>
+  </div>
+</section>
+
+<dialog id="codex-dialog">
+  <h2>Codex Explanation</h2>
+  <pre class="terminal" data-codex-output></pre>
+  <form method="dialog" class="modal-actions">
+    <button type="submit">Close</button>
+  </form>
+</dialog>
+{% endblock %}

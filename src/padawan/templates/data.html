@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Data - Padawan{% endblock %}
+{% block content %}
+<section class="panel data-panel">
+  <div>
+    <h2>Local Data</h2>
+    <p class="muted">
+      Back up progress, badges, generated course drafts, and local courses.
+    </p>
+  </div>
+  <div class="course-actions">
+    <a class="pill" href="/data/export">Download Backup</a>
+  </div>
+</section>
+
+<section class="course-grid">
+  <article class="course-card">
+    <h3>Restore Backup</h3>
+    <p>
+      Restore uses a safe merge. Padawan creates a pre-restore backup, imports
+      missing records, and skips seed-course conflicts.
+    </p>
+    <form class="learn-form" action="/data/import" method="post" enctype="multipart/form-data">
+      <input type="file" name="backup" accept=".zip,application/zip" required>
+      <button class="primary" type="submit">Import Backup</button>
+    </form>
+  </article>
+
+  <article class="course-card">
+    <h3>Current Paths</h3>
+    <p class="muted">State</p>
+    <code>{{ settings.state_dir }}</code>
+    <p class="muted">Backups</p>
+    <code>{{ settings.backup_dir }}</code>
+  </article>
+</section>
+
+{% if data_error %}
+<section class="panel data-panel error-panel">
+  <h3>Import Failed</h3>
+  <p>{{ data_error }}</p>
+</section>
+{% endif %}
+
+{% if restore_summary %}
+<section class="panel data-panel">
+  <h3>Import Summary</h3>
+  <p class="muted">Pre-restore backup: {{ restore_summary.pre_restore_backup }}</p>
+  <div class="summary-grid">
+    <div>
+      <strong>Courses</strong>
+      <p>{{ restore_summary.imported_courses|length }} imported</p>
+    </div>
+    <div>
+      <strong>Drafts</strong>
+      <p>{{ restore_summary.imported_drafts|length }} imported</p>
+    </div>
+    <div>
+      <strong>Skipped</strong>
+      <p>{{ restore_summary.skipped_courses|length }} skipped</p>
+    </div>
+  </div>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Table</th>
+        <th>Inserted</th>
+        <th>Skipped</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for table, inserted in restore_summary.table_inserted.items() %}
+      <tr>
+        <td>{{ table }}</td>
+        <td>{{ inserted }}</td>
+        <td>{{ restore_summary.table_skipped.get(table, 0) }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endif %}
+{% endblock %}

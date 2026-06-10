@@ -1,0 +1,126 @@
+{
+  "id": "k1s-workerbee-concepts",
+  "title": "Learn k1s and WorkerBee Concepts",
+  "track": "k1s-workerbee",
+  "level": "basic",
+  "summary": "Interactive starter lessons based on k1s Concepts in Practice.",
+  "modules": [
+    {
+      "id": "control-loop",
+      "title": "Control Loop Foundations",
+      "summary": "Connect orchestration concepts to local checks.",
+      "lessons": [
+        {
+          "id": "desired-state",
+          "title": "Desired State And Reconciliation",
+          "concept_md": "A reconciler repeatedly compares desired state to actual state and applies corrective actions until they converge. In k1s and WorkerBee work, this means specs, runtime status, logs, and probes are all evidence in one loop.",
+          "prompt": "Print one command or check you would use to verify a local workload is converging.",
+          "starter_code": "echo 'check healthz and workload status'\n",
+          "language": "bash",
+          "runtime": "bash",
+          "hidden_hint": "A useful answer mentions status, health, events, logs, or probes.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "value": "status",
+              "points": 1
+            }
+          ],
+          "codex_context": "k1s desired state and WorkerBee validation concept."
+        },
+        {
+          "id": "manifest-apply",
+          "title": "Manifest Apply Evidence",
+          "concept_md": "A manifest describes desired state. Applying it is only the start; useful validation checks the manifest, the workload status, and recent logs.",
+          "prompt": "Print the three evidence words `manifest`, `status`, and `logs`.",
+          "starter_code": "echo 'manifest logs'\n",
+          "language": "bash",
+          "runtime": "bash",
+          "hidden_hint": "The missing evidence word is `status`.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "value": "manifest",
+              "points": 1
+            },
+            {
+              "kind": "stdout_contains",
+              "value": "status",
+              "points": 1
+            },
+            {
+              "kind": "stdout_contains",
+              "value": "logs",
+              "points": 1
+            }
+          ],
+          "codex_context": "k1s manifest apply validation concept."
+        },
+        {
+          "id": "health-probes",
+          "title": "Health Probes",
+          "concept_md": "Readiness gates traffic, liveness gates restarts, and startup probes protect slow boot. WorkerBee validation should probe the app endpoint and inspect runtime status when checks fail.",
+          "prompt": "Print the endpoint path most seed web apps should expose for a simple health probe.",
+          "starter_code": "echo '/readyz'\n",
+          "language": "bash",
+          "runtime": "bash",
+          "hidden_hint": "This app exposes `/healthz`.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "value": "/healthz",
+              "points": 1
+            }
+          ],
+          "codex_context": "k1s health probe lesson."
+        },
+        {
+          "id": "troubleshooting-loop",
+          "title": "Troubleshooting Loop",
+          "concept_md": "When a workload is degraded, inspect status first, read logs second, then probe the exact route or health endpoint. Each step narrows the failing layer.",
+          "prompt": "Print the ordered troubleshooting checks: `status logs probe`.",
+          "starter_code": "echo 'status probe'\n",
+          "language": "bash",
+          "runtime": "bash",
+          "hidden_hint": "Include `logs` between status and probe.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "value": "status logs probe",
+              "points": 2
+            }
+          ],
+          "codex_context": "WorkerBee degraded workload troubleshooting lesson."
+        }
+      ]
+    }
+  ],
+  "badges": [
+    {
+      "id": "k1s-workerbee-started",
+      "title": "k1s WorkerBee Started",
+      "description": "Completed half of the k1s and WorkerBee starter concepts.",
+      "criteria": {
+        "completion_percent": 50
+      },
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {}
+    },
+    {
+      "id": "k1s-workerbee-starter",
+      "title": "k1s WorkerBee Starter",
+      "description": "Completed the k1s and WorkerBee starter concepts.",
+      "criteria": {
+        "completion_percent": 100
+      },
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {}
+    }
+  ],
+  "generated": false,
+  "verified": true
+}

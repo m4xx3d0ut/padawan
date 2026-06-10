@@ -1,0 +1,34 @@
+{% if courses %}
+<section class="course-grid" aria-label="Courses">
+  {% for course in courses %}
+  <article class="course-card">
+    <div>
+      <h3><a href="/courses/{{ course.id }}">{{ course.title }}</a></h3>
+      <div class="course-meta">{{ course.track }} / {{ course.level }}</div>
+    </div>
+    <p>{{ course.summary }}</p>
+    <div>
+      <div class="progress" aria-label="{{ course.completion_percent }} percent complete">
+        <span style="width: {{ course.completion_percent }}%"></span>
+      </div>
+      <p class="muted">{{ course.completed_lessons }} of {{ course.total_lessons }} lessons complete</p>
+    </div>
+    <div class="badge-row">
+      {% if course.badges %}
+        {% for badge in course.badges %}
+        <span class="badge">{{ badge.id }}</span>
+        {% endfor %}
+      {% else %}
+        <span class="pill">No badges yet</span>
+      {% endif %}
+    </div>
+    <div class="course-actions">
+      <a class="pill" href="/courses/{{ course.id }}">Open</a>
+      {% if course.last_scored_at %}<span class="muted">Last scored {{ course.last_scored_at }}</span>{% endif %}
+    </div>
+  </article>
+  {% endfor %}
+</section>
+{% else %}
+<div class="empty-state">No courses are available yet.</div>
+{% endif %}

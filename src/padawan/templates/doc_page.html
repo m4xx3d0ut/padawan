@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} - Padawan{% endblock %}
+{% block content %}
+<section class="doc-grid">
+  <nav class="panel doc-nav" aria-label="Docs">
+    {% for doc in docs %}
+    <a href="/docs/{{ doc.slug }}">{{ doc.title }}</a>
+    {% endfor %}
+  </nav>
+  <article class="doc-body">
+    {{ body | safe }}
+  </article>
+</section>
+{% endblock %}

@@ -1,0 +1,39 @@
+apiVersion: ae.dev/v1alpha1
+kind: Deployment
+metadata:
+  name: padawan
+  namespace: padawan
+spec:
+  image: localhost/padawan:dev
+  replicas: 1
+  ports:
+    - name: http
+      containerPort: 8787
+  env:
+    - name: PADAWAN_HOST
+      value: "0.0.0.0"
+    - name: PADAWAN_PORT
+      value: "8787"
+    - name: PADAWAN_STATE_DIR
+      value: /data/padawan
+  storage:
+    - name: data
+      mountPath: /data/padawan
+      retention: Retain
+  health:
+    readiness:
+      httpGet:
+        path: /healthz
+        port: 8787
+      initialDelaySeconds: 2
+      periodSeconds: 5
+    liveness:
+      httpGet:
+        path: /healthz
+        port: 8787
+      initialDelaySeconds: 10
+      periodSeconds: 10
+  ingress:
+    host: app.padawan.workerbee.home.arpa
+    path: /
+    tls: true

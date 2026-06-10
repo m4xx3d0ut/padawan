@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Padawan{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/app.css">
+    <script src="/static/vendor/htmx.min.js" defer></script>
+    <script src="/static/js/app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/">
+        <img src="/static/brand/k1s-logo-circle.svg" alt="">
+        <div>
+          <h1>Padawan</h1>
+          <span>Local coding teacher</span>
+        </div>
+      </a>
+      <nav class="course-actions" aria-label="Primary">
+        <a class="pill" href="/courses">Courses</a>
+        <a class="pill" href="/docs">Docs</a>
+        <a class="pill" href="/data">Data</a>
+        <span class="pill {{ 'ok' if codex_status.authenticated else 'pending' }}">Codex</span>
+      </nav>
+    </header>
+    <main class="shell">
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>

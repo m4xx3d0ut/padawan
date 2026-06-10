@@ -1,0 +1,116 @@
+{
+  "id": "git-basics",
+  "title": "Git CLI Basics",
+  "track": "git",
+  "level": "basic",
+  "summary": "Learn the smallest Git commands that reveal repository state.",
+  "modules": [
+    {
+      "id": "repo-state",
+      "title": "Repository State",
+      "summary": "Initialize and inspect a temporary Git repository.",
+      "lessons": [
+        {
+          "id": "git-init-status",
+          "title": "Initialize And Check Status",
+          "concept_md": "`git init` creates a repository. `git status --short` gives compact feedback for scripts and automation.",
+          "prompt": "Initialize a Git repo, create `note.txt`, and print short status.",
+          "starter_code": "git init\nprintf 'hello\\n' > note.txt\ngit status --short\n",
+          "language": "bash",
+          "runtime": "git",
+          "hidden_hint": "The expected output should include `?? note.txt`.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "value": "?? note.txt",
+              "points": 2
+            }
+          ],
+          "codex_context": "Beginner Git status lesson."
+        },
+        {
+          "id": "git-stage-file",
+          "title": "Stage A File",
+          "concept_md": "`git add` moves a file into the staging area. `git status --short` shows staged files with `A` in the first column.",
+          "prompt": "Initialize a repo, create `note.txt`, stage it, and print short status.",
+          "starter_code": "git init\nprintf 'hello\\n' > note.txt\ngit status --short\n",
+          "language": "bash",
+          "runtime": "git",
+          "hidden_hint": "Run `git add note.txt` before `git status --short`.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "value": "A  note.txt",
+              "points": 2
+            }
+          ],
+          "codex_context": "Beginner Git staging lesson."
+        },
+        {
+          "id": "git-first-commit",
+          "title": "Make A First Commit",
+          "concept_md": "A commit records staged changes. Local scripts can set a throwaway identity before committing in a temporary repo.",
+          "prompt": "Create a repo, commit `note.txt`, and print the commit subject.",
+          "starter_code": "git init\ngit config user.email learner@example.local\ngit config user.name Learner\nprintf 'hello\\n' > note.txt\ngit add note.txt\ngit commit -m 'Add note'\ngit log --oneline -1\n",
+          "language": "bash",
+          "runtime": "git",
+          "hidden_hint": "The log output should include the commit message.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "value": "Add note",
+              "points": 2
+            }
+          ],
+          "codex_context": "Beginner Git commit lesson."
+        },
+        {
+          "id": "git-branch-current",
+          "title": "Create A Branch",
+          "concept_md": "Branches are movable names for lines of work. `git branch --show-current` prints the active branch name.",
+          "prompt": "Create a repo, make a first commit, create `feature/docs`, and print the current branch.",
+          "starter_code": "git init\ngit config user.email learner@example.local\ngit config user.name Learner\nprintf 'hello\\n' > note.txt\ngit add note.txt\ngit commit -m 'Add note'\ngit branch --show-current\n",
+          "language": "bash",
+          "runtime": "git",
+          "hidden_hint": "Create and switch branches with `git checkout -b feature/docs` before printing the current branch.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "value": "feature/docs",
+              "points": 2
+            }
+          ],
+          "codex_context": "Beginner Git branch lesson."
+        }
+      ]
+    }
+  ],
+  "badges": [
+    {
+      "id": "git-basics-started",
+      "title": "Git Basics Started",
+      "description": "Completed half of the Git CLI Basics seed course.",
+      "criteria": {
+        "completion_percent": 50
+      },
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {}
+    },
+    {
+      "id": "git-basics-complete",
+      "title": "Git Basics Complete",
+      "description": "Completed the Git CLI Basics seed course.",
+      "criteria": {
+        "completion_percent": 100
+      },
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {}
+    }
+  ],
+  "generated": false,
+  "verified": true
+}

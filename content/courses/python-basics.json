@@ -1,0 +1,136 @@
+{
+  "id": "python-basics",
+  "title": "Python Basics",
+  "track": "python",
+  "level": "basic",
+  "summary": "Start with print output, variables, and small functions in local Python.",
+  "modules": [
+    {
+      "id": "first-steps",
+      "title": "First Steps",
+      "summary": "Run short Python programs and inspect their output.",
+      "lessons": [
+        {
+          "id": "hello-python",
+          "title": "Hello Python",
+          "concept_md": "Python programs can write text to standard output with `print()`. The runtime pane runs your code in a temporary workspace and checks the output.",
+          "prompt": "Change the program so it prints `Hello, Padawan!` exactly.",
+          "starter_code": "print('Hello, world!')\n",
+          "language": "python",
+          "runtime": "python",
+          "hidden_hint": "Only the text inside the quotes needs to change.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "value": "Hello, Padawan!",
+              "points": 1
+            },
+            {
+              "kind": "exit_code",
+              "value": 0,
+              "points": 1
+            }
+          ],
+          "codex_context": "Beginner Python print lesson."
+        },
+        {
+          "id": "python-variables",
+          "title": "Use A Variable",
+          "concept_md": "A variable gives a value a name. An f-string can place that value into output with `{name}`.",
+          "prompt": "Update the variable so the program prints `Hello, Padawan!`.",
+          "starter_code": "name = 'world'\nprint(f'Hello, {name}!')\n",
+          "language": "python",
+          "runtime": "python",
+          "hidden_hint": "Only the value assigned to `name` needs to change.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "value": "Hello, Padawan!",
+              "points": 1
+            },
+            {
+              "kind": "exit_code",
+              "value": 0,
+              "points": 1
+            }
+          ],
+          "codex_context": "Beginner Python variable and f-string lesson."
+        },
+        {
+          "id": "python-conditionals",
+          "title": "Choose With If",
+          "concept_md": "`if` lets a program choose a path. Comparisons such as `>=` produce a true or false result.",
+          "prompt": "Update the condition so this program prints `ready`.",
+          "starter_code": "score = 3\n\nif score > 5:\n    print('ready')\nelse:\n    print('try again')\n",
+          "language": "python",
+          "runtime": "python",
+          "hidden_hint": "The score should pass when it is at least three.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "value": "ready",
+              "points": 1
+            },
+            {
+              "kind": "exit_code",
+              "value": 0,
+              "points": 1
+            }
+          ],
+          "codex_context": "Beginner Python conditional lesson."
+        },
+        {
+          "id": "python-functions",
+          "title": "Return A Value",
+          "concept_md": "A function packages reusable behavior. `return` sends a value back to the caller.",
+          "prompt": "Update `double` so the program prints `8`.",
+          "starter_code": "def double(value):\n    return value\n\nprint(double(4))\n",
+          "language": "python",
+          "runtime": "python",
+          "hidden_hint": "The function should multiply the input by two.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "value": "8",
+              "points": 1
+            },
+            {
+              "kind": "exit_code",
+              "value": 0,
+              "points": 1
+            }
+          ],
+          "codex_context": "Beginner Python function lesson."
+        }
+      ]
+    }
+  ],
+  "badges": [
+    {
+      "id": "python-basics-started",
+      "title": "Python Basics Started",
+      "description": "Completed half of the Python Basics seed course.",
+      "criteria": {
+        "completion_percent": 50
+      },
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {}
+    },
+    {
+      "id": "python-basics-complete",
+      "title": "Python Basics Complete",
+      "description": "Completed the Python Basics seed course.",
+      "criteria": {
+        "completion_percent": 100
+      },
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {}
+    }
+  ],
+  "generated": false,
+  "verified": true
+}

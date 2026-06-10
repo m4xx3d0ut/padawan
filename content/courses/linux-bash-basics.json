@@ -1,0 +1,132 @@
+{
+  "id": "linux-bash-basics",
+  "title": "Linux CLI and Bash Basics",
+  "track": "linux-bash",
+  "level": "basic",
+  "summary": "Practice small shell scripts in controlled temporary workspaces.",
+  "modules": [
+    {
+      "id": "shell-output",
+      "title": "Shell Output",
+      "summary": "Use Bash commands to write predictable output.",
+      "lessons": [
+        {
+          "id": "echo-status",
+          "title": "Echo A Status",
+          "concept_md": "`echo` writes text to standard output. Shell scripts become useful when each command has a clear observable result.",
+          "prompt": "Make the script print `ready`.",
+          "starter_code": "echo waiting\n",
+          "language": "bash",
+          "runtime": "bash",
+          "hidden_hint": "Replace `waiting` with the expected word.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "value": "ready",
+              "points": 1
+            },
+            {
+              "kind": "exit_code",
+              "value": 0,
+              "points": 1
+            }
+          ],
+          "codex_context": "Beginner Bash echo lesson."
+        },
+        {
+          "id": "bash-variables",
+          "title": "Use A Shell Variable",
+          "concept_md": "Shell variables store text for later commands. Double quotes keep the variable expansion readable and predictable.",
+          "prompt": "Update the script so it prints `hello padawan`.",
+          "starter_code": "name=world\necho \"hello $name\"\n",
+          "language": "bash",
+          "runtime": "bash",
+          "hidden_hint": "Only the value assigned to `name` needs to change.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "value": "hello padawan",
+              "points": 1
+            },
+            {
+              "kind": "exit_code",
+              "value": 0,
+              "points": 1
+            }
+          ],
+          "codex_context": "Beginner Bash variable expansion lesson."
+        },
+        {
+          "id": "write-a-file",
+          "title": "Write A File",
+          "concept_md": "Redirection sends command output to a file. `>` replaces a file, while `>>` appends to it.",
+          "prompt": "Create a file named `status.txt` that contains `green`.",
+          "starter_code": "echo blue > status.txt\n",
+          "language": "bash",
+          "runtime": "bash",
+          "hidden_hint": "Keep the filename, change the value being redirected.",
+          "grading": [
+            {
+              "kind": "file_contains",
+              "path": "status.txt",
+              "value": "green",
+              "points": 2
+            }
+          ],
+          "codex_context": "Beginner Bash file redirection lesson."
+        },
+        {
+          "id": "bash-conditionals",
+          "title": "Check A Condition",
+          "concept_md": "Shell scripts often check files before deciding what to do next. `grep -q` tests for matching text without printing it.",
+          "prompt": "Update the script so it prints `deploy` when `status.txt` contains `green`.",
+          "starter_code": "echo green > status.txt\nif grep -q green status.txt; then\n  echo waiting\nfi\n",
+          "language": "bash",
+          "runtime": "bash",
+          "hidden_hint": "The condition is already correct; change the command inside the `then` block.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "value": "deploy",
+              "points": 1
+            },
+            {
+              "kind": "exit_code",
+              "value": 0,
+              "points": 1
+            }
+          ],
+          "codex_context": "Beginner Bash conditional lesson."
+        }
+      ]
+    }
+  ],
+  "badges": [
+    {
+      "id": "bash-basics-started",
+      "title": "Bash Basics Started",
+      "description": "Completed half of the Linux CLI and Bash Basics seed course.",
+      "criteria": {
+        "completion_percent": 50
+      },
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {}
+    },
+    {
+      "id": "bash-basics-complete",
+      "title": "Bash Basics Complete",
+      "description": "Completed the Linux CLI and Bash Basics seed course.",
+      "criteria": {
+        "completion_percent": 100
+      },
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {}
+    }
+  ],
+  "generated": false,
+  "verified": true
+}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Padawan{% endblock %}
+{% block content %}
+<section class="hero">
+  <div>
+    <h2>What programming language or skills would you like to learn today?</h2>
+    <form class="learn-form" action="/courses/generate" method="post">
+      <input name="prompt" size="56" placeholder="Python basics, Git branches, Bash scripts, k1s health probes">
+      <button class="primary" type="submit">Generate Course</button>
+    </form>
+    <p class="muted">
+      Generated courses are held for validation before becoming part of your course list.
+    </p>
+  </div>
+  <aside class="hero-card">
+    <img src="/static/brand/k1s-and-workerbee-logo.png" alt="k1s and WorkerBee">
+    <strong>Core MVP Tracks</strong>
+    <p class="muted">Linux/Bash, Git, Python, and k1s/WorkerBee.</p>
+  </aside>
+</section>
+
+{% include "partials/course_grid.html" %}
+{% endblock %}
