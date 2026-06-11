@@ -27,6 +27,26 @@
       <h2>{{ lesson.title }}</h2>
       {{ concept_html | safe }}
     </article>
+    <article class="panel concept-guide">
+      <h2>Learn The Concept</h2>
+      <div class="concept-summary">
+        {{ concept_guide.summary_html | safe }}
+      </div>
+      {% if concept_guide.links %}
+      <h3>Project Docs</h3>
+      <ul class="resource-list">
+        {% for link in concept_guide.links %}
+        <li>
+          <a
+            href="{{ link.url }}"
+            {% if link.url[:4] == "http" %}target="_blank" rel="noreferrer"{% endif %}
+          >{{ link.title }}</a>
+          {% if link.description %}<span>{{ link.description }}</span>{% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </article>
   </div>
 
   <div class="lesson-right">

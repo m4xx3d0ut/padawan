@@ -39,10 +39,18 @@ class GradingRule(BaseModel):
     points: int = 1
 
 
+class ConceptLink(BaseModel):
+    title: str
+    url: str
+    description: str = ""
+
+
 class Lesson(BaseModel):
     id: str
     title: str
     concept_md: str
+    concept_summary: str = ""
+    concept_links: list[ConceptLink] = Field(default_factory=list)
     prompt: str
     starter_code: str = ""
     language: str = "text"

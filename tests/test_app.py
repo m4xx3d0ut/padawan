@@ -6,6 +6,7 @@ from fastapi.testclient import TestClient
 
 from padawan.app import create_app
 from padawan.courses import export_course, load_courses
+from padawan.models import ConceptLink
 from padawan.settings import REPO_ROOT, Settings
 
 
@@ -48,6 +49,61 @@ def test_lesson_page_runs_python(tmp_path: Path) -> None:
     assert "Runtime Shell" in page.text
     assert response.status_code == 200
     assert response.json()["status"] == "passed"
+
+
+def test_lesson_page_shows_concept_guidance_and_docs(tmp_path: Path) -> None:
+    with make_client(tmp_path) as client:
+        page = client.get("/courses/python-basics/lessons/hello-python")
+
+    assert page.status_code == 200
+    assert "Learn The Concept" in page.text
+    assert "Python Tutorial" in page.text
+    assert "https://docs.python.org/3/tutorial/index.html" in page.text
+    assert "Built-in Functions" in page.text
+
+
+def test_generated_lesson_page_uses_custom_concept_links(tmp_path: Path) -> None:
+    settings = Settings(
+        state_dir=tmp_path,
+        content_dir=REPO_ROOT / "content" / "courses",
+        docs_dir=REPO_ROOT / "docs" / "wiki",
+    )
+    seed = load_courses(settings.content_dir)["python-basics"]
+    lesson = (
+        seed.modules[0]
+        .lessons[0]
+        .model_copy(
+            update={
+                "concept_summary": "This generated lesson explains one focused idea for a novice.",
+                "concept_links": [
+                    ConceptLink(
+                        title="Generated Lesson Docs",
+                        url="https://docs.python.org/3/tutorial/introduction.html",
+                        description="A lesson-specific official docs link.",
+                    )
+                ],
+            }
+        )
+    )
+    module = seed.modules[0].model_copy(update={"lessons": [lesson]})
+    generated = seed.model_copy(
+        update={
+            "id": "generated-python-docs",
+            "title": "Generated Python Docs",
+            "generated": True,
+            "verified": True,
+            "modules": [module],
+        }
+    )
+    export_course(generated, settings.user_course_dir / "generated-python-docs.json")
+
+    with TestClient(create_app(settings)) as client:
+        page = client.get("/courses/generated-python-docs/lessons/hello-python")
+
+    assert page.status_code == 200
+    assert "This generated lesson explains one focused idea for a novice." in page.text
+    assert "Generated Lesson Docs" in page.text
+    assert "https://docs.python.org/3/tutorial/introduction.html" in page.text
 
 
 def test_docs_render(tmp_path: Path) -> None:

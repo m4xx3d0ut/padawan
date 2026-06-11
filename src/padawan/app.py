@@ -25,13 +25,191 @@ from .courses import (
     validate_course_path,
 )
 from .docs import list_docs, render_doc
-from .models import Level, RuntimeRequest, Track
+from .models import ConceptLink, Course, Lesson, Level, RuntimeRequest, Track
 from .runtime import run_lesson
 from .settings import PACKAGE_DIR, Settings, ensure_settings_dirs
 from .storage import Storage
 
 TEMPLATES = Jinja2Templates(directory=str(PACKAGE_DIR / "templates"))
 BACKUP_UPLOAD = File(...)
+
+
+TRACK_GUIDANCE: dict[str, str] = {
+    "linux-bash": (
+        "Shell lessons are about command behavior and text flow. Read the command "
+        "from left to right, identify what input it receives, then run the smallest "
+        "command that proves the output or file changed as expected."
+    ),
+    "git": (
+        "Git lessons are about repository state. Before running a command, name the "
+        "state you expect to change: working tree, staging area, commit history, "
+        "branch pointer, or remote reference."
+    ),
+    "python": (
+        "Python lessons usually practice one language building block at a time. "
+        "Trace the values in the starter code, make one focused edit, then compare "
+        "the runtime output with the prompt."
+    ),
+    "webdev-ts-react": (
+        "TypeScript and React lessons ask you to separate data, rendering, and user "
+        "interaction. Keep the component behavior small, then use the runtime result "
+        "to confirm the rendered state matches the prompt."
+    ),
+    "webdev-python-htmx": (
+        "Python and HTMX lessons connect server-rendered HTML with browser actions. "
+        "Look for the request, the response fragment, and the DOM target that should "
+        "change after the interaction."
+    ),
+    "k1s-workerbee": (
+        "k1s and WorkerBee lessons are evidence-driven. Describe the desired state, "
+        "run or inspect the smallest check available, then compare the observed "
+        "status, logs, or probe output with the expected state."
+    ),
+    "roblox": (
+        "Roblox lessons focus on gameplay behavior and Lua scripting concepts. Name "
+        "the object, event, or script responsibility first, then explain how it would "
+        "change the player experience."
+    ),
+    "unity": (
+        "Unity lessons connect scene objects, components, scripts, and events. Start "
+        "by naming which GameObject or Component owns the behavior, then describe the "
+        "smallest script or editor change that would prove it."
+    ),
+    "unreal": (
+        "Unreal lessons use engine roles such as Actors, Components, Pawns, "
+        "Controllers, and GameMode. Identify which engine object should own the "
+        "behavior before choosing Blueprint or C++ details."
+    ),
+}
+
+
+TRACK_LINKS: dict[str, list[ConceptLink]] = {
+    "linux-bash": [
+        ConceptLink(
+            title="Bash Reference Manual",
+            url="https://www.gnu.org/software/bash/manual/bash.html",
+            description="GNU's reference for shell syntax, expansion, variables, and control flow.",
+        ),
+        ConceptLink(
+            title="GNU Coreutils Manual",
+            url="https://www.gnu.org/software/coreutils/manual/coreutils.html",
+            description="Reference for common commands used in shell lessons.",
+        ),
+    ],
+    "git": [
+        ConceptLink(
+            title="Pro Git Book",
+            url="https://git-scm.com/book/en/v2",
+            description=(
+                "Beginner-friendly chapters on repositories, commits, branches, and remotes."
+            ),
+        ),
+        ConceptLink(
+            title="Git Command Reference",
+            url="https://git-scm.com/docs",
+            description="Official command documentation for checking exact flags and behavior.",
+        ),
+    ],
+    "python": [
+        ConceptLink(
+            title="Python Tutorial",
+            url="https://docs.python.org/3/tutorial/index.html",
+            description="The official guided introduction to Python language basics.",
+        ),
+        ConceptLink(
+            title="Built-in Functions",
+            url="https://docs.python.org/3/library/functions.html",
+            description="Reference for functions such as print, len, range, and input.",
+        ),
+    ],
+    "webdev-ts-react": [
+        ConceptLink(
+            title="React Learn",
+            url="https://react.dev/learn",
+            description="Official React learning path for components, state, and events.",
+        ),
+        ConceptLink(
+            title="TypeScript Handbook",
+            url="https://www.typescriptlang.org/docs/handbook/intro.html",
+            description="Official TypeScript guide for types, functions, objects, and narrowing.",
+        ),
+        ConceptLink(
+            title="MDN JavaScript Guide",
+            url="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
+            description="Beginner-friendly JavaScript concepts from MDN.",
+        ),
+    ],
+    "webdev-python-htmx": [
+        ConceptLink(
+            title="HTMX Documentation",
+            url="https://htmx.org/docs/",
+            description="Official docs for hx-get, hx-post, swaps, targets, and request flow.",
+        ),
+        ConceptLink(
+            title="FastAPI Tutorial",
+            url="https://fastapi.tiangolo.com/tutorial/",
+            description="Official step-by-step guide for Python web endpoints.",
+        ),
+        ConceptLink(
+            title="Python Tutorial",
+            url="https://docs.python.org/3/tutorial/index.html",
+            description="Official Python language basics used by server-side lessons.",
+        ),
+    ],
+    "k1s-workerbee": [
+        ConceptLink(
+            title="Padawan WorkerBee Guide",
+            url="/docs/workerbee",
+            description="Local Padawan guidance for WorkerBee validation and progress surfaces.",
+        ),
+        ConceptLink(
+            title="Kubernetes Workloads",
+            url="https://kubernetes.io/docs/concepts/workloads/",
+            description="Upstream concepts for pods, deployments, and workload state.",
+        ),
+    ],
+    "roblox": [
+        ConceptLink(
+            title="Roblox Creator Documentation",
+            url="https://create.roblox.com/docs",
+            description="Official Roblox Creator Hub docs for Studio and engine concepts.",
+        ),
+        ConceptLink(
+            title="Roblox Scripting",
+            url="https://create.roblox.com/docs/scripting",
+            description="Official scripting overview for adding behavior to Roblox experiences.",
+        ),
+    ],
+    "unity": [
+        ConceptLink(
+            title="Unity Documentation",
+            url="https://docs.unity.com/",
+            description="Official entry point for Unity Engine, Editor, and tool documentation.",
+        ),
+        ConceptLink(
+            title="Programming In Unity",
+            url="https://docs.unity3d.com/6000.4/Documentation/Manual/scripting.html",
+            description="Unity manual section for scripts, components, and programming setup.",
+        ),
+    ],
+    "unreal": [
+        ConceptLink(
+            title="Unreal Engine Documentation",
+            url="https://dev.epicgames.com/documentation/unreal-engine",
+            description=(
+                "Official Unreal Engine docs for editor, gameplay, Blueprint, and C++ topics."
+            ),
+        ),
+        ConceptLink(
+            title="Gameplay Framework",
+            url=(
+                "https://dev.epicgames.com/documentation/unreal-engine/"
+                "gameplay-framework-in-unreal-engine"
+            ),
+            description="Official guide to Unreal gameplay classes and ownership responsibilities.",
+        ),
+    ],
+}
 
 
 def create_app(settings: Settings | None = None) -> FastAPI:
@@ -133,6 +311,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                     item.id: storage.lesson_status(course.id, item.id) for item in course.lessons
                 },
                 "concept_html": _render_markdown(lesson.concept_md),
+                "concept_guide": _lesson_concept_guide(course, lesson),
             }
         )
         return TEMPLATES.TemplateResponse(request, "lesson.html", context)
@@ -506,6 +685,24 @@ def _base_context(request: Request, settings: Settings, storage: Storage) -> dic
         "storage": storage,
         "codex_status": request.app.state.codex.status(),
     }
+
+
+def _lesson_concept_guide(course: Course, lesson: Lesson) -> dict[str, Any]:
+    summary = lesson.concept_summary.strip() or _fallback_concept_summary(course, lesson)
+    links = lesson.concept_links or TRACK_LINKS.get(course.track, [])
+    return {
+        "summary_html": _render_markdown(summary),
+        "links": [link.model_dump() for link in links],
+    }
+
+
+def _fallback_concept_summary(course: Course, lesson: Lesson) -> str:
+    guidance = TRACK_GUIDANCE.get(
+        course.track,
+        "Use this lesson to practice one focused concept. Read the prompt, make the "
+        "smallest useful change, run it, and compare the result with the expected behavior.",
+    )
+    return f"Use **{lesson.title}** to practice one focused idea before moving on.\n\n{guidance}"
 
 
 def _render_markdown(text: str) -> str:

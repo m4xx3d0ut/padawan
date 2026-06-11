@@ -51,6 +51,8 @@ A good lesson has:
 - a short title
 - a focused prompt
 - teaching material that explains one idea
+- a short `concept_summary` written for newcomers
+- one to four `concept_links` that point to relevant official project docs
 - starter code that is close enough for a newcomer to begin
 - a hidden hint that nudges without solving everything
 - local grading rules
@@ -59,6 +61,12 @@ A good lesson has:
 
 Keep lessons small. A learner should understand what to try next after one read
 of the prompt.
+
+`concept_links` should favor the source project docs over blogs or tutorials.
+For example, Python lessons should link to Python docs, Git lessons should link
+to Git docs, HTMX lessons should link to HTMX docs, and engine lessons should
+link to the relevant Roblox, Unity, or Unreal documentation. Padawan falls back
+to track-level docs if an older course does not define lesson-specific links.
 
 ## Validation
 
