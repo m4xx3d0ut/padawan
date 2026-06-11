@@ -1,5 +1,9 @@
 # Padawan
 
+<p align="center">
+  <img src="docs/assets/padawan-hero.gif" alt="Padawan overview showing course browsing, a split lesson editor and runtime shell, hidden hints, draft validation, data backup, docs, and newcomer install guidance" width="900">
+</p>
+
 Padawan is a local progressive coding teacher. It serves a web UI on your
 machine, stores learner progress locally, runs exercises in temporary
 workspaces, and uses your existing Codex CLI login for generated explanations
