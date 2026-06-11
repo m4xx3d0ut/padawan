@@ -38,6 +38,8 @@ packages = ["padawan"]
 "padawan" = [
     "templates/**/*.html",
     "static/**/*",
+    "content/**/*.json",
+    "docs/wiki/*.md",
 ]
 
 [tool.pytest.ini_options]

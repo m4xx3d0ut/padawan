@@ -21,6 +21,7 @@ STATE_TABLES = (
     "badge_awards",
     "generation_jobs",
     "validation_runs",
+    "codex_threads",
 )
 MERGE_KEYS = {
     "attempts": (
@@ -37,6 +38,7 @@ MERGE_KEYS = {
     "badge_awards": ("course_id", "badge_id"),
     "generation_jobs": ("prompt", "status", "course_id", "detail", "created_at", "updated_at"),
     "validation_runs": ("course_id", "status", "detail", "created_at"),
+    "codex_threads": ("thread_id",),
 }
 
 

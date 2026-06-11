@@ -3,7 +3,7 @@ from __future__ import annotations
 import tempfile
 import zipfile
 from pathlib import Path
-from typing import Any
+from typing import Any, get_args
 
 from fastapi import FastAPI, File, Request, UploadFile
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
@@ -12,9 +12,19 @@ from fastapi.templating import Jinja2Templates
 
 from .backup import BackupError, export_backup, import_backup, inspect_backup
 from .codex import CodexClient
-from .courses import export_course, find_lesson, load_course_dirs, validate_course_path
+from .courses import (
+    CourseLoadError,
+    export_course,
+    find_lesson,
+    load_course_dirs,
+    load_drafts,
+    publish_draft,
+    reject_draft,
+    validate_course_for_publish,
+    validate_course_path,
+)
 from .docs import list_docs, render_doc
-from .models import RuntimeRequest
+from .models import Level, RuntimeRequest, Track
 from .runtime import run_lesson
 from .settings import PACKAGE_DIR, Settings, ensure_settings_dirs
 from .storage import Storage
@@ -39,13 +49,30 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         courses = _courses(resolved)
         context = _base_context(request, resolved, storage)
         context["courses"] = storage.course_cards(courses.values())
+        context["tracks"] = get_args(Track)
+        context["levels"] = get_args(Level)
         return TEMPLATES.TemplateResponse(request, "index.html", context)
 
     @app.get("/courses", response_class=HTMLResponse)
     async def courses_index(request: Request) -> HTMLResponse:
         courses = _courses(resolved)
         context = _base_context(request, resolved, storage)
-        context["courses"] = storage.course_cards(courses.values())
+        cards = storage.course_cards(courses.values())
+        track = request.query_params.get("track", "")
+        level = request.query_params.get("level", "")
+        if track:
+            cards = [card for card in cards if card.track == track]
+        if level:
+            cards = [card for card in cards if card.level == level]
+        context.update(
+            {
+                "courses": cards,
+                "tracks": get_args(Track),
+                "levels": get_args(Level),
+                "selected_track": track,
+                "selected_level": level,
+            }
+        )
         return TEMPLATES.TemplateResponse(request, "courses.html", context)
 
     @app.get("/courses/{course_id}", response_class=HTMLResponse)
@@ -153,6 +180,64 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             }
         )
 
+    @app.get("/drafts", response_class=HTMLResponse)
+    async def drafts_index(request: Request) -> HTMLResponse:
+        context = _base_context(request, resolved, storage)
+        context.update(_draft_context(resolved, storage))
+        context["draft_result"] = None
+        context["draft_error"] = None
+        return TEMPLATES.TemplateResponse(request, "drafts.html", context)
+
+    @app.post("/drafts/{course_id}/validate", response_class=HTMLResponse)
+    async def draft_validate(request: Request, course_id: str) -> HTMLResponse:
+        context = _base_context(request, resolved, storage)
+        try:
+            course = load_drafts(resolved.course_draft_dir)[course_id]
+            result = validate_course_for_publish(
+                course,
+                resolved,
+                existing_course_ids=set(_courses(resolved)),
+            )
+            storage.record_validation_run(course_id, result.status, result.model_dump_json())
+            context["draft_result"] = result
+            context["draft_error"] = None
+        except (CourseLoadError, KeyError, OSError, ValueError) as exc:
+            context["draft_result"] = None
+            context["draft_error"] = str(exc)
+        context.update(_draft_context(resolved, storage))
+        return TEMPLATES.TemplateResponse(request, "drafts.html", context)
+
+    @app.post("/drafts/{course_id}/publish", response_class=HTMLResponse)
+    async def draft_publish(request: Request, course_id: str) -> HTMLResponse:
+        context = _base_context(request, resolved, storage)
+        try:
+            result = publish_draft(
+                resolved,
+                course_id,
+                existing_course_ids=set(_courses(resolved)),
+            )
+            storage.record_validation_run(course_id, result.status, result.model_dump_json())
+            context["draft_result"] = result
+            context["draft_error"] = None if result.status == "passed" else "Validation failed."
+        except (CourseLoadError, KeyError, OSError, ValueError) as exc:
+            context["draft_result"] = None
+            context["draft_error"] = str(exc)
+        context.update(_draft_context(resolved, storage))
+        return TEMPLATES.TemplateResponse(request, "drafts.html", context)
+
+    @app.post("/drafts/{course_id}/reject", response_class=HTMLResponse)
+    async def draft_reject(request: Request, course_id: str) -> HTMLResponse:
+        context = _base_context(request, resolved, storage)
+        try:
+            reject_draft(resolved, course_id)
+            context["draft_result"] = None
+            context["draft_error"] = None
+        except OSError as exc:
+            context["draft_result"] = None
+            context["draft_error"] = str(exc)
+        context.update(_draft_context(resolved, storage))
+        return TEMPLATES.TemplateResponse(request, "drafts.html", context)
+
     @app.get("/data", response_class=HTMLResponse)
     async def data_index(request: Request) -> HTMLResponse:
         context = _base_context(request, resolved, storage)
@@ -215,19 +300,31 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             prompt=lesson.prompt,
             code=str(payload.get("code", "")),
         )
+        if thread_id := result.get("thread_id"):
+            storage.upsert_codex_thread(
+                thread_id=str(thread_id),
+                course_id=course.id,
+                lesson_id=lesson.id,
+                title=f"{course.title}: {lesson.title}",
+            )
         return JSONResponse(result)
 
     @app.post("/codex/chat/{thread_id}")
     async def codex_chat(thread_id: str, request: Request) -> JSONResponse:
         payload = await request.json()
-        return JSONResponse(
-            {
-                "ok": False,
-                "thread_id": thread_id,
-                "error": "Interactive resume chat is reserved for the next adapter iteration.",
-                "message": payload.get("message", ""),
-            }
-        )
+        message = str(payload.get("message", "")).strip()
+        if not message:
+            return JSONResponse({"ok": False, "error": "Message is required."}, status_code=400)
+        result = codex.chat(thread_id=thread_id, message=message)
+        thread = storage.codex_thread(thread_id)
+        if thread:
+            storage.upsert_codex_thread(
+                thread_id=thread_id,
+                course_id=str(thread["course_id"]),
+                lesson_id=str(thread["lesson_id"]),
+                title=str(thread["title"]),
+            )
+        return JSONResponse(result)
 
     @app.get("/docs", response_class=HTMLResponse)
     async def docs_index(request: Request) -> HTMLResponse:
@@ -268,6 +365,18 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
 def _courses(settings: Settings):
     return load_course_dirs(settings.content_dir, settings.user_course_dir)
+
+
+def _draft_context(settings: Settings, storage: Storage) -> dict[str, Any]:
+    drafts = []
+    for course in load_drafts(settings.course_draft_dir).values():
+        drafts.append(
+            {
+                "course": course,
+                "validation": storage.latest_validation_for_course(course.id),
+            }
+        )
+    return {"drafts": sorted(drafts, key=lambda item: item["course"].title)}
 
 
 def _base_context(request: Request, settings: Settings, storage: Storage) -> dict[str, Any]:

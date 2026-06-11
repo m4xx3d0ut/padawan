@@ -1,0 +1,124 @@
+{
+  "badges": [
+    {
+      "criteria": {
+        "completion_percent": 50
+      },
+      "description": "Completed half of k1s and WorkerBee Advanced.",
+      "id": "k1s-workerbee-advanced-started",
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {},
+      "title": "k1s and WorkerBee Advanced Started"
+    },
+    {
+      "criteria": {
+        "completion_percent": 100
+      },
+      "description": "Completed k1s and WorkerBee Advanced.",
+      "id": "k1s-workerbee-advanced-complete",
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {},
+      "title": "k1s and WorkerBee Advanced Complete"
+    }
+  ],
+  "generated": false,
+  "id": "k1s-workerbee-advanced",
+  "level": "advanced",
+  "modules": [
+    {
+      "id": "k1s-workerbee-advanced",
+      "lessons": [
+        {
+          "codex_context": "security review Workflow lesson for Padawan.",
+          "concept_md": "k1s and WorkerBee advanced work depends on understanding `security review` and validating it with evidence.",
+          "grading": [
+            {
+              "kind": "text_contains",
+              "points": 1,
+              "value": "security review"
+            }
+          ],
+          "hidden_hint": "Mention `security review` and a validation signal.",
+          "id": "k1s-advanced-1",
+          "language": "markdown",
+          "prompt": "Explain how `security review` fits into a k1s and WorkerBee advanced workflow.",
+          "reference_solution": "security review is part of the k1s and WorkerBee workflow and should be validated with local evidence.",
+          "runtime": "text",
+          "starter_code": "security review fits into the workflow by ...",
+          "title": "security review Workflow",
+          "toolchain": {}
+        },
+        {
+          "codex_context": "helm Workflow lesson for Padawan.",
+          "concept_md": "k1s and WorkerBee advanced work depends on understanding `helm` and validating it with evidence.",
+          "grading": [
+            {
+              "kind": "text_contains",
+              "points": 1,
+              "value": "helm"
+            }
+          ],
+          "hidden_hint": "Mention `helm` and a validation signal.",
+          "id": "k1s-advanced-2",
+          "language": "markdown",
+          "prompt": "Explain how `helm` fits into a k1s and WorkerBee advanced workflow.",
+          "reference_solution": "helm is part of the k1s and WorkerBee workflow and should be validated with local evidence.",
+          "runtime": "text",
+          "starter_code": "helm fits into the workflow by ...",
+          "title": "helm Workflow",
+          "toolchain": {}
+        },
+        {
+          "codex_context": "evidence Workflow lesson for Padawan.",
+          "concept_md": "k1s and WorkerBee advanced work depends on understanding `evidence` and validating it with evidence.",
+          "grading": [
+            {
+              "kind": "text_contains",
+              "points": 1,
+              "value": "evidence"
+            }
+          ],
+          "hidden_hint": "Mention `evidence` and a validation signal.",
+          "id": "k1s-advanced-3",
+          "language": "markdown",
+          "prompt": "Explain how `evidence` fits into a k1s and WorkerBee advanced workflow.",
+          "reference_solution": "evidence is part of the k1s and WorkerBee workflow and should be validated with local evidence.",
+          "runtime": "text",
+          "starter_code": "evidence fits into the workflow by ...",
+          "title": "evidence Workflow",
+          "toolchain": {}
+        },
+        {
+          "codex_context": "separate Workflow lesson for Padawan.",
+          "concept_md": "k1s and WorkerBee advanced work depends on understanding `separate` and validating it with evidence.",
+          "grading": [
+            {
+              "kind": "text_contains",
+              "points": 1,
+              "value": "separate"
+            }
+          ],
+          "hidden_hint": "Mention `separate` and a validation signal.",
+          "id": "k1s-advanced-4",
+          "language": "markdown",
+          "prompt": "Explain how `separate` fits into a k1s and WorkerBee advanced workflow.",
+          "reference_solution": "separate is part of the k1s and WorkerBee workflow and should be validated with local evidence.",
+          "runtime": "text",
+          "starter_code": "separate fits into the workflow by ...",
+          "title": "separate Workflow",
+          "toolchain": {}
+        }
+      ],
+      "summary": "Design validation gates, export artifacts, and operate repair loops.",
+      "title": "k1s and WorkerBee Advanced Lessons"
+    }
+  ],
+  "summary": "Design validation gates, export artifacts, and operate repair loops.",
+  "title": "k1s and WorkerBee Advanced",
+  "track": "k1s-workerbee",
+  "verified": true
+}

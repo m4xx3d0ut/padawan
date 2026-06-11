@@ -1,6 +1,13 @@
 from __future__ import annotations
 
-from padawan.settings import Settings, default_content_dir, default_docs_dir, ensure_settings_dirs
+import padawan.settings as settings_module
+from padawan.settings import (
+    PACKAGE_DIR,
+    Settings,
+    default_content_dir,
+    default_docs_dir,
+    ensure_settings_dirs,
+)
 
 
 def test_default_paths_prefer_current_working_tree(monkeypatch, tmp_path) -> None:
@@ -25,3 +32,13 @@ def test_ensure_settings_dirs_creates_user_data_dirs(tmp_path) -> None:
     assert settings.user_course_dir.is_dir()
     assert settings.course_draft_dir.is_dir()
     assert settings.backup_dir.is_dir()
+
+
+def test_default_paths_fall_back_to_package_resources(monkeypatch, tmp_path) -> None:
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.delenv("PADAWAN_CONTENT_DIR", raising=False)
+    monkeypatch.delenv("PADAWAN_DOCS_DIR", raising=False)
+    monkeypatch.setattr(settings_module, "REPO_ROOT", tmp_path / "missing")
+
+    assert default_content_dir() == PACKAGE_DIR / "content" / "courses"
+    assert default_docs_dir() == PACKAGE_DIR / "docs" / "wiki"

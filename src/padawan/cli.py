@@ -9,8 +9,16 @@ from pathlib import Path
 
 from .backup import BackupError, export_backup, import_backup, inspect_backup
 from .codex import CodexClient
-from .courses import validate_course_path
+from .courses import (
+    load_course_dirs,
+    load_drafts,
+    publish_draft,
+    reject_draft,
+    validate_course_for_publish,
+    validate_course_path,
+)
 from .settings import Settings, ensure_settings_dirs
+from .storage import Storage
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -33,6 +41,18 @@ def main(argv: list[str] | None = None) -> int:
     validate.add_argument("--course", required=True)
     importer = course_sub.add_parser("import-k1s-cip", help="Import k1s Concepts in Practice")
     importer.add_argument("--source", default="../k1s/docs/concepts-in-practice")
+    draft = course_sub.add_parser("draft", help="Manage generated course drafts")
+    draft_sub = draft.add_subparsers(dest="draft_command", required=True)
+    draft_sub.add_parser("list", help="List generated course drafts")
+    draft_show = draft_sub.add_parser("show", help="Show a generated course draft")
+    draft_show.add_argument("course_id")
+    draft_validate = draft_sub.add_parser("validate", help="Validate a generated course draft")
+    draft_validate.add_argument("course_id")
+    draft_validate.add_argument("--json", action="store_true")
+    draft_publish = draft_sub.add_parser("publish", help="Publish a validated generated course")
+    draft_publish.add_argument("course_id")
+    draft_reject = draft_sub.add_parser("reject", help="Reject and delete a generated course draft")
+    draft_reject.add_argument("course_id")
 
     data = sub.add_parser("data", help="Local data backup and restore")
     data_sub = data.add_subparsers(dest="data_command", required=True)
@@ -73,6 +93,8 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     if args.command == "course" and args.course_command == "import-k1s-cip":
         return import_k1s_cip(Path(args.source), settings.user_course_dir)
+    if args.command == "course" and args.course_command == "draft":
+        return draft_command(args, settings)
     if args.command == "data":
         return data_command(args, settings)
     parser.error("unknown command")
@@ -137,6 +159,66 @@ def data_command(args: argparse.Namespace, settings: Settings) -> int:
             print(json.dumps(summary.as_dict(), indent=2, sort_keys=True))
             return 0
     except (BackupError, OSError, ValueError) as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
+    return 2
+
+
+def draft_command(args: argparse.Namespace, settings: Settings) -> int:
+    storage = Storage(settings.db_path)
+    try:
+        drafts = load_drafts(settings.course_draft_dir)
+        if args.draft_command == "list":
+            payload = [
+                {
+                    "id": course.id,
+                    "title": course.title,
+                    "track": course.track,
+                    "level": course.level,
+                    "lesson_count": course.lesson_count,
+                    "validation": storage.latest_validation_for_course(course.id),
+                }
+                for course in drafts.values()
+            ]
+            print(json.dumps(payload, indent=2, sort_keys=True))
+            return 0
+        if args.draft_command == "show":
+            course = drafts[args.course_id]
+            print(json.dumps(course.model_dump(), indent=2, sort_keys=True))
+            return 0
+        if args.draft_command == "validate":
+            course = drafts[args.course_id]
+            result = validate_course_for_publish(
+                course,
+                settings,
+                existing_course_ids=set(
+                    load_course_dirs(settings.content_dir, settings.user_course_dir)
+                ),
+            )
+            storage.record_validation_run(course.id, result.status, result.model_dump_json())
+            if args.json:
+                print(result.model_dump_json(indent=2))
+            else:
+                print(f"{course.id}: {result.status}")
+                for message in result.messages:
+                    print(message)
+            return 0 if result.status == "passed" else 1
+        if args.draft_command == "publish":
+            result = publish_draft(
+                settings,
+                args.course_id,
+                existing_course_ids=set(
+                    load_course_dirs(settings.content_dir, settings.user_course_dir)
+                ),
+            )
+            storage.record_validation_run(args.course_id, result.status, result.model_dump_json())
+            print(result.model_dump_json(indent=2))
+            return 0 if result.status == "passed" else 1
+        if args.draft_command == "reject":
+            reject_draft(settings, args.course_id)
+            print(json.dumps({"ok": True, "rejected": args.course_id}, indent=2, sort_keys=True))
+            return 0
+    except (KeyError, OSError, ValueError) as exc:
         print(str(exc), file=sys.stderr)
         return 1
     return 2

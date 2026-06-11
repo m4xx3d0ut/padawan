@@ -1,0 +1,124 @@
+{
+  "badges": [
+    {
+      "criteria": {
+        "completion_percent": 50
+      },
+      "description": "Completed half of k1s and WorkerBee Intermediate.",
+      "id": "k1s-workerbee-intermediate-started",
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {},
+      "title": "k1s and WorkerBee Intermediate Started"
+    },
+    {
+      "criteria": {
+        "completion_percent": 100
+      },
+      "description": "Completed k1s and WorkerBee Intermediate.",
+      "id": "k1s-workerbee-intermediate-complete",
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {},
+      "title": "k1s and WorkerBee Intermediate Complete"
+    }
+  ],
+  "generated": false,
+  "id": "k1s-workerbee-intermediate",
+  "level": "intermediate",
+  "modules": [
+    {
+      "id": "k1s-workerbee-intermediate",
+      "lessons": [
+        {
+          "codex_context": "manifest Workflow lesson for Padawan.",
+          "concept_md": "k1s and WorkerBee intermediate work depends on understanding `manifest` and validating it with evidence.",
+          "grading": [
+            {
+              "kind": "text_contains",
+              "points": 1,
+              "value": "manifest"
+            }
+          ],
+          "hidden_hint": "Mention `manifest` and a validation signal.",
+          "id": "k1s-intermediate-1",
+          "language": "markdown",
+          "prompt": "Explain how `manifest` fits into a k1s and WorkerBee intermediate workflow.",
+          "reference_solution": "manifest is part of the k1s and WorkerBee workflow and should be validated with local evidence.",
+          "runtime": "text",
+          "starter_code": "manifest fits into the workflow by ...",
+          "title": "manifest Workflow",
+          "toolchain": {}
+        },
+        {
+          "codex_context": "persist Workflow lesson for Padawan.",
+          "concept_md": "k1s and WorkerBee intermediate work depends on understanding `persist` and validating it with evidence.",
+          "grading": [
+            {
+              "kind": "text_contains",
+              "points": 1,
+              "value": "persist"
+            }
+          ],
+          "hidden_hint": "Mention `persist` and a validation signal.",
+          "id": "k1s-intermediate-2",
+          "language": "markdown",
+          "prompt": "Explain how `persist` fits into a k1s and WorkerBee intermediate workflow.",
+          "reference_solution": "persist is part of the k1s and WorkerBee workflow and should be validated with local evidence.",
+          "runtime": "text",
+          "starter_code": "persist fits into the workflow by ...",
+          "title": "persist Workflow",
+          "toolchain": {}
+        },
+        {
+          "codex_context": "/healthz Workflow lesson for Padawan.",
+          "concept_md": "k1s and WorkerBee intermediate work depends on understanding `/healthz` and validating it with evidence.",
+          "grading": [
+            {
+              "kind": "text_contains",
+              "points": 1,
+              "value": "/healthz"
+            }
+          ],
+          "hidden_hint": "Mention `/healthz` and a validation signal.",
+          "id": "k1s-intermediate-3",
+          "language": "markdown",
+          "prompt": "Explain how `/healthz` fits into a k1s and WorkerBee intermediate workflow.",
+          "reference_solution": "/healthz is part of the k1s and WorkerBee workflow and should be validated with local evidence.",
+          "runtime": "text",
+          "starter_code": "/healthz fits into the workflow by ...",
+          "title": "/healthz Workflow",
+          "toolchain": {}
+        },
+        {
+          "codex_context": "logs Workflow lesson for Padawan.",
+          "concept_md": "k1s and WorkerBee intermediate work depends on understanding `logs` and validating it with evidence.",
+          "grading": [
+            {
+              "kind": "text_contains",
+              "points": 1,
+              "value": "logs"
+            }
+          ],
+          "hidden_hint": "Mention `logs` and a validation signal.",
+          "id": "k1s-intermediate-4",
+          "language": "markdown",
+          "prompt": "Explain how `logs` fits into a k1s and WorkerBee intermediate workflow.",
+          "reference_solution": "logs is part of the k1s and WorkerBee workflow and should be validated with local evidence.",
+          "runtime": "text",
+          "starter_code": "logs fits into the workflow by ...",
+          "title": "logs Workflow",
+          "toolchain": {}
+        }
+      ],
+      "summary": "Plan deploy validation with manifests, retained state, ingress probes, and logs.",
+      "title": "k1s and WorkerBee Intermediate Lessons"
+    }
+  ],
+  "summary": "Plan deploy validation with manifests, retained state, ingress probes, and logs.",
+  "title": "k1s and WorkerBee Intermediate",
+  "track": "k1s-workerbee",
+  "verified": true
+}

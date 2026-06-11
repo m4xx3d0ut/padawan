@@ -67,16 +67,27 @@ class CodexClient:
         )
         return self._exec(instruction)
 
+    def chat(self, *, thread_id: str, message: str) -> dict[str, Any]:
+        status = self.status()
+        if not status.installed:
+            return {"ok": False, "error": status.detail, "final_message": ""}
+        if not status.authenticated:
+            return {"ok": False, "error": status.detail, "final_message": ""}
+        cmd = [self.settings.codex_bin, "exec", "resume", "--json", thread_id, "-"]
+        return self._run_json_command(cmd, stdin=message)
+
     def generate_course(self, prompt: str, schema_path: Path) -> Course:
         schema_path.write_text(json.dumps(COURSE_SCHEMA, indent=2), encoding="utf-8")
         instruction = (
             "Create one Padawan course JSON object for a beginner local coding app. "
-            "Use only these tracks: linux-bash, git, python, k1s-workerbee. "
+            "Use only these tracks: linux-bash, git, python, webdev-ts-react, "
+            "webdev-python-htmx, k1s-workerbee, roblox, unity, unreal. "
             "Use level basic, intermediate, or advanced. Include at least one module "
             "and two lessons. "
             "Each lesson must have concept_md, prompt, starter_code, language, "
-            "runtime, hidden_hint, "
-            "grading, and codex_context fields. Set generated true and verified false.\n\n"
+            "runtime, hidden_hint, grading, codex_context, reference_solution, "
+            "and toolchain fields. Use only python, bash, git, node, text, or none "
+            "for runtime. Set generated true and verified false.\n\n"
             f"User request: {prompt}"
         )
         result = self._exec(instruction, schema_path=schema_path)
@@ -91,9 +102,13 @@ class CodexClient:
         if schema_path:
             cmd.extend(["--output-schema", str(schema_path)])
         cmd.append(instruction)
+        return self._run_json_command(cmd)
+
+    def _run_json_command(self, cmd: list[str], *, stdin: str | None = None) -> dict[str, Any]:
         try:
             completed = subprocess.run(
                 cmd,
+                input=stdin,
                 text=True,
                 capture_output=True,
                 timeout=120,

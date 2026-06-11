@@ -1,0 +1,144 @@
+{
+  "badges": [
+    {
+      "criteria": {
+        "completion_percent": 50
+      },
+      "description": "Completed half of Git CLI Advanced.",
+      "id": "git-advanced-started",
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {},
+      "title": "Git CLI Advanced Started"
+    },
+    {
+      "criteria": {
+        "completion_percent": 100
+      },
+      "description": "Completed Git CLI Advanced.",
+      "id": "git-advanced-complete",
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {},
+      "title": "Git CLI Advanced Complete"
+    }
+  ],
+  "generated": false,
+  "id": "git-advanced",
+  "level": "advanced",
+  "modules": [
+    {
+      "id": "git-advanced",
+      "lessons": [
+        {
+          "codex_context": "Read History lesson for Padawan.",
+          "concept_md": "`git log --oneline` shows compact history.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "points": 1,
+              "value": "setup"
+            },
+            {
+              "kind": "exit_code",
+              "points": 1,
+              "value": 0
+            }
+          ],
+          "hidden_hint": "Make the smallest change that satisfies the prompt.",
+          "id": "git-advanced-log",
+          "language": "bash",
+          "prompt": "Create a commit and print `setup` in the log.",
+          "reference_solution": "git init\ngit config user.email padawan@example.local\ngit config user.name Padawan\necho setup > app.txt\ngit add app.txt\ngit commit -m setup\ngit log --oneline\n",
+          "runtime": "git",
+          "starter_code": "git init\necho todo\n",
+          "title": "Read History",
+          "toolchain": {}
+        },
+        {
+          "codex_context": "Inspect Diff lesson for Padawan.",
+          "concept_md": "`git diff` shows unstaged changes.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "points": 1,
+              "value": "new line"
+            },
+            {
+              "kind": "exit_code",
+              "points": 1,
+              "value": 0
+            }
+          ],
+          "hidden_hint": "Make the smallest change that satisfies the prompt.",
+          "id": "git-advanced-diff",
+          "language": "bash",
+          "prompt": "Print a diff containing `new line`.",
+          "reference_solution": "git init\ngit config user.email padawan@example.local\ngit config user.name Padawan\necho old > app.txt\ngit add app.txt\ngit commit -m base\necho 'new line' >> app.txt\ngit diff\n",
+          "runtime": "git",
+          "starter_code": "git init\necho old > app.txt\ngit diff\n",
+          "title": "Inspect Diff",
+          "toolchain": {}
+        },
+        {
+          "codex_context": "Stash Work lesson for Padawan.",
+          "concept_md": "`git stash` shelves uncommitted changes.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "points": 1,
+              "value": "stash saved"
+            },
+            {
+              "kind": "exit_code",
+              "points": 1,
+              "value": 0
+            }
+          ],
+          "hidden_hint": "Make the smallest change that satisfies the prompt.",
+          "id": "git-advanced-stash",
+          "language": "bash",
+          "prompt": "Print `stash saved`.",
+          "reference_solution": "git init\ngit config user.email padawan@example.local\ngit config user.name Padawan\necho base > app.txt\ngit add app.txt\ngit commit -m base\necho work >> app.txt\ngit stash push -m work\necho stash saved\n",
+          "runtime": "git",
+          "starter_code": "git init\necho todo\n",
+          "title": "Stash Work",
+          "toolchain": {}
+        },
+        {
+          "codex_context": "Inspect Reflog lesson for Padawan.",
+          "concept_md": "`git reflog` records recent ref movement.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "points": 1,
+              "value": "HEAD"
+            },
+            {
+              "kind": "exit_code",
+              "points": 1,
+              "value": 0
+            }
+          ],
+          "hidden_hint": "Make the smallest change that satisfies the prompt.",
+          "id": "git-advanced-reflog",
+          "language": "bash",
+          "prompt": "Print output containing `HEAD`.",
+          "reference_solution": "git init\ngit config user.email padawan@example.local\ngit config user.name Padawan\necho base > app.txt\ngit add app.txt\ngit commit -m base\ngit reflog\n",
+          "runtime": "git",
+          "starter_code": "git init\ngit reflog\n",
+          "title": "Inspect Reflog",
+          "toolchain": {}
+        }
+      ],
+      "summary": "Practice recovery-oriented Git commands and history inspection.",
+      "title": "Git CLI Advanced Lessons"
+    }
+  ],
+  "summary": "Practice recovery-oriented Git commands and history inspection.",
+  "title": "Git CLI Advanced",
+  "track": "git",
+  "verified": true
+}

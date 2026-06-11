@@ -1,6 +1,26 @@
 {% extends "base.html" %}
 {% block title %}Courses - Padawan{% endblock %}
 {% block content %}
-<h2>Courses</h2>
+<section class="panel data-panel">
+  <div>
+    <h2>Courses</h2>
+    <p class="muted">Filter by track or level for focused QA passes.</p>
+  </div>
+  <form class="learn-form" action="/courses" method="get">
+    <select name="track" aria-label="Track">
+      <option value="">All tracks</option>
+      {% for track in tracks %}
+      <option value="{{ track }}" {% if selected_track == track %}selected{% endif %}>{{ track }}</option>
+      {% endfor %}
+    </select>
+    <select name="level" aria-label="Level">
+      <option value="">All levels</option>
+      {% for level in levels %}
+      <option value="{{ level }}" {% if selected_level == level %}selected{% endif %}>{{ level }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Apply</button>
+  </form>
+</section>
 {% include "partials/course_grid.html" %}
 {% endblock %}

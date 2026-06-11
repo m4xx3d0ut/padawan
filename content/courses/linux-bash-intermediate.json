@@ -1,0 +1,144 @@
+{
+  "badges": [
+    {
+      "criteria": {
+        "completion_percent": 50
+      },
+      "description": "Completed half of Linux CLI and Bash Intermediate.",
+      "id": "linux-bash-intermediate-started",
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {},
+      "title": "Linux CLI and Bash Intermediate Started"
+    },
+    {
+      "criteria": {
+        "completion_percent": 100
+      },
+      "description": "Completed Linux CLI and Bash Intermediate.",
+      "id": "linux-bash-intermediate-complete",
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {},
+      "title": "Linux CLI and Bash Intermediate Complete"
+    }
+  ],
+  "generated": false,
+  "id": "linux-bash-intermediate",
+  "level": "intermediate",
+  "modules": [
+    {
+      "id": "linux-bash-intermediate",
+      "lessons": [
+        {
+          "codex_context": "Filter With A Pipeline lesson for Padawan.",
+          "concept_md": "Pipes send one command output into another command.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "points": 1,
+              "value": "ready"
+            },
+            {
+              "kind": "exit_code",
+              "points": 1,
+              "value": 0
+            }
+          ],
+          "hidden_hint": "Make the smallest change that satisfies the prompt.",
+          "id": "bash-intermediate-pipeline",
+          "language": "bash",
+          "prompt": "Print only `ready`.",
+          "reference_solution": "printf 'todo\\nready\\n' | grep ready\n",
+          "runtime": "bash",
+          "starter_code": "printf 'todo\\nready\\n' | cat\n",
+          "title": "Filter With A Pipeline",
+          "toolchain": {}
+        },
+        {
+          "codex_context": "Loop Over Values lesson for Padawan.",
+          "concept_md": "A `for` loop repeats commands for each value.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "points": 1,
+              "value": "ship"
+            },
+            {
+              "kind": "exit_code",
+              "points": 1,
+              "value": 0
+            }
+          ],
+          "hidden_hint": "Make the smallest change that satisfies the prompt.",
+          "id": "bash-intermediate-loop",
+          "language": "bash",
+          "prompt": "Print `ship` as one of the loop steps.",
+          "reference_solution": "for step in build validate ship; do echo $step; done\n",
+          "runtime": "bash",
+          "starter_code": "for step in build; do echo $step; done\n",
+          "title": "Loop Over Values",
+          "toolchain": {}
+        },
+        {
+          "codex_context": "Create A Function lesson for Padawan.",
+          "concept_md": "Shell functions package reusable command sequences.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "points": 1,
+              "value": "status: ready"
+            },
+            {
+              "kind": "exit_code",
+              "points": 1,
+              "value": 0
+            }
+          ],
+          "hidden_hint": "Make the smallest change that satisfies the prompt.",
+          "id": "bash-intermediate-function",
+          "language": "bash",
+          "prompt": "Print `status: ready`.",
+          "reference_solution": "status() { echo \"status: $1\"; }\nstatus ready\n",
+          "runtime": "bash",
+          "starter_code": "status() { echo $1; }\nstatus ready\n",
+          "title": "Create A Function",
+          "toolchain": {}
+        },
+        {
+          "codex_context": "Use Strict Mode lesson for Padawan.",
+          "concept_md": "Strict mode helps scripts fail early.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "points": 1,
+              "value": "strict"
+            },
+            {
+              "kind": "exit_code",
+              "points": 1,
+              "value": 0
+            }
+          ],
+          "hidden_hint": "Make the smallest change that satisfies the prompt.",
+          "id": "bash-intermediate-strict",
+          "language": "bash",
+          "prompt": "Print `strict` after enabling strict mode.",
+          "reference_solution": "set -euo pipefail\necho strict\n",
+          "runtime": "bash",
+          "starter_code": "echo strict\n",
+          "title": "Use Strict Mode",
+          "toolchain": {}
+        }
+      ],
+      "summary": "Practice pipes, loops, functions, and strict Bash habits.",
+      "title": "Linux CLI and Bash Intermediate Lessons"
+    }
+  ],
+  "summary": "Practice pipes, loops, functions, and strict Bash habits.",
+  "title": "Linux CLI and Bash Intermediate",
+  "track": "linux-bash",
+  "verified": true
+}

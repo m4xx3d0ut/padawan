@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Drafts - Padawan{% endblock %}
+{% block content %}
+<section class="panel data-panel">
+  <div>
+    <h2>Course Drafts</h2>
+    <p class="muted">Generated courses stay here until validation passes and they are published.</p>
+  </div>
+  <a class="pill" href="/">Generate</a>
+</section>
+
+{% if draft_error %}
+<section class="panel error-panel">
+  <h3>Draft Action Failed</h3>
+  <p>{{ draft_error }}</p>
+</section>
+{% endif %}
+
+{% if draft_result %}
+<section class="panel">
+  <h3>Validation Result</h3>
+  <p class="pill status-{{ draft_result.status }}">{{ draft_result.status }}</p>
+  <p class="muted">
+    {{ draft_result.runnable_lessons }} validated lessons,
+    {{ draft_result.skipped_lessons }} skipped lessons.
+  </p>
+  {% if draft_result.messages %}
+  <ul>
+    {% for message in draft_result.messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</section>
+{% endif %}
+
+{% if drafts %}
+<section class="course-grid" aria-label="Draft courses">
+  {% for item in drafts %}
+  {% set course = item.course %}
+  <article class="course-card">
+    <div>
+      <h3>{{ course.title }}</h3>
+      <div class="course-meta">{{ course.track }} / {{ course.level }}</div>
+    </div>
+    <p>{{ course.summary }}</p>
+    <p class="muted">{{ course.lesson_count }} lessons / {{ "verified" if course.verified else "draft" }}</p>
+    {% if item.validation %}
+    <p class="pill status-{{ item.validation.status }}">Last validation: {{ item.validation.status }}</p>
+    {% else %}
+    <p class="pill pending">Not validated</p>
+    {% endif %}
+    <div class="course-actions">
+      <form action="/drafts/{{ course.id }}/validate" method="post">
+        <button type="submit">Validate</button>
+      </form>
+      <form action="/drafts/{{ course.id }}/publish" method="post">
+        <button class="primary" type="submit">Publish</button>
+      </form>
+      <form action="/drafts/{{ course.id }}/reject" method="post">
+        <button type="submit">Reject</button>
+      </form>
+    </div>
+  </article>
+  {% endfor %}
+</section>
+{% else %}
+<div class="empty-state">No generated course drafts are waiting for review.</div>
+{% endif %}
+{% endblock %}

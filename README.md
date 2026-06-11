@@ -1,8 +1,8 @@
 # Padawan
 
 Padawan is a local progressive coding teacher. It serves a small web UI, stores learner
-progress locally, runs beginner exercises in controlled temporary workspaces, and uses the
-user's existing Codex CLI login for generated explanations and course drafts.
+progress locally, runs exercises in controlled temporary workspaces, and uses the user's
+existing Codex CLI login for generated explanations and course drafts.
 
 ## Quickstart
 
@@ -25,6 +25,9 @@ Run this once if Codex is not already signed in:
 codex login
 ```
 
+Generated explanations can be continued in the lesson dialog when the Codex CLI returns a
+thread id. Generated courses are saved as drafts until local validation passes.
+
 ## Checks
 
 ```bash
@@ -32,9 +35,17 @@ ruff format --check
 ruff check
 pytest
 padawan course validate --course all-seed
+padawan course draft list
 padawan data export --output /tmp/padawan-backup.zip
 padawan data inspect /tmp/padawan-backup.zip
 ```
+
+## Courses
+
+The bundled catalog covers basic, intermediate, and advanced checkpoints for Linux/Bash,
+Git, Python, WebDev TS/React, WebDev Python/HTMX, k1s/WorkerBee, Roblox, Unity, and
+Unreal. Python, Bash, Git, Node, and text-answer lessons validate locally. Roblox, Unity,
+and Unreal lessons use text validation until engine-specific adapters are added.
 
 ## Data
 

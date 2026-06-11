@@ -1,0 +1,136 @@
+{
+  "badges": [
+    {
+      "criteria": {
+        "completion_percent": 50
+      },
+      "description": "Completed half of Unity Advanced.",
+      "id": "unity-advanced-started",
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {},
+      "title": "Unity Advanced Started"
+    },
+    {
+      "criteria": {
+        "completion_percent": 100
+      },
+      "description": "Completed Unity Advanced.",
+      "id": "unity-advanced-complete",
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {},
+      "title": "Unity Advanced Complete"
+    }
+  ],
+  "generated": false,
+  "id": "unity-advanced",
+  "level": "advanced",
+  "modules": [
+    {
+      "id": "unity-advanced",
+      "lessons": [
+        {
+          "codex_context": "Update Workflow lesson for Padawan.",
+          "concept_md": "Unity advanced work depends on understanding `Update` and validating it with evidence.",
+          "grading": [
+            {
+              "kind": "text_contains",
+              "points": 1,
+              "value": "Update"
+            }
+          ],
+          "hidden_hint": "Mention `Update` and a validation signal.",
+          "id": "unity-advanced-1",
+          "language": "markdown",
+          "prompt": "Explain how `Update` fits into a Unity advanced workflow.",
+          "reference_solution": "Update is part of the Unity workflow and should be validated with Unity Editor.",
+          "runtime": "text",
+          "starter_code": "Update fits into the workflow by ...",
+          "title": "Update Workflow",
+          "toolchain": {
+            "external": true,
+            "tool": "Unity Editor"
+          }
+        },
+        {
+          "codex_context": "GameObject Workflow lesson for Padawan.",
+          "concept_md": "Unity advanced work depends on understanding `GameObject` and validating it with evidence.",
+          "grading": [
+            {
+              "kind": "text_contains",
+              "points": 1,
+              "value": "GameObject"
+            }
+          ],
+          "hidden_hint": "Mention `GameObject` and a validation signal.",
+          "id": "unity-advanced-2",
+          "language": "markdown",
+          "prompt": "Explain how `GameObject` fits into a Unity advanced workflow.",
+          "reference_solution": "GameObject is part of the Unity workflow and should be validated with Unity Editor.",
+          "runtime": "text",
+          "starter_code": "GameObject fits into the workflow by ...",
+          "title": "GameObject Workflow",
+          "toolchain": {
+            "external": true,
+            "tool": "Unity Editor"
+          }
+        },
+        {
+          "codex_context": "MonoBehaviour Workflow lesson for Padawan.",
+          "concept_md": "Unity advanced work depends on understanding `MonoBehaviour` and validating it with evidence.",
+          "grading": [
+            {
+              "kind": "text_contains",
+              "points": 1,
+              "value": "MonoBehaviour"
+            }
+          ],
+          "hidden_hint": "Mention `MonoBehaviour` and a validation signal.",
+          "id": "unity-advanced-3",
+          "language": "markdown",
+          "prompt": "Explain how `MonoBehaviour` fits into a Unity advanced workflow.",
+          "reference_solution": "MonoBehaviour is part of the Unity workflow and should be validated with Unity Editor.",
+          "runtime": "text",
+          "starter_code": "MonoBehaviour fits into the workflow by ...",
+          "title": "MonoBehaviour Workflow",
+          "toolchain": {
+            "external": true,
+            "tool": "Unity Editor"
+          }
+        },
+        {
+          "codex_context": "Prefab Workflow lesson for Padawan.",
+          "concept_md": "Unity advanced work depends on understanding `Prefab` and validating it with evidence.",
+          "grading": [
+            {
+              "kind": "text_contains",
+              "points": 1,
+              "value": "Prefab"
+            }
+          ],
+          "hidden_hint": "Mention `Prefab` and a validation signal.",
+          "id": "unity-advanced-4",
+          "language": "markdown",
+          "prompt": "Explain how `Prefab` fits into a Unity advanced workflow.",
+          "reference_solution": "Prefab is part of the Unity workflow and should be validated with Unity Editor.",
+          "runtime": "text",
+          "starter_code": "Prefab fits into the workflow by ...",
+          "title": "Prefab Workflow",
+          "toolchain": {
+            "external": true,
+            "tool": "Unity Editor"
+          }
+        }
+      ],
+      "summary": "Learn advanced Unity engine workflows with text validation until local engine adapters are available.",
+      "title": "Unity Advanced Lessons"
+    }
+  ],
+  "summary": "Learn advanced Unity engine workflows with text validation until local engine adapters are available.",
+  "title": "Unity Advanced",
+  "track": "unity",
+  "verified": true
+}

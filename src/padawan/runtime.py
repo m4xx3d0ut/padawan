@@ -16,6 +16,8 @@ SAFE_ENV_KEYS = ("PATH", "SYSTEMROOT", "WINDIR", "HOME", "USERPROFILE", "TMPDIR"
 def runtime_available(runtime: RuntimeName) -> tuple[bool, str]:
     if runtime == "none":
         return True, "No runtime required."
+    if runtime == "text":
+        return True, "Text validation runtime"
     if runtime == "python":
         return shutil.which("python") is not None or shutil.which(
             "python3"
@@ -26,6 +28,8 @@ def runtime_available(runtime: RuntimeName) -> tuple[bool, str]:
         return shutil.which("bash") is not None, "Bash runtime"
     if runtime == "git":
         return shutil.which("git") is not None, "Git runtime"
+    if runtime == "node":
+        return shutil.which("node") is not None, "Node.js runtime"
     return False, f"Unknown runtime {runtime}"
 
 
@@ -36,6 +40,18 @@ def run_lesson(lesson: Lesson, code: str, settings: Settings) -> RuntimeResult:
     if lesson.runtime == "none":
         return RuntimeResult(
             status="passed", messages=["Read-only lesson acknowledged."], score_delta=1
+        )
+    if lesson.runtime == "text":
+        with tempfile.TemporaryDirectory(prefix="padawan-text-") as tmp:
+            workspace = Path(tmp)
+            passed, messages, points = grade(lesson.grading, 0, "", "", workspace, text=code)
+        return RuntimeResult(
+            status="passed" if passed else "failed",
+            stdout=_limit(code, settings.runtime_output_limit),
+            stderr="",
+            exit_code=0,
+            messages=messages,
+            score_delta=points if passed else 0,
         )
 
     with tempfile.TemporaryDirectory(prefix="padawan-run-") as tmp:
@@ -90,6 +106,10 @@ def _run_runtime(
         script = workspace / "solution.sh"
         script.write_text("set -e\n" + code, encoding="utf-8")
         cmd = ["bash", str(script)]
+    elif runtime == "node":
+        script = workspace / "solution.mjs"
+        script.write_text(code, encoding="utf-8")
+        cmd = ["node", str(script)]
     else:
         raise OSError(f"unsupported runtime {runtime}")
     return subprocess.run(
@@ -109,6 +129,8 @@ def grade(
     stdout: str,
     stderr: str,
     workspace: Path,
+    *,
+    text: str = "",
 ) -> tuple[bool, list[str], int]:
     if not rules:
         return (
@@ -121,7 +143,7 @@ def grade(
     points = 0
     all_passed = True
     for rule in rules:
-        ok = _check_rule(rule, exit_code, stdout, stderr, workspace)
+        ok = _check_rule(rule, exit_code, stdout, stderr, workspace, text=text)
         if ok:
             points += rule.points
             messages.append(f"Passed {rule.kind}.")
@@ -132,7 +154,13 @@ def grade(
 
 
 def _check_rule(
-    rule: GradingRule, exit_code: int, stdout: str, stderr: str, workspace: Path
+    rule: GradingRule,
+    exit_code: int,
+    stdout: str,
+    stderr: str,
+    workspace: Path,
+    *,
+    text: str = "",
 ) -> bool:
     if rule.kind == "exit_code":
         return exit_code == int(rule.value)
@@ -140,6 +168,8 @@ def _check_rule(
         return str(rule.value) in stdout
     if rule.kind == "stderr_contains":
         return str(rule.value) in stderr
+    if rule.kind == "text_contains":
+        return str(rule.value).lower() in text.lower()
     if rule.kind == "file_exists":
         return bool(rule.path) and (workspace / rule.path).exists()
     if rule.kind == "file_contains":

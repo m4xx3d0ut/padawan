@@ -1,0 +1,144 @@
+{
+  "badges": [
+    {
+      "criteria": {
+        "completion_percent": 50
+      },
+      "description": "Completed half of Python Intermediate.",
+      "id": "python-intermediate-started",
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {},
+      "title": "Python Intermediate Started"
+    },
+    {
+      "criteria": {
+        "completion_percent": 100
+      },
+      "description": "Completed Python Intermediate.",
+      "id": "python-intermediate-complete",
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {},
+      "title": "Python Intermediate Complete"
+    }
+  ],
+  "generated": false,
+  "id": "python-intermediate",
+  "level": "intermediate",
+  "modules": [
+    {
+      "id": "python-intermediate",
+      "lessons": [
+        {
+          "codex_context": "Transform A List lesson for Padawan.",
+          "concept_md": "Use a comprehension to transform values.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "points": 1,
+              "value": "[2, 4, 6]"
+            },
+            {
+              "kind": "exit_code",
+              "points": 1,
+              "value": 0
+            }
+          ],
+          "hidden_hint": "Make the smallest change that satisfies the prompt.",
+          "id": "python-intermediate-list-comprehension",
+          "language": "python",
+          "prompt": "Print `[2, 4, 6]`.",
+          "reference_solution": "numbers = [1, 2, 3]\nprint([value * 2 for value in numbers])\n",
+          "runtime": "python",
+          "starter_code": "numbers = [1, 2, 3]\nprint(numbers)\n",
+          "title": "Transform A List",
+          "toolchain": {}
+        },
+        {
+          "codex_context": "Count Values lesson for Padawan.",
+          "concept_md": "Dictionaries can count values by key.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "points": 1,
+              "value": "padawan=2"
+            },
+            {
+              "kind": "exit_code",
+              "points": 1,
+              "value": 0
+            }
+          ],
+          "hidden_hint": "Make the smallest change that satisfies the prompt.",
+          "id": "python-intermediate-dict-count",
+          "language": "python",
+          "prompt": "Print `padawan=2`.",
+          "reference_solution": "words = ['padawan', 'codex', 'padawan']\ncounts = {}\nfor word in words:\n    counts[word] = counts.get(word, 0) + 1\nprint(f\"padawan={counts['padawan']}\")\n",
+          "runtime": "python",
+          "starter_code": "words = ['padawan', 'codex', 'padawan']\nprint('padawan=0')\n",
+          "title": "Count Values",
+          "toolchain": {}
+        },
+        {
+          "codex_context": "Handle Failure lesson for Padawan.",
+          "concept_md": "Exceptions let scripts recover from expected failures.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "points": 1,
+              "value": "fallback"
+            },
+            {
+              "kind": "exit_code",
+              "points": 1,
+              "value": 0
+            }
+          ],
+          "hidden_hint": "Make the smallest change that satisfies the prompt.",
+          "id": "python-intermediate-exception-path",
+          "language": "python",
+          "prompt": "Print `fallback`.",
+          "reference_solution": "data = {}\ntry:\n    print(data['name'])\nexcept KeyError:\n    print('fallback')\n",
+          "runtime": "python",
+          "starter_code": "data = {}\nprint(data['name'])\n",
+          "title": "Handle Failure",
+          "toolchain": {}
+        },
+        {
+          "codex_context": "Yield Steps lesson for Padawan.",
+          "concept_md": "Generators produce values one at a time.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "points": 1,
+              "value": "build,validate,ship"
+            },
+            {
+              "kind": "exit_code",
+              "points": 1,
+              "value": 0
+            }
+          ],
+          "hidden_hint": "Make the smallest change that satisfies the prompt.",
+          "id": "python-intermediate-generator-steps",
+          "language": "python",
+          "prompt": "Print `build,validate,ship`.",
+          "reference_solution": "def steps():\n    yield 'build'\n    yield 'validate'\n    yield 'ship'\nprint(','.join(steps()))\n",
+          "runtime": "python",
+          "starter_code": "def steps():\n    return []\nprint(','.join(steps()))\n",
+          "title": "Yield Steps",
+          "toolchain": {}
+        }
+      ],
+      "summary": "Practice collections, files, exceptions, and generators in Python.",
+      "title": "Python Intermediate Lessons"
+    }
+  ],
+  "summary": "Practice collections, files, exceptions, and generators in Python.",
+  "title": "Python Intermediate",
+  "track": "python",
+  "verified": true
+}

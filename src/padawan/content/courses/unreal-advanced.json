@@ -1,0 +1,136 @@
+{
+  "badges": [
+    {
+      "criteria": {
+        "completion_percent": 50
+      },
+      "description": "Completed half of Unreal Advanced.",
+      "id": "unreal-advanced-started",
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {},
+      "title": "Unreal Advanced Started"
+    },
+    {
+      "criteria": {
+        "completion_percent": 100
+      },
+      "description": "Completed Unreal Advanced.",
+      "id": "unreal-advanced-complete",
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {},
+      "title": "Unreal Advanced Complete"
+    }
+  ],
+  "generated": false,
+  "id": "unreal-advanced",
+  "level": "advanced",
+  "modules": [
+    {
+      "id": "unreal-advanced",
+      "lessons": [
+        {
+          "codex_context": "Actor Workflow lesson for Padawan.",
+          "concept_md": "Unreal advanced work depends on understanding `Actor` and validating it with evidence.",
+          "grading": [
+            {
+              "kind": "text_contains",
+              "points": 1,
+              "value": "Actor"
+            }
+          ],
+          "hidden_hint": "Mention `Actor` and a validation signal.",
+          "id": "unreal-advanced-1",
+          "language": "markdown",
+          "prompt": "Explain how `Actor` fits into a Unreal advanced workflow.",
+          "reference_solution": "Actor is part of the Unreal workflow and should be validated with Unreal Editor.",
+          "runtime": "text",
+          "starter_code": "Actor fits into the workflow by ...",
+          "title": "Actor Workflow",
+          "toolchain": {
+            "external": true,
+            "tool": "Unreal Editor"
+          }
+        },
+        {
+          "codex_context": "Blueprint Workflow lesson for Padawan.",
+          "concept_md": "Unreal advanced work depends on understanding `Blueprint` and validating it with evidence.",
+          "grading": [
+            {
+              "kind": "text_contains",
+              "points": 1,
+              "value": "Blueprint"
+            }
+          ],
+          "hidden_hint": "Mention `Blueprint` and a validation signal.",
+          "id": "unreal-advanced-2",
+          "language": "markdown",
+          "prompt": "Explain how `Blueprint` fits into a Unreal advanced workflow.",
+          "reference_solution": "Blueprint is part of the Unreal workflow and should be validated with Unreal Editor.",
+          "runtime": "text",
+          "starter_code": "Blueprint fits into the workflow by ...",
+          "title": "Blueprint Workflow",
+          "toolchain": {
+            "external": true,
+            "tool": "Unreal Editor"
+          }
+        },
+        {
+          "codex_context": "Component Workflow lesson for Padawan.",
+          "concept_md": "Unreal advanced work depends on understanding `Component` and validating it with evidence.",
+          "grading": [
+            {
+              "kind": "text_contains",
+              "points": 1,
+              "value": "Component"
+            }
+          ],
+          "hidden_hint": "Mention `Component` and a validation signal.",
+          "id": "unreal-advanced-3",
+          "language": "markdown",
+          "prompt": "Explain how `Component` fits into a Unreal advanced workflow.",
+          "reference_solution": "Component is part of the Unreal workflow and should be validated with Unreal Editor.",
+          "runtime": "text",
+          "starter_code": "Component fits into the workflow by ...",
+          "title": "Component Workflow",
+          "toolchain": {
+            "external": true,
+            "tool": "Unreal Editor"
+          }
+        },
+        {
+          "codex_context": "Tick Workflow lesson for Padawan.",
+          "concept_md": "Unreal advanced work depends on understanding `Tick` and validating it with evidence.",
+          "grading": [
+            {
+              "kind": "text_contains",
+              "points": 1,
+              "value": "Tick"
+            }
+          ],
+          "hidden_hint": "Mention `Tick` and a validation signal.",
+          "id": "unreal-advanced-4",
+          "language": "markdown",
+          "prompt": "Explain how `Tick` fits into a Unreal advanced workflow.",
+          "reference_solution": "Tick is part of the Unreal workflow and should be validated with Unreal Editor.",
+          "runtime": "text",
+          "starter_code": "Tick fits into the workflow by ...",
+          "title": "Tick Workflow",
+          "toolchain": {
+            "external": true,
+            "tool": "Unreal Editor"
+          }
+        }
+      ],
+      "summary": "Learn advanced Unreal engine workflows with text validation until local engine adapters are available.",
+      "title": "Unreal Advanced Lessons"
+    }
+  ],
+  "summary": "Learn advanced Unreal engine workflows with text validation until local engine adapters are available.",
+  "title": "Unreal Advanced",
+  "track": "unreal",
+  "verified": true
+}

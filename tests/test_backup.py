@@ -30,6 +30,12 @@ def test_backup_export_and_restore_safe_merge(tmp_path: Path) -> None:
     draft_course = course.model_copy(update={"id": "draft-python", "verified": False})
 
     storage.record_attempt(course, course.lessons[0].id, RuntimeResult(status="passed"))
+    storage.upsert_codex_thread(
+        thread_id="thread-1",
+        course_id=course.id,
+        lesson_id=course.lessons[0].id,
+        title="Python Basics: Hello Python",
+    )
     export_course(local_course, settings.user_course_dir / "local-python.json")
     export_course(draft_course, settings.course_draft_dir / "draft-python.json")
 
@@ -38,6 +44,7 @@ def test_backup_export_and_restore_safe_merge(tmp_path: Path) -> None:
     inspected = inspect_backup(archive)
 
     assert summary.table_counts["attempts"] == 1
+    assert summary.table_counts["codex_threads"] == 1
     assert inspected.courses == ["local-python"]
     assert inspected.drafts == ["draft-python"]
 
@@ -51,6 +58,7 @@ def test_backup_export_and_restore_safe_merge(tmp_path: Path) -> None:
     assert restored.imported_drafts == ["draft-python"]
     assert restored_again.table_inserted["attempts"] == 0
     assert restored_again.table_skipped["attempts"] == 1
+    assert Storage(target.db_path).codex_thread("thread-1") is not None
     assert (target.user_course_dir / "local-python.json").exists()
     assert (target.course_draft_dir / "draft-python.json").exists()
 

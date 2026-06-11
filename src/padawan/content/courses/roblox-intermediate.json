@@ -1,0 +1,136 @@
+{
+  "badges": [
+    {
+      "criteria": {
+        "completion_percent": 50
+      },
+      "description": "Completed half of Roblox Intermediate.",
+      "id": "roblox-intermediate-started",
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {},
+      "title": "Roblox Intermediate Started"
+    },
+    {
+      "criteria": {
+        "completion_percent": 100
+      },
+      "description": "Completed Roblox Intermediate.",
+      "id": "roblox-intermediate-complete",
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {},
+      "title": "Roblox Intermediate Complete"
+    }
+  ],
+  "generated": false,
+  "id": "roblox-intermediate",
+  "level": "intermediate",
+  "modules": [
+    {
+      "id": "roblox-intermediate",
+      "lessons": [
+        {
+          "codex_context": "Script Workflow lesson for Padawan.",
+          "concept_md": "Roblox intermediate work depends on understanding `Script` and validating it with evidence.",
+          "grading": [
+            {
+              "kind": "text_contains",
+              "points": 1,
+              "value": "Script"
+            }
+          ],
+          "hidden_hint": "Mention `Script` and a validation signal.",
+          "id": "roblox-intermediate-1",
+          "language": "markdown",
+          "prompt": "Explain how `Script` fits into a Roblox intermediate workflow.",
+          "reference_solution": "Script is part of the Roblox workflow and should be validated with Roblox Studio.",
+          "runtime": "text",
+          "starter_code": "Script fits into the workflow by ...",
+          "title": "Script Workflow",
+          "toolchain": {
+            "external": true,
+            "tool": "Roblox Studio"
+          }
+        },
+        {
+          "codex_context": "Part Workflow lesson for Padawan.",
+          "concept_md": "Roblox intermediate work depends on understanding `Part` and validating it with evidence.",
+          "grading": [
+            {
+              "kind": "text_contains",
+              "points": 1,
+              "value": "Part"
+            }
+          ],
+          "hidden_hint": "Mention `Part` and a validation signal.",
+          "id": "roblox-intermediate-2",
+          "language": "markdown",
+          "prompt": "Explain how `Part` fits into a Roblox intermediate workflow.",
+          "reference_solution": "Part is part of the Roblox workflow and should be validated with Roblox Studio.",
+          "runtime": "text",
+          "starter_code": "Part fits into the workflow by ...",
+          "title": "Part Workflow",
+          "toolchain": {
+            "external": true,
+            "tool": "Roblox Studio"
+          }
+        },
+        {
+          "codex_context": "RemoteEvent Workflow lesson for Padawan.",
+          "concept_md": "Roblox intermediate work depends on understanding `RemoteEvent` and validating it with evidence.",
+          "grading": [
+            {
+              "kind": "text_contains",
+              "points": 1,
+              "value": "RemoteEvent"
+            }
+          ],
+          "hidden_hint": "Mention `RemoteEvent` and a validation signal.",
+          "id": "roblox-intermediate-3",
+          "language": "markdown",
+          "prompt": "Explain how `RemoteEvent` fits into a Roblox intermediate workflow.",
+          "reference_solution": "RemoteEvent is part of the Roblox workflow and should be validated with Roblox Studio.",
+          "runtime": "text",
+          "starter_code": "RemoteEvent fits into the workflow by ...",
+          "title": "RemoteEvent Workflow",
+          "toolchain": {
+            "external": true,
+            "tool": "Roblox Studio"
+          }
+        },
+        {
+          "codex_context": "Workspace Workflow lesson for Padawan.",
+          "concept_md": "Roblox intermediate work depends on understanding `Workspace` and validating it with evidence.",
+          "grading": [
+            {
+              "kind": "text_contains",
+              "points": 1,
+              "value": "Workspace"
+            }
+          ],
+          "hidden_hint": "Mention `Workspace` and a validation signal.",
+          "id": "roblox-intermediate-4",
+          "language": "markdown",
+          "prompt": "Explain how `Workspace` fits into a Roblox intermediate workflow.",
+          "reference_solution": "Workspace is part of the Roblox workflow and should be validated with Roblox Studio.",
+          "runtime": "text",
+          "starter_code": "Workspace fits into the workflow by ...",
+          "title": "Workspace Workflow",
+          "toolchain": {
+            "external": true,
+            "tool": "Roblox Studio"
+          }
+        }
+      ],
+      "summary": "Learn intermediate Roblox engine workflows with text validation until local engine adapters are available.",
+      "title": "Roblox Intermediate Lessons"
+    }
+  ],
+  "summary": "Learn intermediate Roblox engine workflows with text validation until local engine adapters are available.",
+  "title": "Roblox Intermediate",
+  "track": "roblox",
+  "verified": true
+}

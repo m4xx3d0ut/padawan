@@ -31,7 +31,10 @@ def default_content_dir() -> Path:
     cwd_content = Path.cwd() / "content" / "courses"
     if cwd_content.exists():
         return cwd_content
-    return REPO_ROOT / "content" / "courses"
+    repo_content = REPO_ROOT / "content" / "courses"
+    if repo_content.exists():
+        return repo_content
+    return PACKAGE_DIR / "content" / "courses"
 
 
 def default_docs_dir() -> Path:
@@ -42,7 +45,10 @@ def default_docs_dir() -> Path:
     cwd_docs = Path.cwd() / "docs" / "wiki"
     if cwd_docs.exists():
         return cwd_docs
-    return REPO_ROOT / "docs" / "wiki"
+    repo_docs = REPO_ROOT / "docs" / "wiki"
+    if repo_docs.exists():
+        return repo_docs
+    return PACKAGE_DIR / "docs" / "wiki"
 
 
 @dataclass(frozen=True)

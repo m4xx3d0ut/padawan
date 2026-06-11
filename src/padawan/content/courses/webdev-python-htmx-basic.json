@@ -1,0 +1,144 @@
+{
+  "badges": [
+    {
+      "criteria": {
+        "completion_percent": 50
+      },
+      "description": "Completed half of WebDev Python/HTMX Basic.",
+      "id": "webdev-python-htmx-basic-started",
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {},
+      "title": "WebDev Python/HTMX Basic Started"
+    },
+    {
+      "criteria": {
+        "completion_percent": 100
+      },
+      "description": "Completed WebDev Python/HTMX Basic.",
+      "id": "webdev-python-htmx-basic-complete",
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {},
+      "title": "WebDev Python/HTMX Basic Complete"
+    }
+  ],
+  "generated": false,
+  "id": "webdev-python-htmx-basic",
+  "level": "basic",
+  "modules": [
+    {
+      "id": "webdev-python-htmx-basic",
+      "lessons": [
+        {
+          "codex_context": "Return HTML lesson for Padawan.",
+          "concept_md": "HTMX swaps HTML fragments returned by the server.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "points": 1,
+              "value": "<p>Hello Padawan</p>"
+            },
+            {
+              "kind": "exit_code",
+              "points": 1,
+              "value": 0
+            }
+          ],
+          "hidden_hint": "Make the smallest change that satisfies the prompt.",
+          "id": "htmx-basic-fragment",
+          "language": "python",
+          "prompt": "Print `<p>Hello Padawan</p>`.",
+          "reference_solution": "print('<p>Hello Padawan</p>')\n",
+          "runtime": "python",
+          "starter_code": "print('<p>Hello world</p>')\n",
+          "title": "Return HTML",
+          "toolchain": {}
+        },
+        {
+          "codex_context": "Render A Button lesson for Padawan.",
+          "concept_md": "Server-rendered buttons can trigger HTMX requests.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "points": 1,
+              "value": "<button>Run</button>"
+            },
+            {
+              "kind": "exit_code",
+              "points": 1,
+              "value": 0
+            }
+          ],
+          "hidden_hint": "Make the smallest change that satisfies the prompt.",
+          "id": "htmx-basic-button",
+          "language": "python",
+          "prompt": "Print a button containing `Run`.",
+          "reference_solution": "print('<button>Run</button>')\n",
+          "runtime": "python",
+          "starter_code": "print('<button>Todo</button>')\n",
+          "title": "Render A Button",
+          "toolchain": {}
+        },
+        {
+          "codex_context": "Render A List lesson for Padawan.",
+          "concept_md": "HTML lists make repeated content easy to scan.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "points": 1,
+              "value": "<li>Python</li>"
+            },
+            {
+              "kind": "exit_code",
+              "points": 1,
+              "value": 0
+            }
+          ],
+          "hidden_hint": "Make the smallest change that satisfies the prompt.",
+          "id": "htmx-basic-list",
+          "language": "python",
+          "prompt": "Print a list item containing `Python`.",
+          "reference_solution": "items = ['Python']\nprint('<ul>' + ''.join(f'<li>{item}</li>' for item in items) + '</ul>')\n",
+          "runtime": "python",
+          "starter_code": "items = ['Python']\nprint('<ul></ul>')\n",
+          "title": "Render A List",
+          "toolchain": {}
+        },
+        {
+          "codex_context": "Name Swap Target lesson for Padawan.",
+          "concept_md": "HTMX updates a target selected by id or selector.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "points": 1,
+              "value": "#lesson-status"
+            },
+            {
+              "kind": "exit_code",
+              "points": 1,
+              "value": 0
+            }
+          ],
+          "hidden_hint": "Make the smallest change that satisfies the prompt.",
+          "id": "htmx-basic-target",
+          "language": "python",
+          "prompt": "Print `#lesson-status`.",
+          "reference_solution": "target = '#lesson-status'\nprint(target)\n",
+          "runtime": "python",
+          "starter_code": "target = 'status'\nprint(target)\n",
+          "title": "Name Swap Target",
+          "toolchain": {}
+        }
+      ],
+      "summary": "Practice basic Python and HTMX server-rendered web concepts.",
+      "title": "WebDev Python/HTMX Basic Lessons"
+    }
+  ],
+  "summary": "Practice basic Python and HTMX server-rendered web concepts.",
+  "title": "WebDev Python/HTMX Basic",
+  "track": "webdev-python-htmx",
+  "verified": true
+}

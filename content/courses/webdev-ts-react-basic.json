@@ -1,0 +1,144 @@
+{
+  "badges": [
+    {
+      "criteria": {
+        "completion_percent": 50
+      },
+      "description": "Completed half of WebDev TS/React Basic.",
+      "id": "webdev-ts-react-basic-started",
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {},
+      "title": "WebDev TS/React Basic Started"
+    },
+    {
+      "criteria": {
+        "completion_percent": 100
+      },
+      "description": "Completed WebDev TS/React Basic.",
+      "id": "webdev-ts-react-basic-complete",
+      "issuer": {
+        "name": "Padawan Local"
+      },
+      "share": {},
+      "title": "WebDev TS/React Basic Complete"
+    }
+  ],
+  "generated": false,
+  "id": "webdev-ts-react-basic",
+  "level": "basic",
+  "modules": [
+    {
+      "id": "webdev-ts-react-basic",
+      "lessons": [
+        {
+          "codex_context": "Render A Component lesson for Padawan.",
+          "concept_md": "Components are functions that return UI descriptions.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "points": 1,
+              "value": "Hello Padawan"
+            },
+            {
+              "kind": "exit_code",
+              "points": 1,
+              "value": 0
+            }
+          ],
+          "hidden_hint": "Make the smallest change that satisfies the prompt.",
+          "id": "react-basic-component",
+          "language": "javascript",
+          "prompt": "Print `Hello Padawan`.",
+          "reference_solution": "function App() { return 'Hello Padawan'; }\nconsole.log(App());\n",
+          "runtime": "node",
+          "starter_code": "function App() { return 'Hello world'; }\nconsole.log(App());\n",
+          "title": "Render A Component",
+          "toolchain": {}
+        },
+        {
+          "codex_context": "Use Props lesson for Padawan.",
+          "concept_md": "Props pass data into component functions.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "points": 1,
+              "value": "Course: Python"
+            },
+            {
+              "kind": "exit_code",
+              "points": 1,
+              "value": 0
+            }
+          ],
+          "hidden_hint": "Make the smallest change that satisfies the prompt.",
+          "id": "react-basic-props",
+          "language": "javascript",
+          "prompt": "Print `Course: Python`.",
+          "reference_solution": "function Card(props) { return `Course: ${props.name}`; }\nconsole.log(Card({ name: 'Python' }));\n",
+          "runtime": "node",
+          "starter_code": "function Card(props) { return props.name; }\nconsole.log(Card({ name: 'Python' }));\n",
+          "title": "Use Props",
+          "toolchain": {}
+        },
+        {
+          "codex_context": "Map A List lesson for Padawan.",
+          "concept_md": "Lists of data can become UI labels.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "points": 1,
+              "value": "Bash, Git, Python"
+            },
+            {
+              "kind": "exit_code",
+              "points": 1,
+              "value": 0
+            }
+          ],
+          "hidden_hint": "Make the smallest change that satisfies the prompt.",
+          "id": "react-basic-list",
+          "language": "javascript",
+          "prompt": "Print `Bash, Git, Python`.",
+          "reference_solution": "const tracks = ['Bash', 'Git', 'Python'];\nconsole.log(tracks.join(', '));\n",
+          "runtime": "node",
+          "starter_code": "const tracks = ['Bash', 'Git', 'Python'];\nconsole.log(tracks[0]);\n",
+          "title": "Map A List",
+          "toolchain": {}
+        },
+        {
+          "codex_context": "Derive State lesson for Padawan.",
+          "concept_md": "State values drive what users see.",
+          "grading": [
+            {
+              "kind": "stdout_contains",
+              "points": 1,
+              "value": "status=ready"
+            },
+            {
+              "kind": "exit_code",
+              "points": 1,
+              "value": 0
+            }
+          ],
+          "hidden_hint": "Make the smallest change that satisfies the prompt.",
+          "id": "react-basic-state",
+          "language": "javascript",
+          "prompt": "Print `status=ready`.",
+          "reference_solution": "const status = 'ready';\nconsole.log(`status=${status}`);\n",
+          "runtime": "node",
+          "starter_code": "const status = 'todo';\nconsole.log(`status=${status}`);\n",
+          "title": "Derive State",
+          "toolchain": {}
+        }
+      ],
+      "summary": "Practice basic TypeScript and React concepts with locally validated JavaScript exercises.",
+      "title": "WebDev TS/React Basic Lessons"
+    }
+  ],
+  "summary": "Practice basic TypeScript and React concepts with locally validated JavaScript exercises.",
+  "title": "WebDev TS/React Basic",
+  "track": "webdev-ts-react",
+  "verified": true
+}

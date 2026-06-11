@@ -10,13 +10,30 @@ def utc_now_iso() -> str:
     return datetime.now(UTC).isoformat()
 
 
-Track = Literal["linux-bash", "git", "python", "k1s-workerbee"]
+Track = Literal[
+    "linux-bash",
+    "git",
+    "python",
+    "webdev-ts-react",
+    "webdev-python-htmx",
+    "k1s-workerbee",
+    "roblox",
+    "unity",
+    "unreal",
+]
 Level = Literal["basic", "intermediate", "advanced"]
-RuntimeName = Literal["python", "bash", "git", "none"]
+RuntimeName = Literal["python", "bash", "git", "node", "text", "none"]
 
 
 class GradingRule(BaseModel):
-    kind: Literal["stdout_contains", "stderr_contains", "file_contains", "file_exists", "exit_code"]
+    kind: Literal[
+        "stdout_contains",
+        "stderr_contains",
+        "file_contains",
+        "file_exists",
+        "exit_code",
+        "text_contains",
+    ]
     value: str | int | None = None
     path: str | None = None
     points: int = 1
@@ -33,6 +50,8 @@ class Lesson(BaseModel):
     hidden_hint: str = ""
     grading: list[GradingRule] = Field(default_factory=list)
     codex_context: str = ""
+    reference_solution: str = ""
+    toolchain: dict[str, Any] = Field(default_factory=dict)
 
 
 class Module(BaseModel):
@@ -112,3 +131,11 @@ class GeneratedCourseRequest(BaseModel):
     prompt: str
     track: str | None = None
     level: str | None = None
+
+
+class CourseValidationResult(BaseModel):
+    course_id: str | None = None
+    status: Literal["passed", "failed"] = "failed"
+    messages: list[str] = Field(default_factory=list)
+    runnable_lessons: int = 0
+    skipped_lessons: int = 0

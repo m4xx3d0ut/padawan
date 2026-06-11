@@ -53,6 +53,15 @@ CREATE TABLE IF NOT EXISTS validation_runs (
     detail TEXT NOT NULL DEFAULT '',
     created_at TEXT NOT NULL
 );
+CREATE TABLE IF NOT EXISTS codex_threads (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    thread_id TEXT NOT NULL UNIQUE,
+    course_id TEXT NOT NULL,
+    lesson_id TEXT NOT NULL,
+    title TEXT NOT NULL DEFAULT '',
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+);
 """
 
 
@@ -234,4 +243,60 @@ class Storage:
     def generation_job(self, job_id: int) -> dict[str, Any] | None:
         with self.connect() as conn:
             row = conn.execute("SELECT * FROM generation_jobs WHERE id = ?", (job_id,)).fetchone()
+        return dict(row) if row else None
+
+    def record_validation_run(self, course_id: str | None, status: str, detail: str) -> None:
+        with self.connect() as conn:
+            conn.execute(
+                """
+                INSERT INTO validation_runs (course_id, status, detail, created_at)
+                VALUES (?, ?, ?, ?)
+                """,
+                (course_id, status, detail, utc_now_iso()),
+            )
+
+    def latest_validation_for_course(self, course_id: str) -> dict[str, Any] | None:
+        with self.connect() as conn:
+            row = conn.execute(
+                """
+                SELECT *
+                FROM validation_runs
+                WHERE course_id = ?
+                ORDER BY id DESC
+                LIMIT 1
+                """,
+                (course_id,),
+            ).fetchone()
+        return dict(row) if row else None
+
+    def upsert_codex_thread(
+        self,
+        *,
+        thread_id: str,
+        course_id: str,
+        lesson_id: str,
+        title: str = "",
+    ) -> None:
+        now = utc_now_iso()
+        with self.connect() as conn:
+            conn.execute(
+                """
+                INSERT INTO codex_threads
+                    (thread_id, course_id, lesson_id, title, created_at, updated_at)
+                VALUES (?, ?, ?, ?, ?, ?)
+                ON CONFLICT(thread_id) DO UPDATE SET
+                    course_id = excluded.course_id,
+                    lesson_id = excluded.lesson_id,
+                    title = excluded.title,
+                    updated_at = excluded.updated_at
+                """,
+                (thread_id, course_id, lesson_id, title, now, now),
+            )
+
+    def codex_thread(self, thread_id: str) -> dict[str, Any] | None:
+        with self.connect() as conn:
+            row = conn.execute(
+                "SELECT * FROM codex_threads WHERE thread_id = ?",
+                (thread_id,),
+            ).fetchone()
         return dict(row) if row else None
