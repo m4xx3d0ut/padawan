@@ -44,6 +44,25 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.state.codex = codex
     app.mount("/static", StaticFiles(directory=str(PACKAGE_DIR / "static")), name="static")
 
+    @app.middleware("http")
+    async def security_headers(request: Request, call_next):
+        response = await call_next(request)
+        response.headers.setdefault(
+            "Content-Security-Policy",
+            "default-src 'self'; "
+            "script-src 'self'; "
+            "style-src 'self' 'unsafe-inline'; "
+            "img-src 'self' data:; "
+            "form-action 'self'; "
+            "frame-ancestors 'none'; "
+            "base-uri 'self'",
+        )
+        response.headers.setdefault("X-Content-Type-Options", "nosniff")
+        response.headers.setdefault("Referrer-Policy", "strict-origin-when-cross-origin")
+        response.headers.setdefault("X-Frame-Options", "DENY")
+        response.headers.setdefault("Strict-Transport-Security", "max-age=31536000")
+        return response
+
     @app.get("/", response_class=HTMLResponse)
     async def index(request: Request) -> HTMLResponse:
         courses = _courses(resolved)

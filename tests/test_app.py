@@ -61,6 +61,16 @@ def test_docs_render(tmp_path: Path) -> None:
     assert "Python 3.11" in page.text
 
 
+def test_security_headers_are_set(tmp_path: Path) -> None:
+    with make_client(tmp_path) as client:
+        response = client.get("/")
+
+    assert response.headers["content-security-policy"].startswith("default-src 'self'")
+    assert response.headers["x-content-type-options"] == "nosniff"
+    assert response.headers["referrer-policy"] == "strict-origin-when-cross-origin"
+    assert response.headers["x-frame-options"] == "DENY"
+
+
 def test_data_export_and_import_render_summary(tmp_path: Path) -> None:
     with make_client(tmp_path) as client:
         index = client.get("/data")
