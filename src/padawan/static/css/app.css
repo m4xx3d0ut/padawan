@@ -36,6 +36,10 @@ body {
   line-height: 1.45;
 }
 
+img {
+  max-width: 100%;
+}
+
 a {
   color: var(--k1s-highlight);
   text-decoration: none;
@@ -64,9 +68,15 @@ a:hover {
   min-width: 0;
   align-items: center;
   gap: 10px;
+  overflow-wrap: normal;
+}
+
+.brand > div {
+  min-width: 0;
 }
 
 .brand img {
+  flex: 0 0 auto;
   width: 34px;
   height: 34px;
 }
@@ -123,6 +133,16 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  min-width: 0;
+}
+
+.learn-form > * {
+  max-width: 100%;
+}
+
+.learn-form input {
+  flex: 1 1 240px;
+  min-width: 0;
 }
 
 input,
@@ -178,6 +198,15 @@ button:disabled {
   padding: 14px;
 }
 
+.hero > *,
+.hero-card,
+.course-card,
+.panel,
+.lesson-nav,
+.doc-body {
+  min-width: 0;
+}
+
 .panel {
   padding: 14px;
 }
@@ -222,12 +251,16 @@ button:disabled {
 .badge {
   display: inline-flex;
   align-items: center;
+  min-width: 0;
+  max-width: 100%;
   width: fit-content;
   border: 1px solid var(--k1s-border-soft);
   border-radius: 999px;
   padding: 3px 8px;
   background: #0003;
   color: var(--k1s-text-muted);
+  overflow-wrap: anywhere;
+  white-space: normal;
   text-transform: uppercase;
 }
 
@@ -289,6 +322,11 @@ button:disabled {
 code {
   overflow-wrap: anywhere;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+pre code {
+  overflow-wrap: normal;
+  white-space: inherit;
 }
 
 .lesson-shell {
@@ -371,6 +409,13 @@ code {
   font-weight: 700;
 }
 
+.course-card a,
+.doc-nav a,
+.lesson-nav a,
+.resource-list a {
+  overflow-wrap: anywhere;
+}
+
 .resource-list span {
   display: block;
   color: var(--k1s-text-muted);
@@ -380,11 +425,19 @@ code {
 .followup-exercises {
   display: grid;
   gap: 10px;
+  min-width: 0;
 }
 
 .training-item {
+  min-width: 0;
+  max-width: 100%;
   border-top: 1px solid var(--k1s-border-soft);
   padding-top: 10px;
+}
+
+.training-item > * {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .training-item:first-of-type {
@@ -403,7 +456,9 @@ code {
 
 .concept pre,
 .doc-body pre,
-.runtime-output pre {
+.runtime-output pre,
+.training-item pre {
+  max-width: 100%;
   overflow: auto;
   border: 1px solid var(--k1s-border-soft);
   border-radius: 8px;
@@ -480,5 +535,27 @@ dialog::backdrop {
 
   .lesson-shell {
     min-height: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .topbar .course-actions {
+    width: 100%;
+  }
+
+  .learn-form {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .learn-form input,
+  .learn-form button,
+  .learn-form select {
+    width: 100%;
   }
 }
