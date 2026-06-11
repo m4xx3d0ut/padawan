@@ -27,7 +27,27 @@ checks.
 
 ## Quickstart
 
-Run these commands from the repository root.
+Install the latest release on Linux or macOS:
+
+```bash
+curl -fsSL https://github.com/m4xx3d0ut/padawan/releases/latest/download/install-padawan.sh | sh
+padawan doctor
+padawan serve
+```
+
+Install the latest release on Windows PowerShell:
+
+```powershell
+irm https://github.com/m4xx3d0ut/padawan/releases/latest/download/install-padawan.ps1 | iex
+padawan doctor
+padawan serve
+```
+
+Open `http://127.0.0.1:8787/`.
+
+If the installer prints a PATH command, run it before `padawan doctor`.
+
+To install from source for development, run these commands from the repository root.
 
 ```bash
 python -m venv .venv
@@ -36,8 +56,6 @@ python -m pip install -e .[dev]
 padawan doctor
 padawan serve
 ```
-
-Open `http://127.0.0.1:8787/`.
 
 Start with the bundled courses if you are new. They do not require Codex.
 Generated courses and interactive explanations require the Codex CLI.
@@ -81,6 +99,18 @@ padawan course draft list
 padawan data export --output /tmp/padawan-backup.zip
 padawan data inspect /tmp/padawan-backup.zip
 ```
+
+## Releases
+
+Padawan releases publish one-line installers and a multiplatform wheelhouse:
+
+- `install-padawan.sh`
+- `install-padawan.ps1`
+- `padawan-wheelhouse.tar.gz`
+- `padawan-wheelhouse.zip`
+
+Release notes live in [CHANGELOG.md](CHANGELOG.md). The first wheelhouse release
+is `v0.1.0`.
 
 ## Courses
 

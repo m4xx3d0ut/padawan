@@ -11,6 +11,7 @@ from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
+from . import __version__
 from .backup import BackupError, export_backup, import_backup, inspect_backup
 from .codex import CodexClient
 from .courses import (
@@ -219,7 +220,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     codex = CodexClient(resolved)
     app = FastAPI(
         title="Padawan",
-        version="0.1.0",
+        version=__version__,
         docs_url=None,
         redoc_url=None,
         openapi_url=None,

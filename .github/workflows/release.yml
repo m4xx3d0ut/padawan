@@ -1,0 +1,97 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to publish, for example v0.1.0"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dev dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e '.[dev]'
+      - name: Validate
+        run: |
+          ruff check
+          pytest
+          padawan course validate --course all-seed
+
+  wheels:
+    name: Wheels ${{ matrix.os }} Python ${{ matrix.python-version }}
+    needs: test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-13
+          - macos-14
+          - windows-latest
+        python-version:
+          - "3.11"
+          - "3.12"
+          - "3.13"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Build platform wheelhouse
+        run: python scripts/build_wheelhouse.py --out dist/padawan-wheelhouse --archive-dir dist/release --python python
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheels-${{ matrix.os }}-py${{ matrix.python-version }}
+          path: dist/padawan-wheelhouse/*.whl
+          if-no-files-found: error
+
+  release:
+    name: Publish release artifacts
+    needs: wheels
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: wheels-*
+          merge-multiple: true
+          path: dist/padawan-wheelhouse
+      - name: Package merged wheelhouse
+        run: |
+          python scripts/build_wheelhouse.py --out dist/padawan-wheelhouse --archive-dir dist/release --skip-build
+          cp scripts/install-padawan.sh dist/release/install-padawan.sh
+          cp scripts/install-padawan.ps1 dist/release/install-padawan.ps1
+          test -f dist/release/padawan-wheelhouse.tar.gz
+          test -f dist/release/padawan-wheelhouse.zip
+          test -f dist/release/install-padawan.sh
+          test -f dist/release/install-padawan.ps1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: padawan-release-artifacts
+          path: dist/release/*
+          if-no-files-found: error
+      - name: Publish GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
+          files: dist/release/*

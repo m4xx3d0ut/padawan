@@ -11,6 +11,66 @@ Run commands from the repository root.
 Use the beginner path if you only want to run Padawan and try lessons. Use the
 developer path if you are changing code, course files, or WorkerBee manifests.
 
+## One-Line Release Install
+
+Use this path if you want Padawan installed without cloning the repository.
+
+Linux and macOS:
+
+```bash
+curl -fsSL https://github.com/m4xx3d0ut/padawan/releases/latest/download/install-padawan.sh | sh
+padawan doctor
+padawan serve
+```
+
+Windows PowerShell:
+
+```powershell
+irm https://github.com/m4xx3d0ut/padawan/releases/latest/download/install-padawan.ps1 | iex
+padawan doctor
+padawan serve
+```
+
+Open:
+
+```text
+http://127.0.0.1:8787/
+```
+
+The installer uses your active Python virtual environment when one is active.
+Otherwise, it creates a standalone Padawan virtual environment in your local app
+data directory and writes a `padawan` wrapper.
+
+If the installer prints a PATH command, run it before `padawan doctor`.
+
+### Install From Downloaded Release Artifacts
+
+If you downloaded the release files manually, put the installer and wheelhouse in
+the same directory.
+
+Linux and macOS:
+
+```bash
+chmod +x install-padawan.sh
+PADAWAN_INSTALL_BASE_URL="file://$(pwd)" ./install-padawan.sh
+```
+
+Windows PowerShell:
+
+```powershell
+$env:PADAWAN_INSTALL_BASE_URL = "file:///$((Get-Location).Path.Replace('\', '/'))"
+.\install-padawan.ps1
+```
+
+Expected release artifacts:
+
+```text
+install-padawan.sh
+install-padawan.ps1
+padawan-wheelhouse.tar.gz
+padawan-wheelhouse.zip
+```
+
 ## Super Newcomer Setup
 
 Use this section if you are new to command-line projects or setting up a coding
@@ -157,6 +217,18 @@ ruff format --check
 ruff check
 pytest
 padawan course validate --course all-seed
+```
+
+Build a local release wheelhouse:
+
+```bash
+scripts/build_wheelhouse.sh --python .venv/bin/python
+```
+
+Install from that local wheelhouse:
+
+```bash
+python -m pip install --no-index --find-links dist/padawan-wheelhouse padawan
 ```
 
 ## Optional Local Runtimes

@@ -8,15 +8,16 @@ md = MarkdownIt("commonmark", {"html": False, "linkify": False})
 DOC_ORDER = {
     "first-steps": 0,
     "install": 1,
-    "runtime-safety": 2,
-    "data-backup": 3,
-    "codex": 4,
-    "course-authoring": 5,
-    "training-data-format": 6,
-    "badges": 7,
-    "workerbee": 8,
-    "qa-uat": 9,
-    "troubleshooting": 10,
+    "release-process": 2,
+    "runtime-safety": 3,
+    "data-backup": 4,
+    "codex": 5,
+    "course-authoring": 6,
+    "training-data-format": 7,
+    "badges": 8,
+    "workerbee": 9,
+    "qa-uat": 10,
+    "troubleshooting": 11,
 }
 
 
