@@ -1,4 +1,9 @@
 {
+  "author": {
+    "email": "",
+    "name": "Padawan contributors",
+    "url": "https://github.com/m4xx3d0ut/padawan"
+  },
   "badges": [
     {
       "criteria": {
@@ -25,16 +30,87 @@
       "title": "Linux CLI and Bash Intermediate Complete"
     }
   ],
+  "content_version": "0.1.0",
+  "created_at": "2026-06-11T00:00:00+00:00",
+  "estimated_minutes": 60,
   "generated": false,
   "id": "linux-bash-intermediate",
+  "learning_objectives": [
+    "Practice Linux CLI and Bash through local, validated exercises.",
+    "Explain the purpose of Filter With A Pipeline and related concepts.",
+    "Complete 4 focused intermediate lesson checkpoints."
+  ],
   "level": "intermediate",
+  "license": {
+    "id": "Apache-2.0",
+    "name": "Apache License 2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "maintainers": [
+    {
+      "email": "",
+      "name": "Padawan maintainers",
+      "url": "https://github.com/m4xx3d0ut/padawan"
+    }
+  ],
   "modules": [
     {
       "id": "linux-bash-intermediate",
       "lessons": [
         {
           "codex_context": "Filter With A Pipeline lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "GNU reference for shell syntax, variables, expansion, and control flow.",
+              "title": "Bash Reference Manual",
+              "url": "https://www.gnu.org/software/bash/manual/bash.html"
+            },
+            {
+              "description": "Reference for common command-line tools used in Bash lessons.",
+              "title": "GNU Coreutils Manual",
+              "url": "https://www.gnu.org/software/coreutils/manual/coreutils.html"
+            }
+          ],
           "concept_md": "Pipes send one command output into another command.",
+          "concept_summary": "Filter With A Pipeline focuses on one Linux CLI and Bash idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "printf 'todo\\nready\\n' | grep ready\n",
+              "docs": [
+                {
+                  "description": "GNU reference for shell syntax, variables, expansion, and control flow.",
+                  "title": "Bash Reference Manual",
+                  "url": "https://www.gnu.org/software/bash/manual/bash.html"
+                }
+              ],
+              "explanation": "Pipes send one command output into another command.",
+              "output": "ready",
+              "title": "Worked example: Filter With A Pipeline"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "ready"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "bash-intermediate-pipeline-practice",
+              "prompt": "Print only `ready`.",
+              "reference_solution": "printf 'todo\\nready\\n' | grep ready\n",
+              "starter_code": "printf 'todo\\nready\\n' | cat\n",
+              "title": "Practice Filter With A Pipeline"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -59,7 +135,58 @@
         },
         {
           "codex_context": "Loop Over Values lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "GNU reference for shell syntax, variables, expansion, and control flow.",
+              "title": "Bash Reference Manual",
+              "url": "https://www.gnu.org/software/bash/manual/bash.html"
+            },
+            {
+              "description": "Reference for common command-line tools used in Bash lessons.",
+              "title": "GNU Coreutils Manual",
+              "url": "https://www.gnu.org/software/coreutils/manual/coreutils.html"
+            }
+          ],
           "concept_md": "A `for` loop repeats commands for each value.",
+          "concept_summary": "Loop Over Values focuses on one Linux CLI and Bash idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "for step in build validate ship; do echo $step; done\n",
+              "docs": [
+                {
+                  "description": "GNU reference for shell syntax, variables, expansion, and control flow.",
+                  "title": "Bash Reference Manual",
+                  "url": "https://www.gnu.org/software/bash/manual/bash.html"
+                }
+              ],
+              "explanation": "A `for` loop repeats commands for each value.",
+              "output": "ship",
+              "title": "Worked example: Loop Over Values"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "ship"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "bash-intermediate-loop-practice",
+              "prompt": "Print `ship` as one of the loop steps.",
+              "reference_solution": "for step in build validate ship; do echo $step; done\n",
+              "starter_code": "for step in build; do echo $step; done\n",
+              "title": "Practice Loop Over Values"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -84,7 +211,58 @@
         },
         {
           "codex_context": "Create A Function lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "GNU reference for shell syntax, variables, expansion, and control flow.",
+              "title": "Bash Reference Manual",
+              "url": "https://www.gnu.org/software/bash/manual/bash.html"
+            },
+            {
+              "description": "Reference for common command-line tools used in Bash lessons.",
+              "title": "GNU Coreutils Manual",
+              "url": "https://www.gnu.org/software/coreutils/manual/coreutils.html"
+            }
+          ],
           "concept_md": "Shell functions package reusable command sequences.",
+          "concept_summary": "Create A Function focuses on one Linux CLI and Bash idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "status() { echo \"status: $1\"; }\nstatus ready\n",
+              "docs": [
+                {
+                  "description": "GNU reference for shell syntax, variables, expansion, and control flow.",
+                  "title": "Bash Reference Manual",
+                  "url": "https://www.gnu.org/software/bash/manual/bash.html"
+                }
+              ],
+              "explanation": "Shell functions package reusable command sequences.",
+              "output": "status: ready",
+              "title": "Worked example: Create A Function"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "status: ready"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "bash-intermediate-function-practice",
+              "prompt": "Print `status: ready`.",
+              "reference_solution": "status() { echo \"status: $1\"; }\nstatus ready\n",
+              "starter_code": "status() { echo $1; }\nstatus ready\n",
+              "title": "Practice Create A Function"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -109,7 +287,58 @@
         },
         {
           "codex_context": "Use Strict Mode lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "GNU reference for shell syntax, variables, expansion, and control flow.",
+              "title": "Bash Reference Manual",
+              "url": "https://www.gnu.org/software/bash/manual/bash.html"
+            },
+            {
+              "description": "Reference for common command-line tools used in Bash lessons.",
+              "title": "GNU Coreutils Manual",
+              "url": "https://www.gnu.org/software/coreutils/manual/coreutils.html"
+            }
+          ],
           "concept_md": "Strict mode helps scripts fail early.",
+          "concept_summary": "Use Strict Mode focuses on one Linux CLI and Bash idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "set -euo pipefail\necho strict\n",
+              "docs": [
+                {
+                  "description": "GNU reference for shell syntax, variables, expansion, and control flow.",
+                  "title": "Bash Reference Manual",
+                  "url": "https://www.gnu.org/software/bash/manual/bash.html"
+                }
+              ],
+              "explanation": "Strict mode helps scripts fail early.",
+              "output": "strict",
+              "title": "Worked example: Use Strict Mode"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "strict"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "bash-intermediate-strict-practice",
+              "prompt": "Print `strict` after enabling strict mode.",
+              "reference_solution": "set -euo pipefail\necho strict\n",
+              "starter_code": "echo strict\n",
+              "title": "Practice Use Strict Mode"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -137,8 +366,38 @@
       "title": "Linux CLI and Bash Intermediate Lessons"
     }
   ],
+  "prerequisites": [
+    "Complete a basic Linux CLI and Bash course or have equivalent hands-on practice."
+  ],
+  "provenance": {
+    "generated_by": "",
+    "prompt": "",
+    "reviewed_by": [
+      {
+        "email": "",
+        "name": "Padawan contributors",
+        "url": "https://github.com/m4xx3d0ut/padawan"
+      }
+    ],
+    "source": "padawan seed catalog"
+  },
+  "schema_version": "padawan.training-data.v1",
+  "share": {
+    "canonical_url": "",
+    "repository_url": "https://github.com/m4xx3d0ut/padawan",
+    "slug": "linux-bash-intermediate",
+    "visibility": "local"
+  },
   "summary": "Practice pipes, loops, functions, and strict Bash habits.",
+  "tags": [
+    "linux-bash",
+    "intermediate",
+    "local-first",
+    "coding-practice"
+  ],
+  "target_audience": "Intermediate learners practicing Linux CLI and Bash in a local Padawan environment.",
   "title": "Linux CLI and Bash Intermediate",
   "track": "linux-bash",
+  "updated_at": "2026-06-11T00:00:00+00:00",
   "verified": true
 }

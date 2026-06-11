@@ -12,10 +12,11 @@ DOC_ORDER = {
     "data-backup": 3,
     "codex": 4,
     "course-authoring": 5,
-    "badges": 6,
-    "workerbee": 7,
-    "qa-uat": 8,
-    "troubleshooting": 9,
+    "training-data-format": 6,
+    "badges": 7,
+    "workerbee": 8,
+    "qa-uat": 9,
+    "troubleshooting": 10,
 }
 
 

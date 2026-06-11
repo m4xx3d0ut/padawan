@@ -1,4 +1,9 @@
 {
+  "author": {
+    "email": "",
+    "name": "Padawan contributors",
+    "url": "https://github.com/m4xx3d0ut/padawan"
+  },
   "badges": [
     {
       "criteria": {
@@ -25,16 +30,87 @@
       "title": "Git CLI Basics Complete"
     }
   ],
+  "content_version": "0.1.0",
+  "created_at": "2026-06-11T00:00:00+00:00",
+  "estimated_minutes": 60,
   "generated": false,
   "id": "git-basics",
+  "learning_objectives": [
+    "Practice Git CLI through local, validated exercises.",
+    "Explain the purpose of Initialize And Check Status and related concepts.",
+    "Complete 4 focused basic lesson checkpoints."
+  ],
   "level": "basic",
+  "license": {
+    "id": "Apache-2.0",
+    "name": "Apache License 2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "maintainers": [
+    {
+      "email": "",
+      "name": "Padawan maintainers",
+      "url": "https://github.com/m4xx3d0ut/padawan"
+    }
+  ],
   "modules": [
     {
       "id": "git-basic",
       "lessons": [
         {
           "codex_context": "Initialize And Check Status lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official beginner-friendly chapters for Git repositories and workflows.",
+              "title": "Pro Git Book",
+              "url": "https://git-scm.com/book/en/v2"
+            },
+            {
+              "description": "Official reference for Git commands and options.",
+              "title": "Git Command Reference",
+              "url": "https://git-scm.com/docs"
+            }
+          ],
           "concept_md": "`git init` creates a repository and `git status` shows its state.",
+          "concept_summary": "Initialize And Check Status focuses on one Git CLI idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "git init\ngit status\necho repo ready\n",
+              "docs": [
+                {
+                  "description": "Official beginner-friendly chapters for Git repositories and workflows.",
+                  "title": "Pro Git Book",
+                  "url": "https://git-scm.com/book/en/v2"
+                }
+              ],
+              "explanation": "`git init` creates a repository and `git status` shows its state.",
+              "output": "repo ready",
+              "title": "Worked example: Initialize And Check Status"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "repo ready"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Run `git init` before `git status`.",
+              "id": "git-init-status-practice",
+              "prompt": "Initialize a repo and print `repo ready` after `git status` succeeds.",
+              "reference_solution": "git init\ngit status\necho repo ready\n",
+              "starter_code": "git status\necho todo\n",
+              "title": "Practice Initialize And Check Status"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -59,7 +135,58 @@
         },
         {
           "codex_context": "Stage A File lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official beginner-friendly chapters for Git repositories and workflows.",
+              "title": "Pro Git Book",
+              "url": "https://git-scm.com/book/en/v2"
+            },
+            {
+              "description": "Official reference for Git commands and options.",
+              "title": "Git Command Reference",
+              "url": "https://git-scm.com/docs"
+            }
+          ],
           "concept_md": "`git add` moves file changes into the index.",
+          "concept_summary": "Stage A File focuses on one Git CLI idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "git init\necho note > note.txt\ngit add note.txt\ngit status --short\necho staged\n",
+              "docs": [
+                {
+                  "description": "Official beginner-friendly chapters for Git repositories and workflows.",
+                  "title": "Pro Git Book",
+                  "url": "https://git-scm.com/book/en/v2"
+                }
+              ],
+              "explanation": "`git add` moves file changes into the index.",
+              "output": "staged",
+              "title": "Worked example: Stage A File"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "staged"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "git-stage-file-practice",
+              "prompt": "Create `note.txt`, stage it, and print `staged`.",
+              "reference_solution": "git init\necho note > note.txt\ngit add note.txt\ngit status --short\necho staged\n",
+              "starter_code": "echo note > note.txt\ngit status --short\necho todo\n",
+              "title": "Practice Stage A File"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -84,7 +211,58 @@
         },
         {
           "codex_context": "Make A First Commit lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official beginner-friendly chapters for Git repositories and workflows.",
+              "title": "Pro Git Book",
+              "url": "https://git-scm.com/book/en/v2"
+            },
+            {
+              "description": "Official reference for Git commands and options.",
+              "title": "Git Command Reference",
+              "url": "https://git-scm.com/docs"
+            }
+          ],
           "concept_md": "A commit records the staged snapshot.",
+          "concept_summary": "Make A First Commit focuses on one Git CLI idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "git init\ngit config user.email padawan@example.local\ngit config user.name Padawan\necho note > note.txt\ngit add note.txt\ngit commit -m 'first note'\necho committed\n",
+              "docs": [
+                {
+                  "description": "Official beginner-friendly chapters for Git repositories and workflows.",
+                  "title": "Pro Git Book",
+                  "url": "https://git-scm.com/book/en/v2"
+                }
+              ],
+              "explanation": "A commit records the staged snapshot.",
+              "output": "committed",
+              "title": "Worked example: Make A First Commit"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "committed"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "git-first-commit-practice",
+              "prompt": "Create a first commit and print `committed`.",
+              "reference_solution": "git init\ngit config user.email padawan@example.local\ngit config user.name Padawan\necho note > note.txt\ngit add note.txt\ngit commit -m 'first note'\necho committed\n",
+              "starter_code": "git init\necho note > note.txt\ngit add note.txt\necho todo\n",
+              "title": "Practice Make A First Commit"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -109,7 +287,58 @@
         },
         {
           "codex_context": "Create A Branch lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official beginner-friendly chapters for Git repositories and workflows.",
+              "title": "Pro Git Book",
+              "url": "https://git-scm.com/book/en/v2"
+            },
+            {
+              "description": "Official reference for Git commands and options.",
+              "title": "Git Command Reference",
+              "url": "https://git-scm.com/docs"
+            }
+          ],
           "concept_md": "Branches name a line of work.",
+          "concept_summary": "Create A Branch focuses on one Git CLI idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "git init\ngit checkout -b lesson\ngit branch --show-current\n",
+              "docs": [
+                {
+                  "description": "Official beginner-friendly chapters for Git repositories and workflows.",
+                  "title": "Pro Git Book",
+                  "url": "https://git-scm.com/book/en/v2"
+                }
+              ],
+              "explanation": "Branches name a line of work.",
+              "output": "lesson",
+              "title": "Worked example: Create A Branch"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "lesson"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "git-branch-current-practice",
+              "prompt": "Create and switch to `lesson` and print that branch name.",
+              "reference_solution": "git init\ngit checkout -b lesson\ngit branch --show-current\n",
+              "starter_code": "git init\ngit branch\n",
+              "title": "Practice Create A Branch"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -137,8 +366,38 @@
       "title": "Git CLI Basics Lessons"
     }
   ],
+  "prerequisites": [
+    "No prior Git CLI experience is required."
+  ],
+  "provenance": {
+    "generated_by": "",
+    "prompt": "",
+    "reviewed_by": [
+      {
+        "email": "",
+        "name": "Padawan contributors",
+        "url": "https://github.com/m4xx3d0ut/padawan"
+      }
+    ],
+    "source": "padawan seed catalog"
+  },
+  "schema_version": "padawan.training-data.v1",
+  "share": {
+    "canonical_url": "",
+    "repository_url": "https://github.com/m4xx3d0ut/padawan",
+    "slug": "git-basics",
+    "visibility": "local"
+  },
   "summary": "Practice creating repositories, staging files, committing, and branching.",
+  "tags": [
+    "git",
+    "basic",
+    "local-first",
+    "coding-practice"
+  ],
+  "target_audience": "Basic learners practicing Git CLI in a local Padawan environment.",
   "title": "Git CLI Basics",
   "track": "git",
+  "updated_at": "2026-06-11T00:00:00+00:00",
   "verified": true
 }

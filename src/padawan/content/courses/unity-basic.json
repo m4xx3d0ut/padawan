@@ -1,4 +1,9 @@
 {
+  "author": {
+    "email": "",
+    "name": "Padawan contributors",
+    "url": "https://github.com/m4xx3d0ut/padawan"
+  },
   "badges": [
     {
       "criteria": {
@@ -25,16 +30,82 @@
       "title": "Unity Basic Complete"
     }
   ],
+  "content_version": "0.1.0",
+  "created_at": "2026-06-11T00:00:00+00:00",
+  "estimated_minutes": 60,
   "generated": false,
   "id": "unity-basic",
+  "learning_objectives": [
+    "Practice Unity through local, validated exercises.",
+    "Explain the purpose of Update Workflow and related concepts.",
+    "Complete 4 focused basic lesson checkpoints."
+  ],
   "level": "basic",
+  "license": {
+    "id": "Apache-2.0",
+    "name": "Apache License 2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "maintainers": [
+    {
+      "email": "",
+      "name": "Padawan maintainers",
+      "url": "https://github.com/m4xx3d0ut/padawan"
+    }
+  ],
   "modules": [
     {
       "id": "unity-basic",
       "lessons": [
         {
           "codex_context": "Update Workflow lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official Unity documentation entry point.",
+              "title": "Unity Documentation",
+              "url": "https://docs.unity.com/"
+            },
+            {
+              "description": "Unity manual section for scripts and components.",
+              "title": "Programming In Unity",
+              "url": "https://docs.unity3d.com/6000.4/Documentation/Manual/scripting.html"
+            }
+          ],
           "concept_md": "Unity basic work depends on understanding `Update` and validating it with evidence.",
+          "concept_summary": "Update Workflow focuses on one Unity idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "Update is part of the Unity workflow and should be validated with Unity Editor.",
+              "docs": [
+                {
+                  "description": "Official Unity documentation entry point.",
+                  "title": "Unity Documentation",
+                  "url": "https://docs.unity.com/"
+                }
+              ],
+              "explanation": "Unity basic work depends on understanding `Update` and validating it with evidence.",
+              "output": "Update",
+              "title": "Worked example: Update Workflow"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "text_contains",
+                  "points": 1,
+                  "value": "Update"
+                }
+              ],
+              "hidden_hint": "Mention `Update` and a validation signal.",
+              "id": "unity-basic-1-practice",
+              "prompt": "Explain how `Update` fits into a Unity basic workflow.",
+              "reference_solution": "Update is part of the Unity workflow and should be validated with Unity Editor.",
+              "starter_code": "Update fits into the workflow by ...",
+              "title": "Practice Update Workflow"
+            }
+          ],
           "grading": [
             {
               "kind": "text_contains",
@@ -57,7 +128,53 @@
         },
         {
           "codex_context": "GameObject Workflow lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official Unity documentation entry point.",
+              "title": "Unity Documentation",
+              "url": "https://docs.unity.com/"
+            },
+            {
+              "description": "Unity manual section for scripts and components.",
+              "title": "Programming In Unity",
+              "url": "https://docs.unity3d.com/6000.4/Documentation/Manual/scripting.html"
+            }
+          ],
           "concept_md": "Unity basic work depends on understanding `GameObject` and validating it with evidence.",
+          "concept_summary": "GameObject Workflow focuses on one Unity idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "GameObject is part of the Unity workflow and should be validated with Unity Editor.",
+              "docs": [
+                {
+                  "description": "Official Unity documentation entry point.",
+                  "title": "Unity Documentation",
+                  "url": "https://docs.unity.com/"
+                }
+              ],
+              "explanation": "Unity basic work depends on understanding `GameObject` and validating it with evidence.",
+              "output": "GameObject",
+              "title": "Worked example: GameObject Workflow"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "text_contains",
+                  "points": 1,
+                  "value": "GameObject"
+                }
+              ],
+              "hidden_hint": "Mention `GameObject` and a validation signal.",
+              "id": "unity-basic-2-practice",
+              "prompt": "Explain how `GameObject` fits into a Unity basic workflow.",
+              "reference_solution": "GameObject is part of the Unity workflow and should be validated with Unity Editor.",
+              "starter_code": "GameObject fits into the workflow by ...",
+              "title": "Practice GameObject Workflow"
+            }
+          ],
           "grading": [
             {
               "kind": "text_contains",
@@ -80,7 +197,53 @@
         },
         {
           "codex_context": "MonoBehaviour Workflow lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official Unity documentation entry point.",
+              "title": "Unity Documentation",
+              "url": "https://docs.unity.com/"
+            },
+            {
+              "description": "Unity manual section for scripts and components.",
+              "title": "Programming In Unity",
+              "url": "https://docs.unity3d.com/6000.4/Documentation/Manual/scripting.html"
+            }
+          ],
           "concept_md": "Unity basic work depends on understanding `MonoBehaviour` and validating it with evidence.",
+          "concept_summary": "MonoBehaviour Workflow focuses on one Unity idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "MonoBehaviour is part of the Unity workflow and should be validated with Unity Editor.",
+              "docs": [
+                {
+                  "description": "Official Unity documentation entry point.",
+                  "title": "Unity Documentation",
+                  "url": "https://docs.unity.com/"
+                }
+              ],
+              "explanation": "Unity basic work depends on understanding `MonoBehaviour` and validating it with evidence.",
+              "output": "MonoBehaviour",
+              "title": "Worked example: MonoBehaviour Workflow"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "text_contains",
+                  "points": 1,
+                  "value": "MonoBehaviour"
+                }
+              ],
+              "hidden_hint": "Mention `MonoBehaviour` and a validation signal.",
+              "id": "unity-basic-3-practice",
+              "prompt": "Explain how `MonoBehaviour` fits into a Unity basic workflow.",
+              "reference_solution": "MonoBehaviour is part of the Unity workflow and should be validated with Unity Editor.",
+              "starter_code": "MonoBehaviour fits into the workflow by ...",
+              "title": "Practice MonoBehaviour Workflow"
+            }
+          ],
           "grading": [
             {
               "kind": "text_contains",
@@ -103,7 +266,53 @@
         },
         {
           "codex_context": "Prefab Workflow lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official Unity documentation entry point.",
+              "title": "Unity Documentation",
+              "url": "https://docs.unity.com/"
+            },
+            {
+              "description": "Unity manual section for scripts and components.",
+              "title": "Programming In Unity",
+              "url": "https://docs.unity3d.com/6000.4/Documentation/Manual/scripting.html"
+            }
+          ],
           "concept_md": "Unity basic work depends on understanding `Prefab` and validating it with evidence.",
+          "concept_summary": "Prefab Workflow focuses on one Unity idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "Prefab is part of the Unity workflow and should be validated with Unity Editor.",
+              "docs": [
+                {
+                  "description": "Official Unity documentation entry point.",
+                  "title": "Unity Documentation",
+                  "url": "https://docs.unity.com/"
+                }
+              ],
+              "explanation": "Unity basic work depends on understanding `Prefab` and validating it with evidence.",
+              "output": "Prefab",
+              "title": "Worked example: Prefab Workflow"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "text_contains",
+                  "points": 1,
+                  "value": "Prefab"
+                }
+              ],
+              "hidden_hint": "Mention `Prefab` and a validation signal.",
+              "id": "unity-basic-4-practice",
+              "prompt": "Explain how `Prefab` fits into a Unity basic workflow.",
+              "reference_solution": "Prefab is part of the Unity workflow and should be validated with Unity Editor.",
+              "starter_code": "Prefab fits into the workflow by ...",
+              "title": "Practice Prefab Workflow"
+            }
+          ],
           "grading": [
             {
               "kind": "text_contains",
@@ -129,8 +338,38 @@
       "title": "Unity Basic Lessons"
     }
   ],
+  "prerequisites": [
+    "No prior Unity experience is required."
+  ],
+  "provenance": {
+    "generated_by": "",
+    "prompt": "",
+    "reviewed_by": [
+      {
+        "email": "",
+        "name": "Padawan contributors",
+        "url": "https://github.com/m4xx3d0ut/padawan"
+      }
+    ],
+    "source": "padawan seed catalog"
+  },
+  "schema_version": "padawan.training-data.v1",
+  "share": {
+    "canonical_url": "",
+    "repository_url": "https://github.com/m4xx3d0ut/padawan",
+    "slug": "unity-basic",
+    "visibility": "local"
+  },
   "summary": "Learn basic Unity engine workflows with text validation until local engine adapters are available.",
+  "tags": [
+    "unity",
+    "basic",
+    "local-first",
+    "coding-practice"
+  ],
+  "target_audience": "Basic learners practicing Unity in a local Padawan environment.",
   "title": "Unity Basic",
   "track": "unity",
+  "updated_at": "2026-06-11T00:00:00+00:00",
   "verified": true
 }

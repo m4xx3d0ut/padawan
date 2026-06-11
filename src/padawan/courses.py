@@ -5,7 +5,12 @@ from pathlib import Path
 
 from pydantic import ValidationError
 
-from .models import Course, CourseValidationResult
+from .models import (
+    LEGACY_TRAINING_DATA_FORMAT,
+    TRAINING_DATA_FORMAT,
+    Course,
+    CourseValidationResult,
+)
 from .settings import Settings
 
 
@@ -66,6 +71,7 @@ def validate_course_path(path: Path) -> list[str]:
             errors.append(f"{course.id}: duplicate lesson id")
         if not course.lessons:
             errors.append(f"{course.id}: course has no lessons")
+        errors.extend(_validate_course_shape(course))
     return errors
 
 
@@ -112,18 +118,27 @@ def _validate_course_shape(
     existing_course_ids: set[str] | None = None,
 ) -> list[str]:
     messages: list[str] = []
+    require_v1 = course.generated or course.schema_version == TRAINING_DATA_FORMAT
     if existing_course_ids and course.id in existing_course_ids:
         messages.append(f"{course.id}: course id already exists")
     if not course.lessons:
         messages.append(f"{course.id}: course has no lessons")
+    if course.generated and course.schema_version != TRAINING_DATA_FORMAT:
+        messages.append(f"{course.id}: generated courses must use {TRAINING_DATA_FORMAT}")
+    if course.schema_version not in {TRAINING_DATA_FORMAT, LEGACY_TRAINING_DATA_FORMAT}:
+        messages.append(f"{course.id}: unknown schema_version {course.schema_version}")
     lesson_ids = [lesson.id for lesson in course.lessons]
     if len(lesson_ids) != len(set(lesson_ids)):
         messages.append(f"{course.id}: duplicate lesson id")
+    if require_v1:
+        messages.extend(_validate_v1_course_metadata(course))
     for lesson in course.lessons:
         if not lesson.hidden_hint.strip():
             messages.append(f"{course.id}/{lesson.id}: missing hidden_hint")
         if lesson.runtime != "none" and not lesson.grading:
             messages.append(f"{course.id}/{lesson.id}: missing grading rules")
+        if require_v1:
+            messages.extend(_validate_v1_lesson(course, lesson))
     badge_thresholds = {
         int(badge.criteria.get("completion_percent", 0))
         for badge in course.badges
@@ -133,6 +148,57 @@ def _validate_course_shape(
         messages.append(f"{course.id}: missing 50 percent badge")
     if 100 not in badge_thresholds:
         messages.append(f"{course.id}: missing 100 percent badge")
+    return messages
+
+
+def _validate_v1_course_metadata(course: Course) -> list[str]:
+    messages: list[str] = []
+    required = {
+        "content_version": course.content_version,
+        "author.name": course.author.name,
+        "license.id": course.license.id,
+        "target_audience": course.target_audience,
+        "provenance.source": course.provenance.source,
+        "share.slug": course.share.slug,
+        "created_at": course.created_at,
+        "updated_at": course.updated_at,
+    }
+    for field, value in required.items():
+        if not str(value).strip():
+            messages.append(f"{course.id}: missing {field}")
+    if not course.tags:
+        messages.append(f"{course.id}: missing tags")
+    if not course.prerequisites:
+        messages.append(f"{course.id}: missing prerequisites")
+    if not course.learning_objectives:
+        messages.append(f"{course.id}: missing learning_objectives")
+    if course.estimated_minutes <= 0:
+        messages.append(f"{course.id}: estimated_minutes must be greater than zero")
+    return messages
+
+
+def _validate_v1_lesson(course: Course, lesson) -> list[str]:
+    messages: list[str] = []
+    if not lesson.concept_summary.strip():
+        messages.append(f"{course.id}/{lesson.id}: missing concept_summary")
+    if not lesson.concept_links:
+        messages.append(f"{course.id}/{lesson.id}: missing concept_links")
+    if not lesson.examples:
+        messages.append(f"{course.id}/{lesson.id}: missing examples")
+    if not lesson.exercises:
+        messages.append(f"{course.id}/{lesson.id}: missing exercises")
+    for index, example in enumerate(lesson.examples, start=1):
+        if not example.title.strip():
+            messages.append(f"{course.id}/{lesson.id}: example {index} missing title")
+        if not example.explanation.strip():
+            messages.append(f"{course.id}/{lesson.id}: example {index} missing explanation")
+    for exercise in lesson.exercises:
+        if not exercise.prompt.strip():
+            messages.append(f"{course.id}/{lesson.id}/{exercise.id}: missing prompt")
+        if not exercise.hidden_hint.strip():
+            messages.append(f"{course.id}/{lesson.id}/{exercise.id}: missing hidden_hint")
+        if not exercise.reference_solution.strip():
+            messages.append(f"{course.id}/{lesson.id}/{exercise.id}: missing reference_solution")
     return messages
 
 

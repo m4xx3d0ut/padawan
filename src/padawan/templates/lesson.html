@@ -47,6 +47,49 @@
       </ul>
       {% endif %}
     </article>
+    {% if lesson.examples %}
+    <article class="panel training-examples">
+      <h2>Worked Examples</h2>
+      {% for example in lesson.examples %}
+      <section class="training-item">
+        <h3>{{ example.title }}</h3>
+        <p>{{ example.explanation }}</p>
+        {% if example.code %}<pre><code>{{ example.code }}</code></pre>{% endif %}
+        {% if example.output %}
+        <p class="muted">Expected output</p>
+        <pre><code>{{ example.output }}</code></pre>
+        {% endif %}
+        {% if example.docs %}
+        <ul class="resource-list compact-list">
+          {% for link in example.docs %}
+          <li>
+            <a
+              href="{{ link.url }}"
+              {% if link.url[:4] == "http" %}target="_blank" rel="noreferrer"{% endif %}
+            >{{ link.title }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </section>
+      {% endfor %}
+    </article>
+    {% endif %}
+    {% if lesson.exercises %}
+    <article class="panel followup-exercises">
+      <h2>Practice Next</h2>
+      {% for exercise in lesson.exercises %}
+      <section class="training-item">
+        <div class="course-actions">
+          <h3>{{ exercise.title }}</h3>
+          <span class="pill">{{ exercise.difficulty }}</span>
+        </div>
+        <p>{{ exercise.prompt }}</p>
+        {% if exercise.hidden_hint %}<p class="muted">Hint: {{ exercise.hidden_hint }}</p>{% endif %}
+      </section>
+      {% endfor %}
+    </article>
+    {% endif %}
   </div>
 
   <div class="lesson-right">

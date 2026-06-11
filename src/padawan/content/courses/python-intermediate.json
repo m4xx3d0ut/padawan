@@ -1,4 +1,9 @@
 {
+  "author": {
+    "email": "",
+    "name": "Padawan contributors",
+    "url": "https://github.com/m4xx3d0ut/padawan"
+  },
   "badges": [
     {
       "criteria": {
@@ -25,16 +30,87 @@
       "title": "Python Intermediate Complete"
     }
   ],
+  "content_version": "0.1.0",
+  "created_at": "2026-06-11T00:00:00+00:00",
+  "estimated_minutes": 60,
   "generated": false,
   "id": "python-intermediate",
+  "learning_objectives": [
+    "Practice Python through local, validated exercises.",
+    "Explain the purpose of Transform A List and related concepts.",
+    "Complete 4 focused intermediate lesson checkpoints."
+  ],
   "level": "intermediate",
+  "license": {
+    "id": "Apache-2.0",
+    "name": "Apache License 2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "maintainers": [
+    {
+      "email": "",
+      "name": "Padawan maintainers",
+      "url": "https://github.com/m4xx3d0ut/padawan"
+    }
+  ],
   "modules": [
     {
       "id": "python-intermediate",
       "lessons": [
         {
           "codex_context": "Transform A List lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official Python tutorial for language basics.",
+              "title": "Python Tutorial",
+              "url": "https://docs.python.org/3/tutorial/index.html"
+            },
+            {
+              "description": "Reference for print, len, range, input, and other built-ins.",
+              "title": "Built-in Functions",
+              "url": "https://docs.python.org/3/library/functions.html"
+            }
+          ],
           "concept_md": "Use a comprehension to transform values.",
+          "concept_summary": "Transform A List focuses on one Python idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "numbers = [1, 2, 3]\nprint([value * 2 for value in numbers])\n",
+              "docs": [
+                {
+                  "description": "Official Python tutorial for language basics.",
+                  "title": "Python Tutorial",
+                  "url": "https://docs.python.org/3/tutorial/index.html"
+                }
+              ],
+              "explanation": "Use a comprehension to transform values.",
+              "output": "[2, 4, 6]",
+              "title": "Worked example: Transform A List"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "[2, 4, 6]"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "python-intermediate-list-comprehension-practice",
+              "prompt": "Print `[2, 4, 6]`.",
+              "reference_solution": "numbers = [1, 2, 3]\nprint([value * 2 for value in numbers])\n",
+              "starter_code": "numbers = [1, 2, 3]\nprint(numbers)\n",
+              "title": "Practice Transform A List"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -59,7 +135,58 @@
         },
         {
           "codex_context": "Count Values lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official Python tutorial for language basics.",
+              "title": "Python Tutorial",
+              "url": "https://docs.python.org/3/tutorial/index.html"
+            },
+            {
+              "description": "Reference for print, len, range, input, and other built-ins.",
+              "title": "Built-in Functions",
+              "url": "https://docs.python.org/3/library/functions.html"
+            }
+          ],
           "concept_md": "Dictionaries can count values by key.",
+          "concept_summary": "Count Values focuses on one Python idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "words = ['padawan', 'codex', 'padawan']\ncounts = {}\nfor word in words:\n    counts[word] = counts.get(word, 0) + 1\nprint(f\"padawan={counts['padawan']}\")\n",
+              "docs": [
+                {
+                  "description": "Official Python tutorial for language basics.",
+                  "title": "Python Tutorial",
+                  "url": "https://docs.python.org/3/tutorial/index.html"
+                }
+              ],
+              "explanation": "Dictionaries can count values by key.",
+              "output": "padawan=2",
+              "title": "Worked example: Count Values"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "padawan=2"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "python-intermediate-dict-count-practice",
+              "prompt": "Print `padawan=2`.",
+              "reference_solution": "words = ['padawan', 'codex', 'padawan']\ncounts = {}\nfor word in words:\n    counts[word] = counts.get(word, 0) + 1\nprint(f\"padawan={counts['padawan']}\")\n",
+              "starter_code": "words = ['padawan', 'codex', 'padawan']\nprint('padawan=0')\n",
+              "title": "Practice Count Values"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -84,7 +211,58 @@
         },
         {
           "codex_context": "Handle Failure lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official Python tutorial for language basics.",
+              "title": "Python Tutorial",
+              "url": "https://docs.python.org/3/tutorial/index.html"
+            },
+            {
+              "description": "Reference for print, len, range, input, and other built-ins.",
+              "title": "Built-in Functions",
+              "url": "https://docs.python.org/3/library/functions.html"
+            }
+          ],
           "concept_md": "Exceptions let scripts recover from expected failures.",
+          "concept_summary": "Handle Failure focuses on one Python idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "data = {}\ntry:\n    print(data['name'])\nexcept KeyError:\n    print('fallback')\n",
+              "docs": [
+                {
+                  "description": "Official Python tutorial for language basics.",
+                  "title": "Python Tutorial",
+                  "url": "https://docs.python.org/3/tutorial/index.html"
+                }
+              ],
+              "explanation": "Exceptions let scripts recover from expected failures.",
+              "output": "fallback",
+              "title": "Worked example: Handle Failure"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "fallback"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "python-intermediate-exception-path-practice",
+              "prompt": "Print `fallback`.",
+              "reference_solution": "data = {}\ntry:\n    print(data['name'])\nexcept KeyError:\n    print('fallback')\n",
+              "starter_code": "data = {}\nprint(data['name'])\n",
+              "title": "Practice Handle Failure"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -109,7 +287,58 @@
         },
         {
           "codex_context": "Yield Steps lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official Python tutorial for language basics.",
+              "title": "Python Tutorial",
+              "url": "https://docs.python.org/3/tutorial/index.html"
+            },
+            {
+              "description": "Reference for print, len, range, input, and other built-ins.",
+              "title": "Built-in Functions",
+              "url": "https://docs.python.org/3/library/functions.html"
+            }
+          ],
           "concept_md": "Generators produce values one at a time.",
+          "concept_summary": "Yield Steps focuses on one Python idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "def steps():\n    yield 'build'\n    yield 'validate'\n    yield 'ship'\nprint(','.join(steps()))\n",
+              "docs": [
+                {
+                  "description": "Official Python tutorial for language basics.",
+                  "title": "Python Tutorial",
+                  "url": "https://docs.python.org/3/tutorial/index.html"
+                }
+              ],
+              "explanation": "Generators produce values one at a time.",
+              "output": "build,validate,ship",
+              "title": "Worked example: Yield Steps"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "build,validate,ship"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "python-intermediate-generator-steps-practice",
+              "prompt": "Print `build,validate,ship`.",
+              "reference_solution": "def steps():\n    yield 'build'\n    yield 'validate'\n    yield 'ship'\nprint(','.join(steps()))\n",
+              "starter_code": "def steps():\n    return []\nprint(','.join(steps()))\n",
+              "title": "Practice Yield Steps"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -137,8 +366,38 @@
       "title": "Python Intermediate Lessons"
     }
   ],
+  "prerequisites": [
+    "Complete a basic Python course or have equivalent hands-on practice."
+  ],
+  "provenance": {
+    "generated_by": "",
+    "prompt": "",
+    "reviewed_by": [
+      {
+        "email": "",
+        "name": "Padawan contributors",
+        "url": "https://github.com/m4xx3d0ut/padawan"
+      }
+    ],
+    "source": "padawan seed catalog"
+  },
+  "schema_version": "padawan.training-data.v1",
+  "share": {
+    "canonical_url": "",
+    "repository_url": "https://github.com/m4xx3d0ut/padawan",
+    "slug": "python-intermediate",
+    "visibility": "local"
+  },
   "summary": "Practice collections, files, exceptions, and generators in Python.",
+  "tags": [
+    "python",
+    "intermediate",
+    "local-first",
+    "coding-practice"
+  ],
+  "target_audience": "Intermediate learners practicing Python in a local Padawan environment.",
   "title": "Python Intermediate",
   "track": "python",
+  "updated_at": "2026-06-11T00:00:00+00:00",
   "verified": true
 }

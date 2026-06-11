@@ -7,6 +7,10 @@ Seed courses are JSON files under `content/courses`. Local user courses live in
 the Padawan state directory under `courses/`, and generated drafts live under
 `course-drafts/`.
 
+The canonical course format is `padawan.training-data.v1`. See
+[Training Data Format](/docs/training-data-format) for the full metadata,
+examples, exercises, sharing fields, and validation expectations.
+
 Each course contains modules, lessons, grading rules, optional badges, and hidden
 validation metadata. Every publishable lesson should include a `reference_solution`
 that passes local validation.

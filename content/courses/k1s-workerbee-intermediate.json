@@ -1,4 +1,9 @@
 {
+  "author": {
+    "email": "",
+    "name": "Padawan contributors",
+    "url": "https://github.com/m4xx3d0ut/padawan"
+  },
   "badges": [
     {
       "criteria": {
@@ -25,16 +30,82 @@
       "title": "k1s and WorkerBee Intermediate Complete"
     }
   ],
+  "content_version": "0.1.0",
+  "created_at": "2026-06-11T00:00:00+00:00",
+  "estimated_minutes": 60,
   "generated": false,
   "id": "k1s-workerbee-intermediate",
+  "learning_objectives": [
+    "Practice k1s and WorkerBee through local, validated exercises.",
+    "Explain the purpose of manifest Workflow and related concepts.",
+    "Complete 4 focused intermediate lesson checkpoints."
+  ],
   "level": "intermediate",
+  "license": {
+    "id": "Apache-2.0",
+    "name": "Apache License 2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "maintainers": [
+    {
+      "email": "",
+      "name": "Padawan maintainers",
+      "url": "https://github.com/m4xx3d0ut/padawan"
+    }
+  ],
   "modules": [
     {
       "id": "k1s-workerbee-intermediate",
       "lessons": [
         {
           "codex_context": "manifest Workflow lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Local guide for WorkerBee validation and status in Padawan.",
+              "title": "Padawan WorkerBee Guide",
+              "url": "/docs/workerbee"
+            },
+            {
+              "description": "Upstream concepts for workload state, pods, and deployments.",
+              "title": "Kubernetes Workloads",
+              "url": "https://kubernetes.io/docs/concepts/workloads/"
+            }
+          ],
           "concept_md": "k1s and WorkerBee intermediate work depends on understanding `manifest` and validating it with evidence.",
+          "concept_summary": "manifest Workflow focuses on one k1s and WorkerBee idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "manifest is part of the k1s and WorkerBee workflow and should be validated with local evidence.",
+              "docs": [
+                {
+                  "description": "Local guide for WorkerBee validation and status in Padawan.",
+                  "title": "Padawan WorkerBee Guide",
+                  "url": "/docs/workerbee"
+                }
+              ],
+              "explanation": "k1s and WorkerBee intermediate work depends on understanding `manifest` and validating it with evidence.",
+              "output": "manifest",
+              "title": "Worked example: manifest Workflow"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "text_contains",
+                  "points": 1,
+                  "value": "manifest"
+                }
+              ],
+              "hidden_hint": "Mention `manifest` and a validation signal.",
+              "id": "k1s-intermediate-1-practice",
+              "prompt": "Explain how `manifest` fits into a k1s and WorkerBee intermediate workflow.",
+              "reference_solution": "manifest is part of the k1s and WorkerBee workflow and should be validated with local evidence.",
+              "starter_code": "manifest fits into the workflow by ...",
+              "title": "Practice manifest Workflow"
+            }
+          ],
           "grading": [
             {
               "kind": "text_contains",
@@ -54,7 +125,53 @@
         },
         {
           "codex_context": "persist Workflow lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Local guide for WorkerBee validation and status in Padawan.",
+              "title": "Padawan WorkerBee Guide",
+              "url": "/docs/workerbee"
+            },
+            {
+              "description": "Upstream concepts for workload state, pods, and deployments.",
+              "title": "Kubernetes Workloads",
+              "url": "https://kubernetes.io/docs/concepts/workloads/"
+            }
+          ],
           "concept_md": "k1s and WorkerBee intermediate work depends on understanding `persist` and validating it with evidence.",
+          "concept_summary": "persist Workflow focuses on one k1s and WorkerBee idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "persist is part of the k1s and WorkerBee workflow and should be validated with local evidence.",
+              "docs": [
+                {
+                  "description": "Local guide for WorkerBee validation and status in Padawan.",
+                  "title": "Padawan WorkerBee Guide",
+                  "url": "/docs/workerbee"
+                }
+              ],
+              "explanation": "k1s and WorkerBee intermediate work depends on understanding `persist` and validating it with evidence.",
+              "output": "persist",
+              "title": "Worked example: persist Workflow"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "text_contains",
+                  "points": 1,
+                  "value": "persist"
+                }
+              ],
+              "hidden_hint": "Mention `persist` and a validation signal.",
+              "id": "k1s-intermediate-2-practice",
+              "prompt": "Explain how `persist` fits into a k1s and WorkerBee intermediate workflow.",
+              "reference_solution": "persist is part of the k1s and WorkerBee workflow and should be validated with local evidence.",
+              "starter_code": "persist fits into the workflow by ...",
+              "title": "Practice persist Workflow"
+            }
+          ],
           "grading": [
             {
               "kind": "text_contains",
@@ -74,7 +191,53 @@
         },
         {
           "codex_context": "/healthz Workflow lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Local guide for WorkerBee validation and status in Padawan.",
+              "title": "Padawan WorkerBee Guide",
+              "url": "/docs/workerbee"
+            },
+            {
+              "description": "Upstream concepts for workload state, pods, and deployments.",
+              "title": "Kubernetes Workloads",
+              "url": "https://kubernetes.io/docs/concepts/workloads/"
+            }
+          ],
           "concept_md": "k1s and WorkerBee intermediate work depends on understanding `/healthz` and validating it with evidence.",
+          "concept_summary": "/healthz Workflow focuses on one k1s and WorkerBee idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "/healthz is part of the k1s and WorkerBee workflow and should be validated with local evidence.",
+              "docs": [
+                {
+                  "description": "Local guide for WorkerBee validation and status in Padawan.",
+                  "title": "Padawan WorkerBee Guide",
+                  "url": "/docs/workerbee"
+                }
+              ],
+              "explanation": "k1s and WorkerBee intermediate work depends on understanding `/healthz` and validating it with evidence.",
+              "output": "/healthz",
+              "title": "Worked example: /healthz Workflow"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "text_contains",
+                  "points": 1,
+                  "value": "/healthz"
+                }
+              ],
+              "hidden_hint": "Mention `/healthz` and a validation signal.",
+              "id": "k1s-intermediate-3-practice",
+              "prompt": "Explain how `/healthz` fits into a k1s and WorkerBee intermediate workflow.",
+              "reference_solution": "/healthz is part of the k1s and WorkerBee workflow and should be validated with local evidence.",
+              "starter_code": "/healthz fits into the workflow by ...",
+              "title": "Practice /healthz Workflow"
+            }
+          ],
           "grading": [
             {
               "kind": "text_contains",
@@ -94,7 +257,53 @@
         },
         {
           "codex_context": "logs Workflow lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Local guide for WorkerBee validation and status in Padawan.",
+              "title": "Padawan WorkerBee Guide",
+              "url": "/docs/workerbee"
+            },
+            {
+              "description": "Upstream concepts for workload state, pods, and deployments.",
+              "title": "Kubernetes Workloads",
+              "url": "https://kubernetes.io/docs/concepts/workloads/"
+            }
+          ],
           "concept_md": "k1s and WorkerBee intermediate work depends on understanding `logs` and validating it with evidence.",
+          "concept_summary": "logs Workflow focuses on one k1s and WorkerBee idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "logs is part of the k1s and WorkerBee workflow and should be validated with local evidence.",
+              "docs": [
+                {
+                  "description": "Local guide for WorkerBee validation and status in Padawan.",
+                  "title": "Padawan WorkerBee Guide",
+                  "url": "/docs/workerbee"
+                }
+              ],
+              "explanation": "k1s and WorkerBee intermediate work depends on understanding `logs` and validating it with evidence.",
+              "output": "logs",
+              "title": "Worked example: logs Workflow"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "text_contains",
+                  "points": 1,
+                  "value": "logs"
+                }
+              ],
+              "hidden_hint": "Mention `logs` and a validation signal.",
+              "id": "k1s-intermediate-4-practice",
+              "prompt": "Explain how `logs` fits into a k1s and WorkerBee intermediate workflow.",
+              "reference_solution": "logs is part of the k1s and WorkerBee workflow and should be validated with local evidence.",
+              "starter_code": "logs fits into the workflow by ...",
+              "title": "Practice logs Workflow"
+            }
+          ],
           "grading": [
             {
               "kind": "text_contains",
@@ -117,8 +326,38 @@
       "title": "k1s and WorkerBee Intermediate Lessons"
     }
   ],
+  "prerequisites": [
+    "Complete a basic k1s and WorkerBee course or have equivalent hands-on practice."
+  ],
+  "provenance": {
+    "generated_by": "",
+    "prompt": "",
+    "reviewed_by": [
+      {
+        "email": "",
+        "name": "Padawan contributors",
+        "url": "https://github.com/m4xx3d0ut/padawan"
+      }
+    ],
+    "source": "padawan seed catalog"
+  },
+  "schema_version": "padawan.training-data.v1",
+  "share": {
+    "canonical_url": "",
+    "repository_url": "https://github.com/m4xx3d0ut/padawan",
+    "slug": "k1s-workerbee-intermediate",
+    "visibility": "local"
+  },
   "summary": "Plan deploy validation with manifests, retained state, ingress probes, and logs.",
+  "tags": [
+    "k1s-workerbee",
+    "intermediate",
+    "local-first",
+    "coding-practice"
+  ],
+  "target_audience": "Intermediate learners practicing k1s and WorkerBee in a local Padawan environment.",
   "title": "k1s and WorkerBee Intermediate",
   "track": "k1s-workerbee",
+  "updated_at": "2026-06-11T00:00:00+00:00",
   "verified": true
 }

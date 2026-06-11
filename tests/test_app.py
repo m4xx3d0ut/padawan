@@ -60,6 +60,8 @@ def test_lesson_page_shows_concept_guidance_and_docs(tmp_path: Path) -> None:
     assert "Python Tutorial" in page.text
     assert "https://docs.python.org/3/tutorial/index.html" in page.text
     assert "Built-in Functions" in page.text
+    assert "Worked Examples" in page.text
+    assert "Practice Next" in page.text
 
 
 def test_generated_lesson_page_uses_custom_concept_links(tmp_path: Path) -> None:
@@ -104,17 +106,22 @@ def test_generated_lesson_page_uses_custom_concept_links(tmp_path: Path) -> None
     assert "This generated lesson explains one focused idea for a novice." in page.text
     assert "Generated Lesson Docs" in page.text
     assert "https://docs.python.org/3/tutorial/introduction.html" in page.text
+    assert "Worked Examples" in page.text
+    assert "Practice Next" in page.text
 
 
 def test_docs_render(tmp_path: Path) -> None:
     with make_client(tmp_path) as client:
         index = client.get("/docs")
         page = client.get("/docs/install")
+        schema = client.get("/docs/training-data-format")
 
     assert index.status_code == 200
     assert "Install Padawan" in index.text
     assert page.status_code == 200
     assert "Python 3.11" in page.text
+    assert schema.status_code == 200
+    assert "padawan.training-data.v1" in schema.text
 
 
 def test_security_headers_are_set(tmp_path: Path) -> None:

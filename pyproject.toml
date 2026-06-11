@@ -44,6 +44,8 @@ license-files = ["LICENSE"]
     "static/**/*",
     "content/**/*.json",
     "docs/wiki/*.md",
+    "docs/schemas/*.json",
+    "prompt_profiles/*.md",
 ]
 
 [tool.pytest.ini_options]

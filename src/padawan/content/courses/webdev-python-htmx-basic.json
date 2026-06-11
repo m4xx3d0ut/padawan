@@ -1,4 +1,9 @@
 {
+  "author": {
+    "email": "",
+    "name": "Padawan contributors",
+    "url": "https://github.com/m4xx3d0ut/padawan"
+  },
   "badges": [
     {
       "criteria": {
@@ -25,16 +30,87 @@
       "title": "WebDev Python/HTMX Basic Complete"
     }
   ],
+  "content_version": "0.1.0",
+  "created_at": "2026-06-11T00:00:00+00:00",
+  "estimated_minutes": 60,
   "generated": false,
   "id": "webdev-python-htmx-basic",
+  "learning_objectives": [
+    "Practice WebDev Python and HTMX through local, validated exercises.",
+    "Explain the purpose of Return HTML and related concepts.",
+    "Complete 4 focused basic lesson checkpoints."
+  ],
   "level": "basic",
+  "license": {
+    "id": "Apache-2.0",
+    "name": "Apache License 2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "maintainers": [
+    {
+      "email": "",
+      "name": "Padawan maintainers",
+      "url": "https://github.com/m4xx3d0ut/padawan"
+    }
+  ],
   "modules": [
     {
       "id": "webdev-python-htmx-basic",
       "lessons": [
         {
           "codex_context": "Return HTML lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official docs for HTMX requests, targets, and swaps.",
+              "title": "HTMX Documentation",
+              "url": "https://htmx.org/docs/"
+            },
+            {
+              "description": "Official FastAPI tutorial for Python web endpoints.",
+              "title": "FastAPI Tutorial",
+              "url": "https://fastapi.tiangolo.com/tutorial/"
+            }
+          ],
           "concept_md": "HTMX swaps HTML fragments returned by the server.",
+          "concept_summary": "Return HTML focuses on one WebDev Python and HTMX idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "print('<p>Hello Padawan</p>')\n",
+              "docs": [
+                {
+                  "description": "Official docs for HTMX requests, targets, and swaps.",
+                  "title": "HTMX Documentation",
+                  "url": "https://htmx.org/docs/"
+                }
+              ],
+              "explanation": "HTMX swaps HTML fragments returned by the server.",
+              "output": "<p>Hello Padawan</p>",
+              "title": "Worked example: Return HTML"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "<p>Hello Padawan</p>"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "htmx-basic-fragment-practice",
+              "prompt": "Print `<p>Hello Padawan</p>`.",
+              "reference_solution": "print('<p>Hello Padawan</p>')\n",
+              "starter_code": "print('<p>Hello world</p>')\n",
+              "title": "Practice Return HTML"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -59,7 +135,58 @@
         },
         {
           "codex_context": "Render A Button lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official docs for HTMX requests, targets, and swaps.",
+              "title": "HTMX Documentation",
+              "url": "https://htmx.org/docs/"
+            },
+            {
+              "description": "Official FastAPI tutorial for Python web endpoints.",
+              "title": "FastAPI Tutorial",
+              "url": "https://fastapi.tiangolo.com/tutorial/"
+            }
+          ],
           "concept_md": "Server-rendered buttons can trigger HTMX requests.",
+          "concept_summary": "Render A Button focuses on one WebDev Python and HTMX idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "print('<button>Run</button>')\n",
+              "docs": [
+                {
+                  "description": "Official docs for HTMX requests, targets, and swaps.",
+                  "title": "HTMX Documentation",
+                  "url": "https://htmx.org/docs/"
+                }
+              ],
+              "explanation": "Server-rendered buttons can trigger HTMX requests.",
+              "output": "<button>Run</button>",
+              "title": "Worked example: Render A Button"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "<button>Run</button>"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "htmx-basic-button-practice",
+              "prompt": "Print a button containing `Run`.",
+              "reference_solution": "print('<button>Run</button>')\n",
+              "starter_code": "print('<button>Todo</button>')\n",
+              "title": "Practice Render A Button"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -84,7 +211,58 @@
         },
         {
           "codex_context": "Render A List lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official docs for HTMX requests, targets, and swaps.",
+              "title": "HTMX Documentation",
+              "url": "https://htmx.org/docs/"
+            },
+            {
+              "description": "Official FastAPI tutorial for Python web endpoints.",
+              "title": "FastAPI Tutorial",
+              "url": "https://fastapi.tiangolo.com/tutorial/"
+            }
+          ],
           "concept_md": "HTML lists make repeated content easy to scan.",
+          "concept_summary": "Render A List focuses on one WebDev Python and HTMX idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "items = ['Python']\nprint('<ul>' + ''.join(f'<li>{item}</li>' for item in items) + '</ul>')\n",
+              "docs": [
+                {
+                  "description": "Official docs for HTMX requests, targets, and swaps.",
+                  "title": "HTMX Documentation",
+                  "url": "https://htmx.org/docs/"
+                }
+              ],
+              "explanation": "HTML lists make repeated content easy to scan.",
+              "output": "<li>Python</li>",
+              "title": "Worked example: Render A List"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "<li>Python</li>"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "htmx-basic-list-practice",
+              "prompt": "Print a list item containing `Python`.",
+              "reference_solution": "items = ['Python']\nprint('<ul>' + ''.join(f'<li>{item}</li>' for item in items) + '</ul>')\n",
+              "starter_code": "items = ['Python']\nprint('<ul></ul>')\n",
+              "title": "Practice Render A List"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -109,7 +287,58 @@
         },
         {
           "codex_context": "Name Swap Target lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official docs for HTMX requests, targets, and swaps.",
+              "title": "HTMX Documentation",
+              "url": "https://htmx.org/docs/"
+            },
+            {
+              "description": "Official FastAPI tutorial for Python web endpoints.",
+              "title": "FastAPI Tutorial",
+              "url": "https://fastapi.tiangolo.com/tutorial/"
+            }
+          ],
           "concept_md": "HTMX updates a target selected by id or selector.",
+          "concept_summary": "Name Swap Target focuses on one WebDev Python and HTMX idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "target = '#lesson-status'\nprint(target)\n",
+              "docs": [
+                {
+                  "description": "Official docs for HTMX requests, targets, and swaps.",
+                  "title": "HTMX Documentation",
+                  "url": "https://htmx.org/docs/"
+                }
+              ],
+              "explanation": "HTMX updates a target selected by id or selector.",
+              "output": "#lesson-status",
+              "title": "Worked example: Name Swap Target"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "#lesson-status"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "htmx-basic-target-practice",
+              "prompt": "Print `#lesson-status`.",
+              "reference_solution": "target = '#lesson-status'\nprint(target)\n",
+              "starter_code": "target = 'status'\nprint(target)\n",
+              "title": "Practice Name Swap Target"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -137,8 +366,38 @@
       "title": "WebDev Python/HTMX Basic Lessons"
     }
   ],
+  "prerequisites": [
+    "No prior WebDev Python and HTMX experience is required."
+  ],
+  "provenance": {
+    "generated_by": "",
+    "prompt": "",
+    "reviewed_by": [
+      {
+        "email": "",
+        "name": "Padawan contributors",
+        "url": "https://github.com/m4xx3d0ut/padawan"
+      }
+    ],
+    "source": "padawan seed catalog"
+  },
+  "schema_version": "padawan.training-data.v1",
+  "share": {
+    "canonical_url": "",
+    "repository_url": "https://github.com/m4xx3d0ut/padawan",
+    "slug": "webdev-python-htmx-basic",
+    "visibility": "local"
+  },
   "summary": "Practice basic Python and HTMX server-rendered web concepts.",
+  "tags": [
+    "webdev-python-htmx",
+    "basic",
+    "local-first",
+    "coding-practice"
+  ],
+  "target_audience": "Basic learners practicing WebDev Python and HTMX in a local Padawan environment.",
   "title": "WebDev Python/HTMX Basic",
   "track": "webdev-python-htmx",
+  "updated_at": "2026-06-11T00:00:00+00:00",
   "verified": true
 }

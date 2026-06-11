@@ -1,4 +1,9 @@
 {
+  "author": {
+    "email": "",
+    "name": "Padawan contributors",
+    "url": "https://github.com/m4xx3d0ut/padawan"
+  },
   "badges": [
     {
       "criteria": {
@@ -25,16 +30,82 @@
       "title": "Unreal Basic Complete"
     }
   ],
+  "content_version": "0.1.0",
+  "created_at": "2026-06-11T00:00:00+00:00",
+  "estimated_minutes": 60,
   "generated": false,
   "id": "unreal-basic",
+  "learning_objectives": [
+    "Practice Unreal Engine through local, validated exercises.",
+    "Explain the purpose of Actor Workflow and related concepts.",
+    "Complete 4 focused basic lesson checkpoints."
+  ],
   "level": "basic",
+  "license": {
+    "id": "Apache-2.0",
+    "name": "Apache License 2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "maintainers": [
+    {
+      "email": "",
+      "name": "Padawan maintainers",
+      "url": "https://github.com/m4xx3d0ut/padawan"
+    }
+  ],
   "modules": [
     {
       "id": "unreal-basic",
       "lessons": [
         {
           "codex_context": "Actor Workflow lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official Unreal Engine documentation.",
+              "title": "Unreal Engine Documentation",
+              "url": "https://dev.epicgames.com/documentation/unreal-engine"
+            },
+            {
+              "description": "Official guide to Unreal gameplay classes and ownership.",
+              "title": "Gameplay Framework",
+              "url": "https://dev.epicgames.com/documentation/unreal-engine/gameplay-framework-in-unreal-engine"
+            }
+          ],
           "concept_md": "Unreal basic work depends on understanding `Actor` and validating it with evidence.",
+          "concept_summary": "Actor Workflow focuses on one Unreal Engine idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "Actor is part of the Unreal workflow and should be validated with Unreal Editor.",
+              "docs": [
+                {
+                  "description": "Official Unreal Engine documentation.",
+                  "title": "Unreal Engine Documentation",
+                  "url": "https://dev.epicgames.com/documentation/unreal-engine"
+                }
+              ],
+              "explanation": "Unreal basic work depends on understanding `Actor` and validating it with evidence.",
+              "output": "Actor",
+              "title": "Worked example: Actor Workflow"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "text_contains",
+                  "points": 1,
+                  "value": "Actor"
+                }
+              ],
+              "hidden_hint": "Mention `Actor` and a validation signal.",
+              "id": "unreal-basic-1-practice",
+              "prompt": "Explain how `Actor` fits into a Unreal basic workflow.",
+              "reference_solution": "Actor is part of the Unreal workflow and should be validated with Unreal Editor.",
+              "starter_code": "Actor fits into the workflow by ...",
+              "title": "Practice Actor Workflow"
+            }
+          ],
           "grading": [
             {
               "kind": "text_contains",
@@ -57,7 +128,53 @@
         },
         {
           "codex_context": "Blueprint Workflow lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official Unreal Engine documentation.",
+              "title": "Unreal Engine Documentation",
+              "url": "https://dev.epicgames.com/documentation/unreal-engine"
+            },
+            {
+              "description": "Official guide to Unreal gameplay classes and ownership.",
+              "title": "Gameplay Framework",
+              "url": "https://dev.epicgames.com/documentation/unreal-engine/gameplay-framework-in-unreal-engine"
+            }
+          ],
           "concept_md": "Unreal basic work depends on understanding `Blueprint` and validating it with evidence.",
+          "concept_summary": "Blueprint Workflow focuses on one Unreal Engine idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "Blueprint is part of the Unreal workflow and should be validated with Unreal Editor.",
+              "docs": [
+                {
+                  "description": "Official Unreal Engine documentation.",
+                  "title": "Unreal Engine Documentation",
+                  "url": "https://dev.epicgames.com/documentation/unreal-engine"
+                }
+              ],
+              "explanation": "Unreal basic work depends on understanding `Blueprint` and validating it with evidence.",
+              "output": "Blueprint",
+              "title": "Worked example: Blueprint Workflow"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "text_contains",
+                  "points": 1,
+                  "value": "Blueprint"
+                }
+              ],
+              "hidden_hint": "Mention `Blueprint` and a validation signal.",
+              "id": "unreal-basic-2-practice",
+              "prompt": "Explain how `Blueprint` fits into a Unreal basic workflow.",
+              "reference_solution": "Blueprint is part of the Unreal workflow and should be validated with Unreal Editor.",
+              "starter_code": "Blueprint fits into the workflow by ...",
+              "title": "Practice Blueprint Workflow"
+            }
+          ],
           "grading": [
             {
               "kind": "text_contains",
@@ -80,7 +197,53 @@
         },
         {
           "codex_context": "Component Workflow lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official Unreal Engine documentation.",
+              "title": "Unreal Engine Documentation",
+              "url": "https://dev.epicgames.com/documentation/unreal-engine"
+            },
+            {
+              "description": "Official guide to Unreal gameplay classes and ownership.",
+              "title": "Gameplay Framework",
+              "url": "https://dev.epicgames.com/documentation/unreal-engine/gameplay-framework-in-unreal-engine"
+            }
+          ],
           "concept_md": "Unreal basic work depends on understanding `Component` and validating it with evidence.",
+          "concept_summary": "Component Workflow focuses on one Unreal Engine idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "Component is part of the Unreal workflow and should be validated with Unreal Editor.",
+              "docs": [
+                {
+                  "description": "Official Unreal Engine documentation.",
+                  "title": "Unreal Engine Documentation",
+                  "url": "https://dev.epicgames.com/documentation/unreal-engine"
+                }
+              ],
+              "explanation": "Unreal basic work depends on understanding `Component` and validating it with evidence.",
+              "output": "Component",
+              "title": "Worked example: Component Workflow"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "text_contains",
+                  "points": 1,
+                  "value": "Component"
+                }
+              ],
+              "hidden_hint": "Mention `Component` and a validation signal.",
+              "id": "unreal-basic-3-practice",
+              "prompt": "Explain how `Component` fits into a Unreal basic workflow.",
+              "reference_solution": "Component is part of the Unreal workflow and should be validated with Unreal Editor.",
+              "starter_code": "Component fits into the workflow by ...",
+              "title": "Practice Component Workflow"
+            }
+          ],
           "grading": [
             {
               "kind": "text_contains",
@@ -103,7 +266,53 @@
         },
         {
           "codex_context": "Tick Workflow lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official Unreal Engine documentation.",
+              "title": "Unreal Engine Documentation",
+              "url": "https://dev.epicgames.com/documentation/unreal-engine"
+            },
+            {
+              "description": "Official guide to Unreal gameplay classes and ownership.",
+              "title": "Gameplay Framework",
+              "url": "https://dev.epicgames.com/documentation/unreal-engine/gameplay-framework-in-unreal-engine"
+            }
+          ],
           "concept_md": "Unreal basic work depends on understanding `Tick` and validating it with evidence.",
+          "concept_summary": "Tick Workflow focuses on one Unreal Engine idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "Tick is part of the Unreal workflow and should be validated with Unreal Editor.",
+              "docs": [
+                {
+                  "description": "Official Unreal Engine documentation.",
+                  "title": "Unreal Engine Documentation",
+                  "url": "https://dev.epicgames.com/documentation/unreal-engine"
+                }
+              ],
+              "explanation": "Unreal basic work depends on understanding `Tick` and validating it with evidence.",
+              "output": "Tick",
+              "title": "Worked example: Tick Workflow"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "text_contains",
+                  "points": 1,
+                  "value": "Tick"
+                }
+              ],
+              "hidden_hint": "Mention `Tick` and a validation signal.",
+              "id": "unreal-basic-4-practice",
+              "prompt": "Explain how `Tick` fits into a Unreal basic workflow.",
+              "reference_solution": "Tick is part of the Unreal workflow and should be validated with Unreal Editor.",
+              "starter_code": "Tick fits into the workflow by ...",
+              "title": "Practice Tick Workflow"
+            }
+          ],
           "grading": [
             {
               "kind": "text_contains",
@@ -129,8 +338,38 @@
       "title": "Unreal Basic Lessons"
     }
   ],
+  "prerequisites": [
+    "No prior Unreal Engine experience is required."
+  ],
+  "provenance": {
+    "generated_by": "",
+    "prompt": "",
+    "reviewed_by": [
+      {
+        "email": "",
+        "name": "Padawan contributors",
+        "url": "https://github.com/m4xx3d0ut/padawan"
+      }
+    ],
+    "source": "padawan seed catalog"
+  },
+  "schema_version": "padawan.training-data.v1",
+  "share": {
+    "canonical_url": "",
+    "repository_url": "https://github.com/m4xx3d0ut/padawan",
+    "slug": "unreal-basic",
+    "visibility": "local"
+  },
   "summary": "Learn basic Unreal engine workflows with text validation until local engine adapters are available.",
+  "tags": [
+    "unreal",
+    "basic",
+    "local-first",
+    "coding-practice"
+  ],
+  "target_audience": "Basic learners practicing Unreal Engine in a local Padawan environment.",
   "title": "Unreal Basic",
   "track": "unreal",
+  "updated_at": "2026-06-11T00:00:00+00:00",
   "verified": true
 }

@@ -1,4 +1,9 @@
 {
+  "author": {
+    "email": "",
+    "name": "Padawan contributors",
+    "url": "https://github.com/m4xx3d0ut/padawan"
+  },
   "badges": [
     {
       "criteria": {
@@ -25,16 +30,87 @@
       "title": "Python Basics Complete"
     }
   ],
+  "content_version": "0.1.0",
+  "created_at": "2026-06-11T00:00:00+00:00",
+  "estimated_minutes": 60,
   "generated": false,
   "id": "python-basics",
+  "learning_objectives": [
+    "Practice Python through local, validated exercises.",
+    "Explain the purpose of Hello Python and related concepts.",
+    "Complete 4 focused basic lesson checkpoints."
+  ],
   "level": "basic",
+  "license": {
+    "id": "Apache-2.0",
+    "name": "Apache License 2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "maintainers": [
+    {
+      "email": "",
+      "name": "Padawan maintainers",
+      "url": "https://github.com/m4xx3d0ut/padawan"
+    }
+  ],
   "modules": [
     {
       "id": "python-basic",
       "lessons": [
         {
           "codex_context": "Hello Python lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official Python tutorial for language basics.",
+              "title": "Python Tutorial",
+              "url": "https://docs.python.org/3/tutorial/index.html"
+            },
+            {
+              "description": "Reference for print, len, range, input, and other built-ins.",
+              "title": "Built-in Functions",
+              "url": "https://docs.python.org/3/library/functions.html"
+            }
+          ],
           "concept_md": "Python programs can write text to standard output with `print()`.",
+          "concept_summary": "Hello Python focuses on one Python idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "print('Hello, Padawan!')\n",
+              "docs": [
+                {
+                  "description": "Official Python tutorial for language basics.",
+                  "title": "Python Tutorial",
+                  "url": "https://docs.python.org/3/tutorial/index.html"
+                }
+              ],
+              "explanation": "Python programs can write text to standard output with `print()`.",
+              "output": "Hello, Padawan!",
+              "title": "Worked example: Hello Python"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "Hello, Padawan!"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Only the text inside the quotes needs to change.",
+              "id": "hello-python-practice",
+              "prompt": "Change the program so it prints `Hello, Padawan!` exactly.",
+              "reference_solution": "print('Hello, Padawan!')\n",
+              "starter_code": "print('Hello, world!')\n",
+              "title": "Practice Hello Python"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -59,7 +135,58 @@
         },
         {
           "codex_context": "Use A Variable lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official Python tutorial for language basics.",
+              "title": "Python Tutorial",
+              "url": "https://docs.python.org/3/tutorial/index.html"
+            },
+            {
+              "description": "Reference for print, len, range, input, and other built-ins.",
+              "title": "Built-in Functions",
+              "url": "https://docs.python.org/3/library/functions.html"
+            }
+          ],
           "concept_md": "A variable gives a value a name. An f-string can place that value into output with `{name}`.",
+          "concept_summary": "Use A Variable focuses on one Python idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "name = 'Padawan'\nprint(f'Hello, {name}!')\n",
+              "docs": [
+                {
+                  "description": "Official Python tutorial for language basics.",
+                  "title": "Python Tutorial",
+                  "url": "https://docs.python.org/3/tutorial/index.html"
+                }
+              ],
+              "explanation": "A variable gives a value a name. An f-string can place that value into output with `{name}`.",
+              "output": "Hello, Padawan!",
+              "title": "Worked example: Use A Variable"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "Hello, Padawan!"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Only the value assigned to `name` needs to change.",
+              "id": "python-variables-practice",
+              "prompt": "Update the variable so the program prints `Hello, Padawan!`.",
+              "reference_solution": "name = 'Padawan'\nprint(f'Hello, {name}!')\n",
+              "starter_code": "name = 'world'\nprint(f'Hello, {name}!')\n",
+              "title": "Practice Use A Variable"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -84,7 +211,58 @@
         },
         {
           "codex_context": "Choose With If lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official Python tutorial for language basics.",
+              "title": "Python Tutorial",
+              "url": "https://docs.python.org/3/tutorial/index.html"
+            },
+            {
+              "description": "Reference for print, len, range, input, and other built-ins.",
+              "title": "Built-in Functions",
+              "url": "https://docs.python.org/3/library/functions.html"
+            }
+          ],
           "concept_md": "`if` lets a program choose a path. Comparisons such as `>=` produce true or false.",
+          "concept_summary": "Choose With If focuses on one Python idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "score = 3\n\nif score >= 3:\n    print('ready')\nelse:\n    print('try again')\n",
+              "docs": [
+                {
+                  "description": "Official Python tutorial for language basics.",
+                  "title": "Python Tutorial",
+                  "url": "https://docs.python.org/3/tutorial/index.html"
+                }
+              ],
+              "explanation": "`if` lets a program choose a path. Comparisons such as `>=` produce true or false.",
+              "output": "ready",
+              "title": "Worked example: Choose With If"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "ready"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "The score should pass when it is at least three.",
+              "id": "python-conditionals-practice",
+              "prompt": "Update the condition so this program prints `ready`.",
+              "reference_solution": "score = 3\n\nif score >= 3:\n    print('ready')\nelse:\n    print('try again')\n",
+              "starter_code": "score = 3\n\nif score > 5:\n    print('ready')\nelse:\n    print('try again')\n",
+              "title": "Practice Choose With If"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -109,7 +287,58 @@
         },
         {
           "codex_context": "Return A Value lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official Python tutorial for language basics.",
+              "title": "Python Tutorial",
+              "url": "https://docs.python.org/3/tutorial/index.html"
+            },
+            {
+              "description": "Reference for print, len, range, input, and other built-ins.",
+              "title": "Built-in Functions",
+              "url": "https://docs.python.org/3/library/functions.html"
+            }
+          ],
           "concept_md": "A function packages reusable behavior. `return` sends a value back to the caller.",
+          "concept_summary": "Return A Value focuses on one Python idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "def double(value):\n    return value * 2\n\nprint(double(4))\n",
+              "docs": [
+                {
+                  "description": "Official Python tutorial for language basics.",
+                  "title": "Python Tutorial",
+                  "url": "https://docs.python.org/3/tutorial/index.html"
+                }
+              ],
+              "explanation": "A function packages reusable behavior. `return` sends a value back to the caller.",
+              "output": "8",
+              "title": "Worked example: Return A Value"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "8"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "The function should multiply the input by two.",
+              "id": "python-functions-practice",
+              "prompt": "Update `double` so the program prints `8`.",
+              "reference_solution": "def double(value):\n    return value * 2\n\nprint(double(4))\n",
+              "starter_code": "def double(value):\n    return value\n\nprint(double(4))\n",
+              "title": "Practice Return A Value"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -137,8 +366,38 @@
       "title": "Python Basics Lessons"
     }
   ],
+  "prerequisites": [
+    "No prior Python experience is required."
+  ],
+  "provenance": {
+    "generated_by": "",
+    "prompt": "",
+    "reviewed_by": [
+      {
+        "email": "",
+        "name": "Padawan contributors",
+        "url": "https://github.com/m4xx3d0ut/padawan"
+      }
+    ],
+    "source": "padawan seed catalog"
+  },
+  "schema_version": "padawan.training-data.v1",
+  "share": {
+    "canonical_url": "",
+    "repository_url": "https://github.com/m4xx3d0ut/padawan",
+    "slug": "python-basics",
+    "visibility": "local"
+  },
   "summary": "Start with print output, variables, conditionals, and small functions in local Python.",
+  "tags": [
+    "python",
+    "basic",
+    "local-first",
+    "coding-practice"
+  ],
+  "target_audience": "Basic learners practicing Python in a local Padawan environment.",
   "title": "Python Basics",
   "track": "python",
+  "updated_at": "2026-06-11T00:00:00+00:00",
   "verified": true
 }

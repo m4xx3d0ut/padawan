@@ -1,4 +1,9 @@
 {
+  "author": {
+    "email": "",
+    "name": "Padawan contributors",
+    "url": "https://github.com/m4xx3d0ut/padawan"
+  },
   "badges": [
     {
       "criteria": {
@@ -25,16 +30,87 @@
       "title": "Git CLI Intermediate Complete"
     }
   ],
+  "content_version": "0.1.0",
+  "created_at": "2026-06-11T00:00:00+00:00",
+  "estimated_minutes": 60,
   "generated": false,
   "id": "git-intermediate",
+  "learning_objectives": [
+    "Practice Git CLI through local, validated exercises.",
+    "Explain the purpose of Read History and related concepts.",
+    "Complete 4 focused intermediate lesson checkpoints."
+  ],
   "level": "intermediate",
+  "license": {
+    "id": "Apache-2.0",
+    "name": "Apache License 2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "maintainers": [
+    {
+      "email": "",
+      "name": "Padawan maintainers",
+      "url": "https://github.com/m4xx3d0ut/padawan"
+    }
+  ],
   "modules": [
     {
       "id": "git-intermediate",
       "lessons": [
         {
           "codex_context": "Read History lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official beginner-friendly chapters for Git repositories and workflows.",
+              "title": "Pro Git Book",
+              "url": "https://git-scm.com/book/en/v2"
+            },
+            {
+              "description": "Official reference for Git commands and options.",
+              "title": "Git Command Reference",
+              "url": "https://git-scm.com/docs"
+            }
+          ],
           "concept_md": "`git log --oneline` shows compact history.",
+          "concept_summary": "Read History focuses on one Git CLI idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "git init\ngit config user.email padawan@example.local\ngit config user.name Padawan\necho setup > app.txt\ngit add app.txt\ngit commit -m setup\ngit log --oneline\n",
+              "docs": [
+                {
+                  "description": "Official beginner-friendly chapters for Git repositories and workflows.",
+                  "title": "Pro Git Book",
+                  "url": "https://git-scm.com/book/en/v2"
+                }
+              ],
+              "explanation": "`git log --oneline` shows compact history.",
+              "output": "setup",
+              "title": "Worked example: Read History"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "setup"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "git-intermediate-log-practice",
+              "prompt": "Create a commit and print `setup` in the log.",
+              "reference_solution": "git init\ngit config user.email padawan@example.local\ngit config user.name Padawan\necho setup > app.txt\ngit add app.txt\ngit commit -m setup\ngit log --oneline\n",
+              "starter_code": "git init\necho todo\n",
+              "title": "Practice Read History"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -59,7 +135,58 @@
         },
         {
           "codex_context": "Inspect Diff lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official beginner-friendly chapters for Git repositories and workflows.",
+              "title": "Pro Git Book",
+              "url": "https://git-scm.com/book/en/v2"
+            },
+            {
+              "description": "Official reference for Git commands and options.",
+              "title": "Git Command Reference",
+              "url": "https://git-scm.com/docs"
+            }
+          ],
           "concept_md": "`git diff` shows unstaged changes.",
+          "concept_summary": "Inspect Diff focuses on one Git CLI idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "git init\ngit config user.email padawan@example.local\ngit config user.name Padawan\necho old > app.txt\ngit add app.txt\ngit commit -m base\necho 'new line' >> app.txt\ngit diff\n",
+              "docs": [
+                {
+                  "description": "Official beginner-friendly chapters for Git repositories and workflows.",
+                  "title": "Pro Git Book",
+                  "url": "https://git-scm.com/book/en/v2"
+                }
+              ],
+              "explanation": "`git diff` shows unstaged changes.",
+              "output": "new line",
+              "title": "Worked example: Inspect Diff"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "new line"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "git-intermediate-diff-practice",
+              "prompt": "Print a diff containing `new line`.",
+              "reference_solution": "git init\ngit config user.email padawan@example.local\ngit config user.name Padawan\necho old > app.txt\ngit add app.txt\ngit commit -m base\necho 'new line' >> app.txt\ngit diff\n",
+              "starter_code": "git init\necho old > app.txt\ngit diff\n",
+              "title": "Practice Inspect Diff"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -84,7 +211,58 @@
         },
         {
           "codex_context": "Stash Work lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official beginner-friendly chapters for Git repositories and workflows.",
+              "title": "Pro Git Book",
+              "url": "https://git-scm.com/book/en/v2"
+            },
+            {
+              "description": "Official reference for Git commands and options.",
+              "title": "Git Command Reference",
+              "url": "https://git-scm.com/docs"
+            }
+          ],
           "concept_md": "`git stash` shelves uncommitted changes.",
+          "concept_summary": "Stash Work focuses on one Git CLI idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "git init\ngit config user.email padawan@example.local\ngit config user.name Padawan\necho base > app.txt\ngit add app.txt\ngit commit -m base\necho work >> app.txt\ngit stash push -m work\necho stash saved\n",
+              "docs": [
+                {
+                  "description": "Official beginner-friendly chapters for Git repositories and workflows.",
+                  "title": "Pro Git Book",
+                  "url": "https://git-scm.com/book/en/v2"
+                }
+              ],
+              "explanation": "`git stash` shelves uncommitted changes.",
+              "output": "stash saved",
+              "title": "Worked example: Stash Work"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "stash saved"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "git-intermediate-stash-practice",
+              "prompt": "Print `stash saved`.",
+              "reference_solution": "git init\ngit config user.email padawan@example.local\ngit config user.name Padawan\necho base > app.txt\ngit add app.txt\ngit commit -m base\necho work >> app.txt\ngit stash push -m work\necho stash saved\n",
+              "starter_code": "git init\necho todo\n",
+              "title": "Practice Stash Work"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -109,7 +287,58 @@
         },
         {
           "codex_context": "Inspect Reflog lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official beginner-friendly chapters for Git repositories and workflows.",
+              "title": "Pro Git Book",
+              "url": "https://git-scm.com/book/en/v2"
+            },
+            {
+              "description": "Official reference for Git commands and options.",
+              "title": "Git Command Reference",
+              "url": "https://git-scm.com/docs"
+            }
+          ],
           "concept_md": "`git reflog` records recent ref movement.",
+          "concept_summary": "Inspect Reflog focuses on one Git CLI idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "git init\ngit config user.email padawan@example.local\ngit config user.name Padawan\necho base > app.txt\ngit add app.txt\ngit commit -m base\ngit reflog\n",
+              "docs": [
+                {
+                  "description": "Official beginner-friendly chapters for Git repositories and workflows.",
+                  "title": "Pro Git Book",
+                  "url": "https://git-scm.com/book/en/v2"
+                }
+              ],
+              "explanation": "`git reflog` records recent ref movement.",
+              "output": "HEAD",
+              "title": "Worked example: Inspect Reflog"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "HEAD"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "git-intermediate-reflog-practice",
+              "prompt": "Print output containing `HEAD`.",
+              "reference_solution": "git init\ngit config user.email padawan@example.local\ngit config user.name Padawan\necho base > app.txt\ngit add app.txt\ngit commit -m base\ngit reflog\n",
+              "starter_code": "git init\ngit reflog\n",
+              "title": "Practice Inspect Reflog"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -137,8 +366,38 @@
       "title": "Git CLI Intermediate Lessons"
     }
   ],
+  "prerequisites": [
+    "Complete a basic Git CLI course or have equivalent hands-on practice."
+  ],
+  "provenance": {
+    "generated_by": "",
+    "prompt": "",
+    "reviewed_by": [
+      {
+        "email": "",
+        "name": "Padawan contributors",
+        "url": "https://github.com/m4xx3d0ut/padawan"
+      }
+    ],
+    "source": "padawan seed catalog"
+  },
+  "schema_version": "padawan.training-data.v1",
+  "share": {
+    "canonical_url": "",
+    "repository_url": "https://github.com/m4xx3d0ut/padawan",
+    "slug": "git-intermediate",
+    "visibility": "local"
+  },
   "summary": "Inspect history, diffs, stashes, and repository evidence.",
+  "tags": [
+    "git",
+    "intermediate",
+    "local-first",
+    "coding-practice"
+  ],
+  "target_audience": "Intermediate learners practicing Git CLI in a local Padawan environment.",
   "title": "Git CLI Intermediate",
   "track": "git",
+  "updated_at": "2026-06-11T00:00:00+00:00",
   "verified": true
 }

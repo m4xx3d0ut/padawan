@@ -1,4 +1,9 @@
 {
+  "author": {
+    "email": "",
+    "name": "Padawan contributors",
+    "url": "https://github.com/m4xx3d0ut/padawan"
+  },
   "badges": [
     {
       "criteria": {
@@ -25,16 +30,87 @@
       "title": "Linux CLI and Bash Basics Complete"
     }
   ],
+  "content_version": "0.1.0",
+  "created_at": "2026-06-11T00:00:00+00:00",
+  "estimated_minutes": 60,
   "generated": false,
   "id": "linux-bash-basics",
+  "learning_objectives": [
+    "Practice Linux CLI and Bash through local, validated exercises.",
+    "Explain the purpose of Echo A Status and related concepts.",
+    "Complete 4 focused basic lesson checkpoints."
+  ],
   "level": "basic",
+  "license": {
+    "id": "Apache-2.0",
+    "name": "Apache License 2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "maintainers": [
+    {
+      "email": "",
+      "name": "Padawan maintainers",
+      "url": "https://github.com/m4xx3d0ut/padawan"
+    }
+  ],
   "modules": [
     {
       "id": "linux-bash-basic",
       "lessons": [
         {
           "codex_context": "Echo A Status lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "GNU reference for shell syntax, variables, expansion, and control flow.",
+              "title": "Bash Reference Manual",
+              "url": "https://www.gnu.org/software/bash/manual/bash.html"
+            },
+            {
+              "description": "Reference for common command-line tools used in Bash lessons.",
+              "title": "GNU Coreutils Manual",
+              "url": "https://www.gnu.org/software/coreutils/manual/coreutils.html"
+            }
+          ],
           "concept_md": "`echo` writes text to standard output.",
+          "concept_summary": "Echo A Status focuses on one Linux CLI and Bash idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "echo ready\n",
+              "docs": [
+                {
+                  "description": "GNU reference for shell syntax, variables, expansion, and control flow.",
+                  "title": "Bash Reference Manual",
+                  "url": "https://www.gnu.org/software/bash/manual/bash.html"
+                }
+              ],
+              "explanation": "`echo` writes text to standard output.",
+              "output": "ready",
+              "title": "Worked example: Echo A Status"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "ready"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Replace the word after `echo`.",
+              "id": "echo-status-practice",
+              "prompt": "Change the script so it prints `ready`.",
+              "reference_solution": "echo ready\n",
+              "starter_code": "echo todo\n",
+              "title": "Practice Echo A Status"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -59,7 +135,58 @@
         },
         {
           "codex_context": "Use A Shell Variable lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "GNU reference for shell syntax, variables, expansion, and control flow.",
+              "title": "Bash Reference Manual",
+              "url": "https://www.gnu.org/software/bash/manual/bash.html"
+            },
+            {
+              "description": "Reference for common command-line tools used in Bash lessons.",
+              "title": "GNU Coreutils Manual",
+              "url": "https://www.gnu.org/software/coreutils/manual/coreutils.html"
+            }
+          ],
           "concept_md": "Shell variables are assigned with `name=value` and read with `$name`.",
+          "concept_summary": "Use A Shell Variable focuses on one Linux CLI and Bash idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "name=Padawan\necho \"Hello $name\"\n",
+              "docs": [
+                {
+                  "description": "GNU reference for shell syntax, variables, expansion, and control flow.",
+                  "title": "Bash Reference Manual",
+                  "url": "https://www.gnu.org/software/bash/manual/bash.html"
+                }
+              ],
+              "explanation": "Shell variables are assigned with `name=value` and read with `$name`.",
+              "output": "Hello Padawan",
+              "title": "Worked example: Use A Shell Variable"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "Hello Padawan"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "bash-variables-practice",
+              "prompt": "Update the variable so the script prints `Hello Padawan`.",
+              "reference_solution": "name=Padawan\necho \"Hello $name\"\n",
+              "starter_code": "name=world\necho \"Hello $name\"\n",
+              "title": "Practice Use A Shell Variable"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -84,7 +211,58 @@
         },
         {
           "codex_context": "Write A File lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "GNU reference for shell syntax, variables, expansion, and control flow.",
+              "title": "Bash Reference Manual",
+              "url": "https://www.gnu.org/software/bash/manual/bash.html"
+            },
+            {
+              "description": "Reference for common command-line tools used in Bash lessons.",
+              "title": "GNU Coreutils Manual",
+              "url": "https://www.gnu.org/software/coreutils/manual/coreutils.html"
+            }
+          ],
           "concept_md": "Redirection can write command output into a file.",
+          "concept_summary": "Write A File focuses on one Linux CLI and Bash idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "echo ready > status.txt\ncat status.txt\n",
+              "docs": [
+                {
+                  "description": "GNU reference for shell syntax, variables, expansion, and control flow.",
+                  "title": "Bash Reference Manual",
+                  "url": "https://www.gnu.org/software/bash/manual/bash.html"
+                }
+              ],
+              "explanation": "Redirection can write command output into a file.",
+              "output": "ready",
+              "title": "Worked example: Write A File"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "ready"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "write-a-file-practice",
+              "prompt": "Write `ready` into `status.txt`.",
+              "reference_solution": "echo ready > status.txt\ncat status.txt\n",
+              "starter_code": "echo todo > status.txt\ncat status.txt\n",
+              "title": "Practice Write A File"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -109,7 +287,58 @@
         },
         {
           "codex_context": "Check A Condition lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "GNU reference for shell syntax, variables, expansion, and control flow.",
+              "title": "Bash Reference Manual",
+              "url": "https://www.gnu.org/software/bash/manual/bash.html"
+            },
+            {
+              "description": "Reference for common command-line tools used in Bash lessons.",
+              "title": "GNU Coreutils Manual",
+              "url": "https://www.gnu.org/software/coreutils/manual/coreutils.html"
+            }
+          ],
           "concept_md": "`if` statements branch based on command success.",
+          "concept_summary": "Check A Condition focuses on one Linux CLI and Bash idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "touch status.txt\nif [ -f status.txt ]; then echo exists; else echo missing; fi\n",
+              "docs": [
+                {
+                  "description": "GNU reference for shell syntax, variables, expansion, and control flow.",
+                  "title": "Bash Reference Manual",
+                  "url": "https://www.gnu.org/software/bash/manual/bash.html"
+                }
+              ],
+              "explanation": "`if` statements branch based on command success.",
+              "output": "exists",
+              "title": "Worked example: Check A Condition"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "exists"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "bash-conditionals-practice",
+              "prompt": "Print `exists` when `status.txt` is present.",
+              "reference_solution": "touch status.txt\nif [ -f status.txt ]; then echo exists; else echo missing; fi\n",
+              "starter_code": "touch status.txt\nif [ -f missing.txt ]; then echo exists; else echo missing; fi\n",
+              "title": "Practice Check A Condition"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -137,8 +366,38 @@
       "title": "Linux CLI and Bash Basics Lessons"
     }
   ],
+  "prerequisites": [
+    "No prior Linux CLI and Bash experience is required."
+  ],
+  "provenance": {
+    "generated_by": "",
+    "prompt": "",
+    "reviewed_by": [
+      {
+        "email": "",
+        "name": "Padawan contributors",
+        "url": "https://github.com/m4xx3d0ut/padawan"
+      }
+    ],
+    "source": "padawan seed catalog"
+  },
+  "schema_version": "padawan.training-data.v1",
+  "share": {
+    "canonical_url": "",
+    "repository_url": "https://github.com/m4xx3d0ut/padawan",
+    "slug": "linux-bash-basics",
+    "visibility": "local"
+  },
   "summary": "Start with shell output, variables, files, and simple branches.",
+  "tags": [
+    "linux-bash",
+    "basic",
+    "local-first",
+    "coding-practice"
+  ],
+  "target_audience": "Basic learners practicing Linux CLI and Bash in a local Padawan environment.",
   "title": "Linux CLI and Bash Basics",
   "track": "linux-bash",
+  "updated_at": "2026-06-11T00:00:00+00:00",
   "verified": true
 }

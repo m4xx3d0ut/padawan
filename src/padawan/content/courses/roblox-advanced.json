@@ -1,4 +1,9 @@
 {
+  "author": {
+    "email": "",
+    "name": "Padawan contributors",
+    "url": "https://github.com/m4xx3d0ut/padawan"
+  },
   "badges": [
     {
       "criteria": {
@@ -25,16 +30,82 @@
       "title": "Roblox Advanced Complete"
     }
   ],
+  "content_version": "0.1.0",
+  "created_at": "2026-06-11T00:00:00+00:00",
+  "estimated_minutes": 60,
   "generated": false,
   "id": "roblox-advanced",
+  "learning_objectives": [
+    "Practice Roblox through local, validated exercises.",
+    "Explain the purpose of Script Workflow and related concepts.",
+    "Complete 4 focused advanced lesson checkpoints."
+  ],
   "level": "advanced",
+  "license": {
+    "id": "Apache-2.0",
+    "name": "Apache License 2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "maintainers": [
+    {
+      "email": "",
+      "name": "Padawan maintainers",
+      "url": "https://github.com/m4xx3d0ut/padawan"
+    }
+  ],
   "modules": [
     {
       "id": "roblox-advanced",
       "lessons": [
         {
           "codex_context": "Script Workflow lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official Roblox Creator Hub documentation.",
+              "title": "Roblox Creator Documentation",
+              "url": "https://create.roblox.com/docs"
+            },
+            {
+              "description": "Official scripting guide for adding behavior to Roblox experiences.",
+              "title": "Roblox Scripting",
+              "url": "https://create.roblox.com/docs/scripting"
+            }
+          ],
           "concept_md": "Roblox advanced work depends on understanding `Script` and validating it with evidence.",
+          "concept_summary": "Script Workflow focuses on one Roblox idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "Script is part of the Roblox workflow and should be validated with Roblox Studio.",
+              "docs": [
+                {
+                  "description": "Official Roblox Creator Hub documentation.",
+                  "title": "Roblox Creator Documentation",
+                  "url": "https://create.roblox.com/docs"
+                }
+              ],
+              "explanation": "Roblox advanced work depends on understanding `Script` and validating it with evidence.",
+              "output": "Script",
+              "title": "Worked example: Script Workflow"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "text_contains",
+                  "points": 1,
+                  "value": "Script"
+                }
+              ],
+              "hidden_hint": "Mention `Script` and a validation signal.",
+              "id": "roblox-advanced-1-practice",
+              "prompt": "Explain how `Script` fits into a Roblox advanced workflow.",
+              "reference_solution": "Script is part of the Roblox workflow and should be validated with Roblox Studio.",
+              "starter_code": "Script fits into the workflow by ...",
+              "title": "Practice Script Workflow"
+            }
+          ],
           "grading": [
             {
               "kind": "text_contains",
@@ -57,7 +128,53 @@
         },
         {
           "codex_context": "Part Workflow lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official Roblox Creator Hub documentation.",
+              "title": "Roblox Creator Documentation",
+              "url": "https://create.roblox.com/docs"
+            },
+            {
+              "description": "Official scripting guide for adding behavior to Roblox experiences.",
+              "title": "Roblox Scripting",
+              "url": "https://create.roblox.com/docs/scripting"
+            }
+          ],
           "concept_md": "Roblox advanced work depends on understanding `Part` and validating it with evidence.",
+          "concept_summary": "Part Workflow focuses on one Roblox idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "Part is part of the Roblox workflow and should be validated with Roblox Studio.",
+              "docs": [
+                {
+                  "description": "Official Roblox Creator Hub documentation.",
+                  "title": "Roblox Creator Documentation",
+                  "url": "https://create.roblox.com/docs"
+                }
+              ],
+              "explanation": "Roblox advanced work depends on understanding `Part` and validating it with evidence.",
+              "output": "Part",
+              "title": "Worked example: Part Workflow"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "text_contains",
+                  "points": 1,
+                  "value": "Part"
+                }
+              ],
+              "hidden_hint": "Mention `Part` and a validation signal.",
+              "id": "roblox-advanced-2-practice",
+              "prompt": "Explain how `Part` fits into a Roblox advanced workflow.",
+              "reference_solution": "Part is part of the Roblox workflow and should be validated with Roblox Studio.",
+              "starter_code": "Part fits into the workflow by ...",
+              "title": "Practice Part Workflow"
+            }
+          ],
           "grading": [
             {
               "kind": "text_contains",
@@ -80,7 +197,53 @@
         },
         {
           "codex_context": "RemoteEvent Workflow lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official Roblox Creator Hub documentation.",
+              "title": "Roblox Creator Documentation",
+              "url": "https://create.roblox.com/docs"
+            },
+            {
+              "description": "Official scripting guide for adding behavior to Roblox experiences.",
+              "title": "Roblox Scripting",
+              "url": "https://create.roblox.com/docs/scripting"
+            }
+          ],
           "concept_md": "Roblox advanced work depends on understanding `RemoteEvent` and validating it with evidence.",
+          "concept_summary": "RemoteEvent Workflow focuses on one Roblox idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "RemoteEvent is part of the Roblox workflow and should be validated with Roblox Studio.",
+              "docs": [
+                {
+                  "description": "Official Roblox Creator Hub documentation.",
+                  "title": "Roblox Creator Documentation",
+                  "url": "https://create.roblox.com/docs"
+                }
+              ],
+              "explanation": "Roblox advanced work depends on understanding `RemoteEvent` and validating it with evidence.",
+              "output": "RemoteEvent",
+              "title": "Worked example: RemoteEvent Workflow"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "text_contains",
+                  "points": 1,
+                  "value": "RemoteEvent"
+                }
+              ],
+              "hidden_hint": "Mention `RemoteEvent` and a validation signal.",
+              "id": "roblox-advanced-3-practice",
+              "prompt": "Explain how `RemoteEvent` fits into a Roblox advanced workflow.",
+              "reference_solution": "RemoteEvent is part of the Roblox workflow and should be validated with Roblox Studio.",
+              "starter_code": "RemoteEvent fits into the workflow by ...",
+              "title": "Practice RemoteEvent Workflow"
+            }
+          ],
           "grading": [
             {
               "kind": "text_contains",
@@ -103,7 +266,53 @@
         },
         {
           "codex_context": "Workspace Workflow lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official Roblox Creator Hub documentation.",
+              "title": "Roblox Creator Documentation",
+              "url": "https://create.roblox.com/docs"
+            },
+            {
+              "description": "Official scripting guide for adding behavior to Roblox experiences.",
+              "title": "Roblox Scripting",
+              "url": "https://create.roblox.com/docs/scripting"
+            }
+          ],
           "concept_md": "Roblox advanced work depends on understanding `Workspace` and validating it with evidence.",
+          "concept_summary": "Workspace Workflow focuses on one Roblox idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "Workspace is part of the Roblox workflow and should be validated with Roblox Studio.",
+              "docs": [
+                {
+                  "description": "Official Roblox Creator Hub documentation.",
+                  "title": "Roblox Creator Documentation",
+                  "url": "https://create.roblox.com/docs"
+                }
+              ],
+              "explanation": "Roblox advanced work depends on understanding `Workspace` and validating it with evidence.",
+              "output": "Workspace",
+              "title": "Worked example: Workspace Workflow"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "text_contains",
+                  "points": 1,
+                  "value": "Workspace"
+                }
+              ],
+              "hidden_hint": "Mention `Workspace` and a validation signal.",
+              "id": "roblox-advanced-4-practice",
+              "prompt": "Explain how `Workspace` fits into a Roblox advanced workflow.",
+              "reference_solution": "Workspace is part of the Roblox workflow and should be validated with Roblox Studio.",
+              "starter_code": "Workspace fits into the workflow by ...",
+              "title": "Practice Workspace Workflow"
+            }
+          ],
           "grading": [
             {
               "kind": "text_contains",
@@ -129,8 +338,38 @@
       "title": "Roblox Advanced Lessons"
     }
   ],
+  "prerequisites": [
+    "Complete intermediate Roblox practice or have equivalent project experience."
+  ],
+  "provenance": {
+    "generated_by": "",
+    "prompt": "",
+    "reviewed_by": [
+      {
+        "email": "",
+        "name": "Padawan contributors",
+        "url": "https://github.com/m4xx3d0ut/padawan"
+      }
+    ],
+    "source": "padawan seed catalog"
+  },
+  "schema_version": "padawan.training-data.v1",
+  "share": {
+    "canonical_url": "",
+    "repository_url": "https://github.com/m4xx3d0ut/padawan",
+    "slug": "roblox-advanced",
+    "visibility": "local"
+  },
   "summary": "Learn advanced Roblox engine workflows with text validation until local engine adapters are available.",
+  "tags": [
+    "roblox",
+    "advanced",
+    "local-first",
+    "coding-practice"
+  ],
+  "target_audience": "Advanced learners practicing Roblox in a local Padawan environment.",
   "title": "Roblox Advanced",
   "track": "roblox",
+  "updated_at": "2026-06-11T00:00:00+00:00",
   "verified": true
 }

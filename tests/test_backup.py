@@ -7,7 +7,7 @@ import pytest
 
 from padawan.backup import BackupError, export_backup, import_backup, inspect_backup
 from padawan.courses import export_course, load_courses
-from padawan.models import RuntimeResult
+from padawan.models import TRAINING_DATA_FORMAT, RuntimeResult
 from padawan.settings import REPO_ROOT, Settings, ensure_settings_dirs
 from padawan.storage import Storage
 
@@ -61,6 +61,11 @@ def test_backup_export_and_restore_safe_merge(tmp_path: Path) -> None:
     assert Storage(target.db_path).codex_thread("thread-1") is not None
     assert (target.user_course_dir / "local-python.json").exists()
     assert (target.course_draft_dir / "draft-python.json").exists()
+    restored_courses = load_courses(target.user_course_dir)
+    restored_lesson = restored_courses["local-python"].lessons[0]
+    assert restored_courses["local-python"].schema_version == TRAINING_DATA_FORMAT
+    assert restored_lesson.examples
+    assert restored_lesson.exercises
 
 
 def test_backup_import_dry_run_does_not_write(tmp_path: Path) -> None:

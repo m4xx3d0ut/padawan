@@ -1,4 +1,9 @@
 {
+  "author": {
+    "email": "",
+    "name": "Padawan contributors",
+    "url": "https://github.com/m4xx3d0ut/padawan"
+  },
   "badges": [
     {
       "criteria": {
@@ -25,16 +30,82 @@
       "title": "k1s and WorkerBee Advanced Complete"
     }
   ],
+  "content_version": "0.1.0",
+  "created_at": "2026-06-11T00:00:00+00:00",
+  "estimated_minutes": 60,
   "generated": false,
   "id": "k1s-workerbee-advanced",
+  "learning_objectives": [
+    "Practice k1s and WorkerBee through local, validated exercises.",
+    "Explain the purpose of security review Workflow and related concepts.",
+    "Complete 4 focused advanced lesson checkpoints."
+  ],
   "level": "advanced",
+  "license": {
+    "id": "Apache-2.0",
+    "name": "Apache License 2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "maintainers": [
+    {
+      "email": "",
+      "name": "Padawan maintainers",
+      "url": "https://github.com/m4xx3d0ut/padawan"
+    }
+  ],
   "modules": [
     {
       "id": "k1s-workerbee-advanced",
       "lessons": [
         {
           "codex_context": "security review Workflow lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Local guide for WorkerBee validation and status in Padawan.",
+              "title": "Padawan WorkerBee Guide",
+              "url": "/docs/workerbee"
+            },
+            {
+              "description": "Upstream concepts for workload state, pods, and deployments.",
+              "title": "Kubernetes Workloads",
+              "url": "https://kubernetes.io/docs/concepts/workloads/"
+            }
+          ],
           "concept_md": "k1s and WorkerBee advanced work depends on understanding `security review` and validating it with evidence.",
+          "concept_summary": "security review Workflow focuses on one k1s and WorkerBee idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "security review is part of the k1s and WorkerBee workflow and should be validated with local evidence.",
+              "docs": [
+                {
+                  "description": "Local guide for WorkerBee validation and status in Padawan.",
+                  "title": "Padawan WorkerBee Guide",
+                  "url": "/docs/workerbee"
+                }
+              ],
+              "explanation": "k1s and WorkerBee advanced work depends on understanding `security review` and validating it with evidence.",
+              "output": "security review",
+              "title": "Worked example: security review Workflow"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "text_contains",
+                  "points": 1,
+                  "value": "security review"
+                }
+              ],
+              "hidden_hint": "Mention `security review` and a validation signal.",
+              "id": "k1s-advanced-1-practice",
+              "prompt": "Explain how `security review` fits into a k1s and WorkerBee advanced workflow.",
+              "reference_solution": "security review is part of the k1s and WorkerBee workflow and should be validated with local evidence.",
+              "starter_code": "security review fits into the workflow by ...",
+              "title": "Practice security review Workflow"
+            }
+          ],
           "grading": [
             {
               "kind": "text_contains",
@@ -54,7 +125,53 @@
         },
         {
           "codex_context": "helm Workflow lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Local guide for WorkerBee validation and status in Padawan.",
+              "title": "Padawan WorkerBee Guide",
+              "url": "/docs/workerbee"
+            },
+            {
+              "description": "Upstream concepts for workload state, pods, and deployments.",
+              "title": "Kubernetes Workloads",
+              "url": "https://kubernetes.io/docs/concepts/workloads/"
+            }
+          ],
           "concept_md": "k1s and WorkerBee advanced work depends on understanding `helm` and validating it with evidence.",
+          "concept_summary": "helm Workflow focuses on one k1s and WorkerBee idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "helm is part of the k1s and WorkerBee workflow and should be validated with local evidence.",
+              "docs": [
+                {
+                  "description": "Local guide for WorkerBee validation and status in Padawan.",
+                  "title": "Padawan WorkerBee Guide",
+                  "url": "/docs/workerbee"
+                }
+              ],
+              "explanation": "k1s and WorkerBee advanced work depends on understanding `helm` and validating it with evidence.",
+              "output": "helm",
+              "title": "Worked example: helm Workflow"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "text_contains",
+                  "points": 1,
+                  "value": "helm"
+                }
+              ],
+              "hidden_hint": "Mention `helm` and a validation signal.",
+              "id": "k1s-advanced-2-practice",
+              "prompt": "Explain how `helm` fits into a k1s and WorkerBee advanced workflow.",
+              "reference_solution": "helm is part of the k1s and WorkerBee workflow and should be validated with local evidence.",
+              "starter_code": "helm fits into the workflow by ...",
+              "title": "Practice helm Workflow"
+            }
+          ],
           "grading": [
             {
               "kind": "text_contains",
@@ -74,7 +191,53 @@
         },
         {
           "codex_context": "evidence Workflow lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Local guide for WorkerBee validation and status in Padawan.",
+              "title": "Padawan WorkerBee Guide",
+              "url": "/docs/workerbee"
+            },
+            {
+              "description": "Upstream concepts for workload state, pods, and deployments.",
+              "title": "Kubernetes Workloads",
+              "url": "https://kubernetes.io/docs/concepts/workloads/"
+            }
+          ],
           "concept_md": "k1s and WorkerBee advanced work depends on understanding `evidence` and validating it with evidence.",
+          "concept_summary": "evidence Workflow focuses on one k1s and WorkerBee idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "evidence is part of the k1s and WorkerBee workflow and should be validated with local evidence.",
+              "docs": [
+                {
+                  "description": "Local guide for WorkerBee validation and status in Padawan.",
+                  "title": "Padawan WorkerBee Guide",
+                  "url": "/docs/workerbee"
+                }
+              ],
+              "explanation": "k1s and WorkerBee advanced work depends on understanding `evidence` and validating it with evidence.",
+              "output": "evidence",
+              "title": "Worked example: evidence Workflow"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "text_contains",
+                  "points": 1,
+                  "value": "evidence"
+                }
+              ],
+              "hidden_hint": "Mention `evidence` and a validation signal.",
+              "id": "k1s-advanced-3-practice",
+              "prompt": "Explain how `evidence` fits into a k1s and WorkerBee advanced workflow.",
+              "reference_solution": "evidence is part of the k1s and WorkerBee workflow and should be validated with local evidence.",
+              "starter_code": "evidence fits into the workflow by ...",
+              "title": "Practice evidence Workflow"
+            }
+          ],
           "grading": [
             {
               "kind": "text_contains",
@@ -94,7 +257,53 @@
         },
         {
           "codex_context": "separate Workflow lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Local guide for WorkerBee validation and status in Padawan.",
+              "title": "Padawan WorkerBee Guide",
+              "url": "/docs/workerbee"
+            },
+            {
+              "description": "Upstream concepts for workload state, pods, and deployments.",
+              "title": "Kubernetes Workloads",
+              "url": "https://kubernetes.io/docs/concepts/workloads/"
+            }
+          ],
           "concept_md": "k1s and WorkerBee advanced work depends on understanding `separate` and validating it with evidence.",
+          "concept_summary": "separate Workflow focuses on one k1s and WorkerBee idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "separate is part of the k1s and WorkerBee workflow and should be validated with local evidence.",
+              "docs": [
+                {
+                  "description": "Local guide for WorkerBee validation and status in Padawan.",
+                  "title": "Padawan WorkerBee Guide",
+                  "url": "/docs/workerbee"
+                }
+              ],
+              "explanation": "k1s and WorkerBee advanced work depends on understanding `separate` and validating it with evidence.",
+              "output": "separate",
+              "title": "Worked example: separate Workflow"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "text_contains",
+                  "points": 1,
+                  "value": "separate"
+                }
+              ],
+              "hidden_hint": "Mention `separate` and a validation signal.",
+              "id": "k1s-advanced-4-practice",
+              "prompt": "Explain how `separate` fits into a k1s and WorkerBee advanced workflow.",
+              "reference_solution": "separate is part of the k1s and WorkerBee workflow and should be validated with local evidence.",
+              "starter_code": "separate fits into the workflow by ...",
+              "title": "Practice separate Workflow"
+            }
+          ],
           "grading": [
             {
               "kind": "text_contains",
@@ -117,8 +326,38 @@
       "title": "k1s and WorkerBee Advanced Lessons"
     }
   ],
+  "prerequisites": [
+    "Complete intermediate k1s and WorkerBee practice or have equivalent project experience."
+  ],
+  "provenance": {
+    "generated_by": "",
+    "prompt": "",
+    "reviewed_by": [
+      {
+        "email": "",
+        "name": "Padawan contributors",
+        "url": "https://github.com/m4xx3d0ut/padawan"
+      }
+    ],
+    "source": "padawan seed catalog"
+  },
+  "schema_version": "padawan.training-data.v1",
+  "share": {
+    "canonical_url": "",
+    "repository_url": "https://github.com/m4xx3d0ut/padawan",
+    "slug": "k1s-workerbee-advanced",
+    "visibility": "local"
+  },
   "summary": "Design validation gates, export artifacts, and operate repair loops.",
+  "tags": [
+    "k1s-workerbee",
+    "advanced",
+    "local-first",
+    "coding-practice"
+  ],
+  "target_audience": "Advanced learners practicing k1s and WorkerBee in a local Padawan environment.",
   "title": "k1s and WorkerBee Advanced",
   "track": "k1s-workerbee",
+  "updated_at": "2026-06-11T00:00:00+00:00",
   "verified": true
 }

@@ -6,25 +6,11 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
-from .models import CodexStatus, Course
-from .settings import Settings
+from .models import CodexStatus, Course, training_data_json_schema
+from .settings import PACKAGE_DIR, Settings
 
-COURSE_SCHEMA: dict[str, Any] = {
-    "type": "object",
-    "properties": {
-        "id": {"type": "string"},
-        "title": {"type": "string"},
-        "track": {"type": "string"},
-        "level": {"type": "string"},
-        "summary": {"type": "string"},
-        "modules": {"type": "array"},
-        "badges": {"type": "array"},
-        "generated": {"type": "boolean"},
-        "verified": {"type": "boolean"},
-    },
-    "required": ["id", "title", "track", "level", "summary", "modules"],
-    "additionalProperties": True,
-}
+COURSE_SCHEMA: dict[str, Any] = training_data_json_schema()
+COURSE_GENERATION_PROFILE = PACKAGE_DIR / "prompt_profiles" / "course_generation_v1.md"
 
 
 class CodexClient:
@@ -78,23 +64,8 @@ class CodexClient:
 
     def generate_course(self, prompt: str, schema_path: Path) -> Course:
         schema_path.write_text(json.dumps(COURSE_SCHEMA, indent=2), encoding="utf-8")
-        instruction = (
-            "Create one Padawan course JSON object for a beginner local coding app. "
-            "Use only these tracks: linux-bash, git, python, webdev-ts-react, "
-            "webdev-python-htmx, k1s-workerbee, roblox, unity, unreal. "
-            "Use level basic, intermediate, or advanced. Include at least one module "
-            "and two lessons. "
-            "Each lesson must have concept_md, concept_summary, concept_links, "
-            "prompt, starter_code, language, runtime, hidden_hint, grading, "
-            "codex_context, reference_solution, and toolchain fields. "
-            "concept_summary must be two to four novice-friendly sentences that "
-            "teach the lesson concept before the exercise. concept_links must be "
-            "one to four objects with title, url, and description fields, and must "
-            "prefer official project documentation such as Python, Git, GNU Bash, "
-            "React, TypeScript, HTMX, FastAPI, Roblox, Unity, Unreal, or Kubernetes "
-            "docs as appropriate. Use only python, bash, git, node, text, or none "
-            "for runtime. Set generated true and verified false.\n\n"
-            f"User request: {prompt}"
+        instruction = COURSE_GENERATION_PROFILE.read_text(encoding="utf-8").replace(
+            "{{USER_REQUEST}}", prompt
         )
         result = self._exec(instruction, schema_path=schema_path)
         text = result.get("final_message", "")

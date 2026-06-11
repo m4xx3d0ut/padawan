@@ -1,4 +1,9 @@
 {
+  "author": {
+    "email": "",
+    "name": "Padawan contributors",
+    "url": "https://github.com/m4xx3d0ut/padawan"
+  },
   "badges": [
     {
       "criteria": {
@@ -25,16 +30,87 @@
       "title": "WebDev TS/React Basic Complete"
     }
   ],
+  "content_version": "0.1.0",
+  "created_at": "2026-06-11T00:00:00+00:00",
+  "estimated_minutes": 60,
   "generated": false,
   "id": "webdev-ts-react-basic",
+  "learning_objectives": [
+    "Practice WebDev TypeScript and React through local, validated exercises.",
+    "Explain the purpose of Render A Component and related concepts.",
+    "Complete 4 focused basic lesson checkpoints."
+  ],
   "level": "basic",
+  "license": {
+    "id": "Apache-2.0",
+    "name": "Apache License 2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "maintainers": [
+    {
+      "email": "",
+      "name": "Padawan maintainers",
+      "url": "https://github.com/m4xx3d0ut/padawan"
+    }
+  ],
   "modules": [
     {
       "id": "webdev-ts-react-basic",
       "lessons": [
         {
           "codex_context": "Render A Component lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official React learning path for components, state, and events.",
+              "title": "React Learn",
+              "url": "https://react.dev/learn"
+            },
+            {
+              "description": "Official TypeScript guide for types and everyday language features.",
+              "title": "TypeScript Handbook",
+              "url": "https://www.typescriptlang.org/docs/handbook/intro.html"
+            }
+          ],
           "concept_md": "Components are functions that return UI descriptions.",
+          "concept_summary": "Render A Component focuses on one WebDev TypeScript and React idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "function App() { return 'Hello Padawan'; }\nconsole.log(App());\n",
+              "docs": [
+                {
+                  "description": "Official React learning path for components, state, and events.",
+                  "title": "React Learn",
+                  "url": "https://react.dev/learn"
+                }
+              ],
+              "explanation": "Components are functions that return UI descriptions.",
+              "output": "Hello Padawan",
+              "title": "Worked example: Render A Component"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "Hello Padawan"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "react-basic-component-practice",
+              "prompt": "Print `Hello Padawan`.",
+              "reference_solution": "function App() { return 'Hello Padawan'; }\nconsole.log(App());\n",
+              "starter_code": "function App() { return 'Hello world'; }\nconsole.log(App());\n",
+              "title": "Practice Render A Component"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -59,7 +135,58 @@
         },
         {
           "codex_context": "Use Props lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official React learning path for components, state, and events.",
+              "title": "React Learn",
+              "url": "https://react.dev/learn"
+            },
+            {
+              "description": "Official TypeScript guide for types and everyday language features.",
+              "title": "TypeScript Handbook",
+              "url": "https://www.typescriptlang.org/docs/handbook/intro.html"
+            }
+          ],
           "concept_md": "Props pass data into component functions.",
+          "concept_summary": "Use Props focuses on one WebDev TypeScript and React idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "function Card(props) { return `Course: ${props.name}`; }\nconsole.log(Card({ name: 'Python' }));\n",
+              "docs": [
+                {
+                  "description": "Official React learning path for components, state, and events.",
+                  "title": "React Learn",
+                  "url": "https://react.dev/learn"
+                }
+              ],
+              "explanation": "Props pass data into component functions.",
+              "output": "Course: Python",
+              "title": "Worked example: Use Props"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "Course: Python"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "react-basic-props-practice",
+              "prompt": "Print `Course: Python`.",
+              "reference_solution": "function Card(props) { return `Course: ${props.name}`; }\nconsole.log(Card({ name: 'Python' }));\n",
+              "starter_code": "function Card(props) { return props.name; }\nconsole.log(Card({ name: 'Python' }));\n",
+              "title": "Practice Use Props"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -84,7 +211,58 @@
         },
         {
           "codex_context": "Map A List lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official React learning path for components, state, and events.",
+              "title": "React Learn",
+              "url": "https://react.dev/learn"
+            },
+            {
+              "description": "Official TypeScript guide for types and everyday language features.",
+              "title": "TypeScript Handbook",
+              "url": "https://www.typescriptlang.org/docs/handbook/intro.html"
+            }
+          ],
           "concept_md": "Lists of data can become UI labels.",
+          "concept_summary": "Map A List focuses on one WebDev TypeScript and React idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "const tracks = ['Bash', 'Git', 'Python'];\nconsole.log(tracks.join(', '));\n",
+              "docs": [
+                {
+                  "description": "Official React learning path for components, state, and events.",
+                  "title": "React Learn",
+                  "url": "https://react.dev/learn"
+                }
+              ],
+              "explanation": "Lists of data can become UI labels.",
+              "output": "Bash, Git, Python",
+              "title": "Worked example: Map A List"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "Bash, Git, Python"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "react-basic-list-practice",
+              "prompt": "Print `Bash, Git, Python`.",
+              "reference_solution": "const tracks = ['Bash', 'Git', 'Python'];\nconsole.log(tracks.join(', '));\n",
+              "starter_code": "const tracks = ['Bash', 'Git', 'Python'];\nconsole.log(tracks[0]);\n",
+              "title": "Practice Map A List"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -109,7 +287,58 @@
         },
         {
           "codex_context": "Derive State lesson for Padawan.",
+          "concept_links": [
+            {
+              "description": "Official React learning path for components, state, and events.",
+              "title": "React Learn",
+              "url": "https://react.dev/learn"
+            },
+            {
+              "description": "Official TypeScript guide for types and everyday language features.",
+              "title": "TypeScript Handbook",
+              "url": "https://www.typescriptlang.org/docs/handbook/intro.html"
+            }
+          ],
           "concept_md": "State values drive what users see.",
+          "concept_summary": "Derive State focuses on one WebDev TypeScript and React idea. Read the example, compare it with the starter code, and then make the smallest change that satisfies the prompt.",
+          "examples": [
+            {
+              "code": "const status = 'ready';\nconsole.log(`status=${status}`);\n",
+              "docs": [
+                {
+                  "description": "Official React learning path for components, state, and events.",
+                  "title": "React Learn",
+                  "url": "https://react.dev/learn"
+                }
+              ],
+              "explanation": "State values drive what users see.",
+              "output": "status=ready",
+              "title": "Worked example: Derive State"
+            }
+          ],
+          "exercises": [
+            {
+              "difficulty": "practice",
+              "grading": [
+                {
+                  "kind": "stdout_contains",
+                  "points": 1,
+                  "value": "status=ready"
+                },
+                {
+                  "kind": "exit_code",
+                  "points": 1,
+                  "value": 0
+                }
+              ],
+              "hidden_hint": "Make the smallest change that satisfies the prompt.",
+              "id": "react-basic-state-practice",
+              "prompt": "Print `status=ready`.",
+              "reference_solution": "const status = 'ready';\nconsole.log(`status=${status}`);\n",
+              "starter_code": "const status = 'todo';\nconsole.log(`status=${status}`);\n",
+              "title": "Practice Derive State"
+            }
+          ],
           "grading": [
             {
               "kind": "stdout_contains",
@@ -137,8 +366,38 @@
       "title": "WebDev TS/React Basic Lessons"
     }
   ],
+  "prerequisites": [
+    "No prior WebDev TypeScript and React experience is required."
+  ],
+  "provenance": {
+    "generated_by": "",
+    "prompt": "",
+    "reviewed_by": [
+      {
+        "email": "",
+        "name": "Padawan contributors",
+        "url": "https://github.com/m4xx3d0ut/padawan"
+      }
+    ],
+    "source": "padawan seed catalog"
+  },
+  "schema_version": "padawan.training-data.v1",
+  "share": {
+    "canonical_url": "",
+    "repository_url": "https://github.com/m4xx3d0ut/padawan",
+    "slug": "webdev-ts-react-basic",
+    "visibility": "local"
+  },
   "summary": "Practice basic TypeScript and React concepts with locally validated JavaScript exercises.",
+  "tags": [
+    "webdev-ts-react",
+    "basic",
+    "local-first",
+    "coding-practice"
+  ],
+  "target_audience": "Basic learners practicing WebDev TypeScript and React in a local Padawan environment.",
   "title": "WebDev TS/React Basic",
   "track": "webdev-ts-react",
+  "updated_at": "2026-06-11T00:00:00+00:00",
   "verified": true
 }
