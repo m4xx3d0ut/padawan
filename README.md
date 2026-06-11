@@ -1,7 +1,7 @@
 # Padawan
 
 <p align="center">
-  <img src="docs/assets/padawan-hero.gif" alt="Padawan overview showing course browsing, a split lesson editor and runtime shell, hidden hints, draft validation, data backup, docs, and newcomer install guidance" width="900">
+  <img src="docs/assets/padawan-hero.gif" alt="Padawan overview showing course browsing, lesson concept guidance, worked examples, follow-up practice, local runtime feedback, staged help, data backup, and training data format docs" width="900">
 </p>
 
 Padawan is a local progressive coding teacher. It serves a web UI on your
