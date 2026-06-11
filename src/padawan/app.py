@@ -66,7 +66,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         response.headers.setdefault("X-Content-Type-Options", "nosniff")
         response.headers.setdefault("Referrer-Policy", "strict-origin-when-cross-origin")
         response.headers.setdefault("X-Frame-Options", "DENY")
-        response.headers.setdefault("Strict-Transport-Security", "max-age=31536000")
+        response.headers["Strict-Transport-Security"] = "max-age=31536000"
         return response
 
     @app.get("/", response_class=HTMLResponse)

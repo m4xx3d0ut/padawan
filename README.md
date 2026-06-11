@@ -57,3 +57,7 @@ and creates a pre-restore backup before writing.
 
 WorkerBee is optional for novice seed-course use, but it is the validation workbench for
 publishable generated courses and deployable app checks.
+
+## License
+
+Padawan is released under the Apache License 2.0. See [LICENSE](LICENSE).

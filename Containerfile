@@ -14,5 +14,7 @@ ENV PADAWAN_PORT=8787
 ENV PADAWAN_CONTENT_DIR=/app/content/courses
 ENV PADAWAN_DOCS_DIR=/app/docs/wiki
 ENV PADAWAN_STATE_DIR=/data/padawan
+ENV TMPDIR=/data/padawan/tmp
+ENV PYTHONDONTWRITEBYTECODE=1
 EXPOSE 8787
 CMD ["padawan", "serve", "--host", "0.0.0.0", "--port", "8787"]

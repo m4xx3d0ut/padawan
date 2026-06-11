@@ -78,9 +78,14 @@ class Settings:
     def backup_dir(self) -> Path:
         return self.state_dir / "backups"
 
+    @property
+    def tmp_dir(self) -> Path:
+        return self.state_dir / "tmp"
+
 
 def ensure_settings_dirs(settings: Settings) -> None:
     settings.state_dir.mkdir(parents=True, exist_ok=True)
     settings.user_course_dir.mkdir(parents=True, exist_ok=True)
     settings.course_draft_dir.mkdir(parents=True, exist_ok=True)
     settings.backup_dir.mkdir(parents=True, exist_ok=True)
+    settings.tmp_dir.mkdir(parents=True, exist_ok=True)

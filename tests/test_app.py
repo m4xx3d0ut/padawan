@@ -70,6 +70,7 @@ def test_security_headers_are_set(tmp_path: Path) -> None:
     assert response.headers["x-content-type-options"] == "nosniff"
     assert response.headers["referrer-policy"] == "strict-origin-when-cross-origin"
     assert response.headers["x-frame-options"] == "DENY"
+    assert response.headers["strict-transport-security"] == "max-age=31536000"
     assert openapi.status_code == 404
 
 
