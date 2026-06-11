@@ -5,6 +5,18 @@ from pathlib import Path
 from markdown_it import MarkdownIt
 
 md = MarkdownIt("commonmark", {"html": False, "linkify": False})
+DOC_ORDER = {
+    "first-steps": 0,
+    "install": 1,
+    "runtime-safety": 2,
+    "data-backup": 3,
+    "codex": 4,
+    "course-authoring": 5,
+    "badges": 6,
+    "workerbee": 7,
+    "qa-uat": 8,
+    "troubleshooting": 9,
+}
 
 
 def list_docs(docs_dir: Path) -> list[dict[str, str]]:
@@ -19,7 +31,7 @@ def list_docs(docs_dir: Path) -> list[dict[str, str]]:
                 title = line[2:].strip()
                 break
         docs.append({"slug": path.stem, "title": title})
-    return docs
+    return sorted(docs, key=lambda doc: (DOC_ORDER.get(doc["slug"], 100), doc["title"]))
 
 
 def render_doc(docs_dir: Path, slug: str) -> tuple[str, str]:

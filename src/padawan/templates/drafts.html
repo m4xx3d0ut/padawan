@@ -45,13 +45,18 @@
     </div>
     <p>{{ course.summary }}</p>
     <p class="muted">{{ course.lesson_count }} lessons / {{ "verified" if course.verified else "draft" }}</p>
+    <div id="draft-status-{{ course.id }}" class="validation-status" data-draft-status>
     {% if item.validation %}
-    <p class="pill status-{{ item.validation.status }}">Last validation: {{ item.validation.status }}</p>
+      <p class="pill status-{{ item.validation.status }}">Validation: {{ item.validation.status }}</p>
+      <p class="muted">{{ item.validation.summary }}</p>
+      <p class="muted">Recorded {{ item.validation.created_at }}</p>
     {% else %}
-    <p class="pill pending">Not validated</p>
+      <p class="pill pending">Not validated</p>
+      <p class="muted">Validate before publishing.</p>
     {% endif %}
+    </div>
     <div class="course-actions">
-      <form action="/drafts/{{ course.id }}/validate" method="post">
+      <form action="/drafts/{{ course.id }}/validate" method="post" data-validate-draft data-course-id="{{ course.id }}">
         <button type="submit">Validate</button>
       </form>
       <form action="/drafts/{{ course.id }}/publish" method="post">

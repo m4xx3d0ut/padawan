@@ -245,15 +245,35 @@ class Storage:
             row = conn.execute("SELECT * FROM generation_jobs WHERE id = ?", (job_id,)).fetchone()
         return dict(row) if row else None
 
-    def record_validation_run(self, course_id: str | None, status: str, detail: str) -> None:
+    def record_validation_run(self, course_id: str | None, status: str, detail: str) -> int:
+        return self.create_validation_run(course_id, status, detail)
+
+    def create_validation_run(self, course_id: str | None, status: str, detail: str) -> int:
         with self.connect() as conn:
-            conn.execute(
+            cur = conn.execute(
                 """
                 INSERT INTO validation_runs (course_id, status, detail, created_at)
                 VALUES (?, ?, ?, ?)
                 """,
                 (course_id, status, detail, utc_now_iso()),
             )
+            return int(cur.lastrowid)
+
+    def set_validation_run(self, run_id: int, status: str, detail: str) -> None:
+        with self.connect() as conn:
+            conn.execute(
+                """
+                UPDATE validation_runs
+                SET status = ?, detail = ?
+                WHERE id = ?
+                """,
+                (status, detail, run_id),
+            )
+
+    def validation_run(self, run_id: int) -> dict[str, Any] | None:
+        with self.connect() as conn:
+            row = conn.execute("SELECT * FROM validation_runs WHERE id = ?", (run_id,)).fetchone()
+        return dict(row) if row else None
 
     def latest_validation_for_course(self, course_id: str) -> dict[str, Any] | None:
         with self.connect() as conn:

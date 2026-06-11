@@ -111,6 +111,8 @@ def test_course_filters_and_draft_publish(tmp_path: Path) -> None:
     with TestClient(app) as client:
         filtered = client.get("/courses?track=python&level=advanced")
         drafts = client.get("/drafts")
+        started = client.post("/drafts/generated-python/validate/start")
+        status = client.get(f"/validations/{started.json()['run_id']}")
         validated = client.post("/drafts/generated-python/validate")
         published = client.post("/drafts/generated-python/publish")
         courses = client.get("/courses")
@@ -120,6 +122,11 @@ def test_course_filters_and_draft_publish(tmp_path: Path) -> None:
     assert "Python Basics" not in filtered.text
     assert drafts.status_code == 200
     assert "Generated Python" in drafts.text
+    assert started.status_code == 200
+    assert started.json()["validation"]["status"] in {"queued", "running", "passed"}
+    assert status.status_code == 200
+    assert status.json()["validation"]["status"] == "passed"
+    assert "validated lessons" in status.json()["validation"]["summary"]
     assert validated.status_code == 200
     assert "Validation Result" in validated.text
     assert published.status_code == 200

@@ -327,6 +327,11 @@ code {
   color: var(--k1s-success);
 }
 
+.status-running,
+.status-queued {
+  color: var(--k1s-warning);
+}
+
 .status-failed,
 .status-error,
 .fail {

@@ -114,6 +114,75 @@ async function continueCodexChat(form) {
   }
 }
 
+function renderDraftValidationStatus(courseId, validation) {
+  const panel = document.getElementById("draft-status-" + courseId);
+  if (!panel) return;
+  const status = validation?.status || "not-started";
+  const summary = validation?.summary || "Waiting for validation status.";
+  const created = validation?.created_at ? "Recorded " + validation.created_at : "";
+  const statusLine = document.createElement("p");
+  statusLine.className = "pill status-" + status;
+  statusLine.textContent = "Validation: " + status;
+  const summaryLine = document.createElement("p");
+  summaryLine.className = "muted";
+  summaryLine.textContent = summary;
+  const children = [statusLine, summaryLine];
+  if (created) {
+    const createdLine = document.createElement("p");
+    createdLine.className = "muted";
+    createdLine.textContent = created;
+    children.push(createdLine);
+  }
+  panel.replaceChildren(...children);
+}
+
+function validationFinished(status) {
+  return !["queued", "running"].includes(status || "");
+}
+
+async function pollDraftValidation(courseId, runId) {
+  try {
+    const response = await fetch("/validations/" + encodeURIComponent(runId));
+    const result = await response.json();
+    if (!result.ok) {
+      renderDraftValidationStatus(courseId, { status: "error", summary: result.error });
+      return;
+    }
+    renderDraftValidationStatus(courseId, result.validation);
+    if (!validationFinished(result.validation.status)) {
+      window.setTimeout(() => pollDraftValidation(courseId, runId), 1000);
+    }
+  } catch (error) {
+    renderDraftValidationStatus(courseId, { status: "error", summary: String(error) });
+  }
+}
+
+async function startDraftValidation(form) {
+  const courseId = form.dataset.courseId;
+  const button = form.querySelector("button[type='submit']");
+  if (button) button.disabled = true;
+  renderDraftValidationStatus(courseId, {
+    status: "queued",
+    summary: "Queued for validation.",
+  });
+  try {
+    const response = await fetch(form.action.replace(/\/validate$/, "/validate/start"), {
+      method: "POST",
+    });
+    const result = await response.json();
+    if (!result.ok) {
+      renderDraftValidationStatus(courseId, { status: "error", summary: result.error });
+      return;
+    }
+    renderDraftValidationStatus(courseId, result.validation);
+    await pollDraftValidation(courseId, result.run_id);
+  } catch (error) {
+    renderDraftValidationStatus(courseId, { status: "error", summary: String(error) });
+  } finally {
+    if (button) button.disabled = false;
+  }
+}
+
 document.addEventListener("click", (event) => {
   const run = event.target.closest("[data-run-lesson]");
   if (run) runLesson(run);
@@ -123,7 +192,13 @@ document.addEventListener("click", (event) => {
 
 document.addEventListener("submit", (event) => {
   const form = event.target.closest("[data-codex-chat-form]");
-  if (!form) return;
+  if (form) {
+    event.preventDefault();
+    continueCodexChat(form);
+    return;
+  }
+  const validationForm = event.target.closest("[data-validate-draft]");
+  if (!validationForm) return;
   event.preventDefault();
-  continueCodexChat(form);
+  startDraftValidation(validationForm);
 });

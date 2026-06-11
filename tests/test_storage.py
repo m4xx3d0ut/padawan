@@ -62,7 +62,8 @@ def test_course_cards_sort_by_latest_score(tmp_path: Path) -> None:
 def test_validation_runs_and_codex_threads_are_persisted(tmp_path: Path) -> None:
     storage = Storage(tmp_path / "state.sqlite3")
 
-    storage.record_validation_run("draft-python", "passed", '{"ok": true}')
+    run_id = storage.record_validation_run("draft-python", "running", "Queued")
+    storage.set_validation_run(run_id, "passed", '{"ok": true}')
     storage.upsert_codex_thread(
         thread_id="thread-1",
         course_id="python-basics",
@@ -71,6 +72,7 @@ def test_validation_runs_and_codex_threads_are_persisted(tmp_path: Path) -> None
     )
 
     assert storage.latest_validation_for_course("draft-python")["status"] == "passed"
+    assert storage.validation_run(run_id)["status"] == "passed"
     thread = storage.codex_thread("thread-1")
     assert thread is not None
     assert thread["course_id"] == "python-basics"

@@ -1,11 +1,12 @@
 from __future__ import annotations
 
+import json
 import tempfile
 import zipfile
 from pathlib import Path
 from typing import Any, get_args
 
-from fastapi import FastAPI, File, Request, UploadFile
+from fastapi import BackgroundTasks, FastAPI, File, Request, UploadFile
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -218,12 +219,15 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         context = _base_context(request, resolved, storage)
         try:
             course = load_drafts(resolved.course_draft_dir)[course_id]
+            run_id = storage.create_validation_run(
+                course_id, "running", "Running local course validation."
+            )
             result = validate_course_for_publish(
                 course,
                 resolved,
                 existing_course_ids=set(_courses(resolved)),
             )
-            storage.record_validation_run(course_id, result.status, result.model_dump_json())
+            storage.set_validation_run(run_id, result.status, result.model_dump_json())
             context["draft_result"] = result
             context["draft_error"] = None
         except (CourseLoadError, KeyError, OSError, ValueError) as exc:
@@ -231,6 +235,36 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             context["draft_error"] = str(exc)
         context.update(_draft_context(resolved, storage))
         return TEMPLATES.TemplateResponse(request, "drafts.html", context)
+
+    @app.post("/drafts/{course_id}/validate/start")
+    async def draft_validate_start(
+        course_id: str,
+        background_tasks: BackgroundTasks,
+    ) -> JSONResponse:
+        try:
+            load_drafts(resolved.course_draft_dir)[course_id]
+        except (CourseLoadError, KeyError, OSError, ValueError) as exc:
+            return JSONResponse({"ok": False, "error": str(exc)}, status_code=404)
+        run_id = storage.create_validation_run(
+            course_id,
+            "queued",
+            "Queued for local validation. WorkerBee validation can report through "
+            "this status surface when attached.",
+        )
+        background_tasks.add_task(
+            _run_draft_validation_job,
+            resolved,
+            run_id,
+            course_id,
+            set(_courses(resolved)),
+        )
+        return JSONResponse(
+            {
+                "ok": True,
+                "run_id": run_id,
+                "validation": _validation_payload(storage.validation_run(run_id)),
+            }
+        )
 
     @app.post("/drafts/{course_id}/publish", response_class=HTMLResponse)
     async def draft_publish(request: Request, course_id: str) -> HTMLResponse:
@@ -310,6 +344,15 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         return JSONResponse(
             {"events": [] if not payload else [{"type": payload["status"], "job": payload}]}
         )
+
+    @app.get("/validations/{run_id}")
+    async def validation_status(run_id: int) -> JSONResponse:
+        payload = storage.validation_run(run_id)
+        if not payload:
+            return JSONResponse(
+                {"ok": False, "error": "Validation run not found."}, status_code=404
+            )
+        return JSONResponse({"ok": True, "validation": _validation_payload(payload)})
 
     @app.post("/codex/explain")
     async def codex_explain(request: Request) -> JSONResponse:
@@ -392,16 +435,68 @@ def _courses(settings: Settings):
     return load_course_dirs(settings.content_dir, settings.user_course_dir)
 
 
+def _run_draft_validation_job(
+    settings: Settings,
+    run_id: int,
+    course_id: str,
+    existing_course_ids: set[str],
+) -> None:
+    storage = Storage(settings.db_path)
+    storage.set_validation_run(run_id, "running", "Running local course validation.")
+    try:
+        course = load_drafts(settings.course_draft_dir)[course_id]
+        result = validate_course_for_publish(
+            course,
+            settings,
+            existing_course_ids=existing_course_ids,
+        )
+        storage.set_validation_run(run_id, result.status, result.model_dump_json())
+    except (CourseLoadError, KeyError, OSError, ValueError) as exc:
+        storage.set_validation_run(run_id, "failed", str(exc))
+
+
 def _draft_context(settings: Settings, storage: Storage) -> dict[str, Any]:
     drafts = []
     for course in load_drafts(settings.course_draft_dir).values():
         drafts.append(
             {
                 "course": course,
-                "validation": storage.latest_validation_for_course(course.id),
+                "validation": _validation_payload(storage.latest_validation_for_course(course.id)),
             }
         )
     return {"drafts": sorted(drafts, key=lambda item: item["course"].title)}
+
+
+def _validation_payload(row: dict[str, Any] | None) -> dict[str, Any] | None:
+    if not row:
+        return None
+    detail = str(row.get("detail") or "")
+    summary = detail
+    messages: list[str] = []
+    try:
+        parsed = json.loads(detail)
+    except ValueError:
+        parsed = None
+    if isinstance(parsed, dict):
+        messages = [str(message) for message in parsed.get("messages", [])]
+        status = str(parsed.get("status") or row.get("status") or "")
+        runnable = parsed.get("runnable_lessons")
+        skipped = parsed.get("skipped_lessons")
+        if runnable is not None and skipped is not None:
+            summary = f"{runnable} validated lessons, {skipped} skipped lessons."
+        elif status:
+            summary = f"Validation {status}."
+        if messages:
+            summary = f"{summary} {len(messages)} issue(s) reported."
+    return {
+        "id": row.get("id"),
+        "course_id": row.get("course_id"),
+        "status": row.get("status"),
+        "detail": detail,
+        "summary": summary,
+        "messages": messages,
+        "created_at": row.get("created_at"),
+    }
 
 
 def _base_context(request: Request, settings: Settings, storage: Storage) -> dict[str, Any]:
