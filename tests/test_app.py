@@ -64,11 +64,13 @@ def test_docs_render(tmp_path: Path) -> None:
 def test_security_headers_are_set(tmp_path: Path) -> None:
     with make_client(tmp_path) as client:
         response = client.get("/")
+        openapi = client.get("/openapi.json")
 
     assert response.headers["content-security-policy"].startswith("default-src 'self'")
     assert response.headers["x-content-type-options"] == "nosniff"
     assert response.headers["referrer-policy"] == "strict-origin-when-cross-origin"
     assert response.headers["x-frame-options"] == "DENY"
+    assert openapi.status_code == 404
 
 
 def test_data_export_and_import_render_summary(tmp_path: Path) -> None:

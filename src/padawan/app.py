@@ -38,7 +38,13 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     ensure_settings_dirs(resolved)
     storage = Storage(resolved.db_path)
     codex = CodexClient(resolved)
-    app = FastAPI(title="Padawan", version="0.1.0", docs_url=None, redoc_url=None)
+    app = FastAPI(
+        title="Padawan",
+        version="0.1.0",
+        docs_url=None,
+        redoc_url=None,
+        openapi_url=None,
+    )
     app.state.settings = resolved
     app.state.storage = storage
     app.state.codex = codex
