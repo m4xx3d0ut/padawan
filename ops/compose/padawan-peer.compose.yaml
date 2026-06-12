@@ -1,0 +1,37 @@
+services:
+  padawan:
+    build:
+      context: ../..
+      dockerfile: Containerfile
+    image: localhost/padawan:peer-dev
+    depends_on:
+      - coturn
+    environment:
+      PADAWAN_HOST: 0.0.0.0
+      PADAWAN_PORT: "8787"
+      PADAWAN_STATE_DIR: /data/padawan
+      PADAWAN_TURN_HOST: 127.0.0.1
+      PADAWAN_TURN_SECRET: padawan-turn-dev
+      TMPDIR: /data/padawan/tmp
+      PYTHONDONTWRITEBYTECODE: "1"
+    ports:
+      - "8787:8787"
+    volumes:
+      - ../../.local/compose-state/padawan:/data/padawan:Z
+
+  coturn:
+    image: coturn/coturn:4.12.0
+    command:
+      - --fingerprint
+      - --lt-cred-mech
+      - --user=padawan:padawan-turn-dev
+      - --realm=padawan.local
+      - --no-cli
+      - --no-tls
+      - --no-dtls
+      - --min-port=49160
+      - --max-port=49200
+    ports:
+      - "3478:3478/tcp"
+      - "3478:3478/udp"
+      - "49160-49200:49160-49200/udp"

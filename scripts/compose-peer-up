@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+COMPOSE_FILE="$ROOT/ops/compose/padawan-peer.compose.yaml"
+
+if [[ -n "${PADAWAN_COMPOSE_ENGINE:-}" ]]; then
+  read -r -a ENGINE <<<"$PADAWAN_COMPOSE_ENGINE"
+elif podman compose version >/dev/null 2>&1; then
+  ENGINE=(podman compose)
+elif command -v podman-compose >/dev/null 2>&1; then
+  ENGINE=(podman-compose)
+elif docker compose version >/dev/null 2>&1; then
+  ENGINE=(docker compose)
+elif command -v docker-compose >/dev/null 2>&1; then
+  ENGINE=(docker-compose)
+else
+  echo "No compose engine found. Install podman-compose or docker compose." >&2
+  exit 1
+fi
+
+mkdir -p "$ROOT/.local/compose-state/padawan"
+cd "$ROOT"
+exec "${ENGINE[@]}" -f "$COMPOSE_FILE" up --build
