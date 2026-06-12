@@ -190,6 +190,7 @@ const peerState = {
   socket: null,
   connection: null,
   dataChannel: null,
+  initiator: false,
 };
 
 function peerRoot() {
@@ -280,6 +281,7 @@ async function joinPeerSession() {
 
 async function connectPeerSocket(initiator) {
   await ensurePeerConnection(initiator);
+  peerState.initiator = initiator;
   const scheme = window.location.protocol === "https:" ? "wss" : "ws";
   const sessionId = encodeURIComponent(peerState.session.session_id);
   const token = encodeURIComponent(peerState.token);
@@ -287,11 +289,7 @@ async function connectPeerSocket(initiator) {
   peerState.socket = new WebSocket(`${scheme}://${window.location.host}/peer/ws/${sessionId}?token=${token}&peer_id=${peerId}`);
   peerState.socket.addEventListener("open", async () => {
     setPeerStatus("Signaling connected.");
-    if (initiator) {
-      const offer = await peerState.connection.createOffer();
-      await peerState.connection.setLocalDescription(offer);
-      peerState.socket.send(JSON.stringify({ type: "offer", description: offer }));
-    }
+    if (initiator) await sendPeerOffer();
   });
   peerState.socket.addEventListener("message", (event) => {
     handlePeerSignal(JSON.parse(event.data)).catch((error) => setPeerStatus(String(error)));
@@ -334,9 +332,22 @@ function configureDataChannel(channel) {
   channel.addEventListener("message", (event) => handlePeerData(JSON.parse(event.data)));
 }
 
+async function sendPeerOffer() {
+  if (!peerState.connection || peerState.socket?.readyState !== WebSocket.OPEN) return;
+  if (peerState.connection.localDescription?.type === "offer") {
+    peerState.socket.send(JSON.stringify({ type: "offer", description: peerState.connection.localDescription }));
+    return;
+  }
+  if (peerState.connection.signalingState !== "stable") return;
+  const offer = await peerState.connection.createOffer();
+  await peerState.connection.setLocalDescription(offer);
+  peerState.socket.send(JSON.stringify({ type: "offer", description: offer }));
+}
+
 async function handlePeerSignal(message) {
   if (message.type === "peer-joined") {
     renderPeerRoster(message.participants);
+    if (peerState.initiator) await sendPeerOffer();
     return;
   }
   await ensurePeerConnection(false);
