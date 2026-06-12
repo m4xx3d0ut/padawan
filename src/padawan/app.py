@@ -6,7 +6,16 @@ import zipfile
 from pathlib import Path
 from typing import Any, get_args
 
-from fastapi import BackgroundTasks, FastAPI, File, Request, UploadFile
+from fastapi import (
+    BackgroundTasks,
+    FastAPI,
+    File,
+    HTTPException,
+    Request,
+    UploadFile,
+    WebSocket,
+    WebSocketDisconnect,
+)
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -27,6 +36,14 @@ from .courses import (
 )
 from .docs import list_docs, render_doc
 from .models import ConceptLink, Course, Lesson, Level, RuntimeRequest, Track
+from .peer import (
+    PeerHub,
+    PeerIdentityRequest,
+    PeerJoinRequest,
+    PeerSessionRequest,
+    decode_invite_token,
+    ice_servers_for_profile,
+)
 from .runtime import run_lesson
 from .settings import PACKAGE_DIR, Settings, ensure_settings_dirs
 from .storage import Storage
@@ -228,6 +245,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.state.settings = resolved
     app.state.storage = storage
     app.state.codex = codex
+    app.state.peer_hub = PeerHub()
     app.mount("/static", StaticFiles(directory=str(PACKAGE_DIR / "static")), name="static")
 
     @app.middleware("http")
@@ -239,6 +257,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             "script-src 'self'; "
             "style-src 'self' 'unsafe-inline'; "
             "img-src 'self' data:; "
+            "connect-src 'self'; "
             "form-action 'self'; "
             "frame-ancestors 'none'; "
             "base-uri 'self'",
@@ -257,6 +276,113 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         context["tracks"] = get_args(Track)
         context["levels"] = get_args(Level)
         return TEMPLATES.TemplateResponse(request, "index.html", context)
+
+    @app.get("/peer/ice-config")
+    async def peer_ice_config(profile: str = "local-turn") -> JSONResponse:
+        return JSONResponse(
+            {
+                "ok": True,
+                "profile": profile,
+                "ice_servers": ice_servers_for_profile(
+                    profile,
+                    turn_host=resolved.turn_host,
+                    turn_secret=resolved.turn_secret,
+                ),
+            }
+        )
+
+    @app.post("/peer/identity")
+    async def peer_identity(request: Request) -> JSONResponse:
+        payload = PeerIdentityRequest.model_validate(await request.json())
+        identity = storage.peer_identity(payload.username, payload.role)
+        return JSONResponse({"ok": True, "identity": identity.model_dump()})
+
+    @app.post("/peer/sessions")
+    async def peer_session_create(request: Request) -> JSONResponse:
+        payload = PeerSessionRequest.model_validate(await request.json())
+        identity = storage.peer_identity(payload.username, payload.role)
+        session, token = app.state.peer_hub.create_session(
+            issuer=identity,
+            ice_profile=payload.ice_profile,
+            origin=payload.origin or str(request.base_url).rstrip("/"),
+            ttl_seconds=payload.ttl_seconds,
+        )
+        return JSONResponse(
+            {
+                "ok": True,
+                "identity": identity.model_dump(),
+                "session": session.model_dump(),
+                "token": token,
+            }
+        )
+
+    @app.post("/peer/sessions/join")
+    async def peer_session_join(request: Request) -> JSONResponse:
+        payload = PeerJoinRequest.model_validate(await request.json())
+        try:
+            token = decode_invite_token(payload.token)
+        except ValueError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+        identity = storage.peer_identity(payload.username, payload.role)
+        try:
+            session = app.state.peer_hub.join_session(token, identity)
+        except ValueError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+        return JSONResponse(
+            {"ok": True, "identity": identity.model_dump(), "session": session.model_dump()}
+        )
+
+    @app.get("/peer/progress/{course_id}")
+    async def peer_local_progress(course_id: str) -> JSONResponse:
+        return JSONResponse({"ok": True, "progress": storage.local_progress_payload(course_id)})
+
+    @app.post("/peer/progress")
+    async def peer_progress_save(request: Request) -> JSONResponse:
+        payload = await request.json()
+        peer_id = str(payload.get("peer_id", "")).strip()
+        course_id = str(payload.get("course_id", "")).strip()
+        progress = payload.get("progress")
+        if not peer_id or not course_id or not isinstance(progress, dict):
+            return JSONResponse(
+                {"ok": False, "error": "peer_id, course_id, and progress are required."},
+                status_code=400,
+            )
+        storage.upsert_peer_progress(peer_id=peer_id, course_id=course_id, payload=progress)
+        return JSONResponse({"ok": True})
+
+    @app.post("/peer/courses")
+    async def peer_course_save(request: Request) -> JSONResponse:
+        payload = await request.json()
+        peer_id = str(payload.get("peer_id", "")).strip()
+        course = payload.get("course")
+        if not peer_id or not isinstance(course, dict):
+            return JSONResponse(
+                {"ok": False, "error": "peer_id and course are required."},
+                status_code=400,
+            )
+        parsed = Course.model_validate(course)
+        inbox_id = storage.record_peer_course(
+            peer_id=peer_id,
+            course_id=parsed.id,
+            course_payload=parsed.model_dump(),
+        )
+        return JSONResponse({"ok": True, "inbox_id": inbox_id, "course_id": parsed.id})
+
+    @app.websocket("/peer/ws/{session_id}")
+    async def peer_signaling_socket(websocket: WebSocket, session_id: str) -> None:
+        raw_token = websocket.query_params.get("token", "")
+        peer_id_value = websocket.query_params.get("peer_id", "")
+        try:
+            app.state.peer_hub.validate(session_id, raw_token)
+            await app.state.peer_hub.connect(session_id, peer_id_value, websocket)
+            while True:
+                payload = await websocket.receive_json()
+                if isinstance(payload, dict):
+                    await app.state.peer_hub.broadcast(session_id, peer_id_value, payload)
+        except ValueError:
+            await websocket.close(code=1008)
+        except WebSocketDisconnect:
+            app.state.peer_hub.disconnect(session_id, peer_id_value)
 
     @app.get("/courses", response_class=HTMLResponse)
     async def courses_index(request: Request) -> HTMLResponse:

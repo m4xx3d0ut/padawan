@@ -76,3 +76,28 @@ def test_validation_runs_and_codex_threads_are_persisted(tmp_path: Path) -> None
     thread = storage.codex_thread("thread-1")
     assert thread is not None
     assert thread["course_id"] == "python-basics"
+
+
+def test_peer_identity_course_inbox_and_progress(tmp_path: Path) -> None:
+    storage = Storage(tmp_path / "state.sqlite3")
+    course = load_courses(REPO_ROOT / "content" / "courses")["python-basics"]
+
+    identity = storage.peer_identity("Ahsoka", "padawan")
+    same_identity = storage.peer_identity(" Ahsoka ", "padawan")
+    inbox_id = storage.record_peer_course(
+        peer_id=identity.peer_id,
+        course_id=course.id,
+        course_payload=course.model_dump(),
+    )
+    storage.upsert_peer_progress(
+        peer_id=identity.peer_id,
+        course_id=course.id,
+        payload={"completed_lessons": ["hello-python"]},
+    )
+
+    assert identity.peer_id == same_identity.peer_id
+    assert inbox_id == 1
+    assert storage.peer_courses(identity.peer_id)[0]["course"]["id"] == "python-basics"
+    assert storage.peer_progress(identity.peer_id)[0]["payload"] == {
+        "completed_lessons": ["hello-python"]
+    }

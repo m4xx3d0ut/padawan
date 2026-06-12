@@ -61,6 +61,8 @@ class Settings:
     codex_bin: str = os.getenv("PADAWAN_CODEX_BIN", "codex")
     runtime_timeout_seconds: float = float(os.getenv("PADAWAN_RUNTIME_TIMEOUT", "8"))
     runtime_output_limit: int = int(os.getenv("PADAWAN_RUNTIME_OUTPUT_LIMIT", "12000"))
+    turn_host: str = os.getenv("PADAWAN_TURN_HOST", "")
+    turn_secret: str = os.getenv("PADAWAN_TURN_SECRET", "")
 
     @property
     def db_path(self) -> Path:
