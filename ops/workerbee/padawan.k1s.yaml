@@ -27,7 +27,7 @@ spec:
     - name: PADAWAN_STATE_DIR
       value: /data/padawan
     - name: PADAWAN_TURN_HOST
-      value: app.padawan-simulacra-and-simulation-ff1f1693ac.workerbee.home.arpa
+      value: app.padawan.workerbee.localhost
     - name: PADAWAN_TURN_SECRET
       value: padawan-turn-dev
     - name: TMPDIR
@@ -56,6 +56,6 @@ spec:
       initialDelaySeconds: 10
       periodSeconds: 10
   ingress:
-    host: app.padawan-simulacra-and-simulation-ff1f1693ac.workerbee.home.arpa
+    host: app.padawan.workerbee.localhost
     path: /
     tls: true

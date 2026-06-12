@@ -7,12 +7,14 @@ The peer validation stage uses two native k1s workloads:
   fully qualified `docker.io/coturn/coturn:4.12.0` image so Podman does not
   need short-name registry aliases
 
-`PADAWAN_TURN_HOST` must be a host the browser can resolve. The local
-WorkerBee stage uses
-`app.padawan-simulacra-and-simulation-ff1f1693ac.workerbee.home.arpa` with
-coturn published on port 3478. Remote k1s-dev-a runs should override it with an
-externally reachable node, load balancer, or DNS name for the deployed TURN
-endpoint.
+`PADAWAN_TURN_HOST` must be a host the browser can resolve. The committed
+manifest uses the neutral local default `app.padawan.workerbee.localhost`.
+Measured simulation runs must rewrite the staged manifest to the active
+WorkerBee project host before deployment, for example
+`app.simcal2.workerbee.localhost`, so Caddy route ownership and TURN host values
+do not collide with another WorkerBee project. Remote k1s-dev-a runs should
+override it with an externally reachable node, load balancer, or DNS name for
+the deployed TURN endpoint.
 
 The local WorkerBee manifests intentionally omit `metadata.namespace` because
 the project-local Podman-backed k1s path expects simple app identities for
@@ -23,23 +25,23 @@ The coturn container intentionally does not drop all Linux capabilities in this
 local stage because the upstream image entrypoint will not execute under
 Podman's fully dropped capability bounding set.
 
-Expected WorkerBee loop:
+Expected direct-containerd WorkerBee simulation loop:
 
 ```bash
-workerbee_v1_session_start(cwd="/home/m4xx3d0ut/git/k1s-wt/padawan", goal="validate peer flow")
-workerbee_v1_image_build(context=".", dockerfile="Containerfile", tag="localhost/padawan:dev")
-workerbee_v1_manifest_prepare(name="padawan-peer", source="/home/m4xx3d0ut/git/k1s-wt/padawan/ops/workerbee")
-workerbee_v1_manifest_validate(stage="<returned stage_dir>")
-workerbee_v1_manifest_deploy_local(stage="<returned stage_dir>")
-workerbee_v1_ingress_probe(
-    host="app.padawan-simulacra-and-simulation-ff1f1693ac.workerbee.home.arpa",
-    path="/healthz",
-)
-workerbee_v1_ingress_probe(
-    host="app.padawan-simulacra-and-simulation-ff1f1693ac.workerbee.home.arpa",
-    path="/peer",
-)
-workerbee_v1_security_review_project(stage="ops/workerbee")
+cd /home/m4xx3d0ut/git/k1s-wt/k1s-workerbee
+WORKERBEE_REFRESH_SUDO=0 scripts/dev/wb-containerd --project simcal2 profile start \
+  --profile k1s-dev-min-sqlite --k1s-root ../k1s
+WORKERBEE_REFRESH_SUDO=0 scripts/dev/wb-containerd --project simcal2 build-image \
+  --tag localhost/padawan:dev -f Containerfile /home/m4xx3d0ut/git/k1s-wt/padawan
+WORKERBEE_REFRESH_SUDO=0 scripts/dev/wb-containerd --project simcal2 manifest prepare \
+  --name padawan-peer --source /home/m4xx3d0ut/git/k1s-wt/padawan/ops/workerbee
+cd /home/m4xx3d0ut/git/k1s-wt/simulacra-and-simulation
+simctl patch-workerbee-stage --project simcal2 --stage-dir <returned stage_dir>
+cd /home/m4xx3d0ut/git/k1s-wt/k1s-workerbee
+WORKERBEE_REFRESH_SUDO=0 scripts/dev/wb-containerd --project simcal2 manifest validate \
+  --stage <returned stage_dir>
+WORKERBEE_REFRESH_SUDO=0 scripts/dev/wb-containerd --project simcal2 manifest deploy-local \
+  --stage <returned stage_dir> --target profile --profile k1s-dev-min-sqlite --k1s-root ../k1s
 ```
 
 If this WorkerBee runtime applies the workloads but does not materialize an app
