@@ -64,6 +64,26 @@ def test_peer_ice_profiles(tmp_path: Path) -> None:
     assert google.json()["ice_servers"] == [{"urls": "stun:stun.l.google.com:19302"}]
 
 
+def test_peer_workspace_and_course_transfer_endpoints(tmp_path: Path) -> None:
+    with make_client(tmp_path) as client:
+        page = client.get("/peer?role=jedi&username=Leia")
+        course_export = client.get("/peer/courses/python-basics/export")
+        imported = client.post(
+            "/peer/courses",
+            json={"peer_id": "remote-jedi", "course": course_export.json()["course"]},
+        )
+        courses = client.get("/courses")
+
+    assert page.status_code == 200
+    assert "Course Transfer" in page.text
+    assert "Leia" in page.text
+    assert course_export.status_code == 200
+    assert course_export.json()["course"]["id"] == "python-basics"
+    assert imported.status_code == 200
+    assert imported.json()["course_id"] == "python-basics"
+    assert "Python Basics" in courses.text
+
+
 def test_peer_websocket_relays_signaling(tmp_path: Path) -> None:
     with make_client(tmp_path) as client:
         created = client.post(

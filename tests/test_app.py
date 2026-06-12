@@ -27,6 +27,7 @@ def test_landing_page_renders_courses_and_style(tmp_path: Path) -> None:
 
     assert response.status_code == 200
     assert "What programming language or skills would you like to learn today?" in response.text
+    assert "Peer Mode" in response.text
     assert "Python Basics" in response.text
     assert "/static/brand/page-background-3840x2160.webp" not in response.text
     assert "/static/css/app.css" in response.text

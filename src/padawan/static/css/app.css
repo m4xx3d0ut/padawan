@@ -218,6 +218,120 @@ button:disabled {
   margin: 0 auto 10px;
 }
 
+.mode-panel,
+.peer-mode-form,
+.peer-controls,
+.peer-actions,
+.peer-message-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: end;
+}
+
+.mode-panel {
+  justify-content: space-between;
+  margin-top: 14px;
+}
+
+.peer-mode-form input {
+  min-width: 180px;
+}
+
+.peer-workspace {
+  display: grid;
+  gap: 14px;
+}
+
+.peer-controls {
+  align-items: end;
+}
+
+.peer-controls > div:first-child {
+  flex: 1 1 220px;
+}
+
+.peer-controls label {
+  display: grid;
+  gap: 4px;
+  min-width: 150px;
+  color: var(--k1s-text-muted);
+}
+
+.peer-controls textarea {
+  flex: 1 1 100%;
+  min-height: 76px;
+}
+
+.peer-stage {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.peer-video-panel {
+  position: relative;
+  min-width: 0;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--k1s-border-soft);
+  border-radius: var(--k1s-radius);
+  background: #020617;
+}
+
+.peer-video-panel video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #020617;
+}
+
+.peer-video-panel .pill {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+}
+
+.peer-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 1.4fr) repeat(2, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.peer-grid .panel {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+.peer-log {
+  min-height: 180px;
+  max-height: 280px;
+  overflow: auto;
+  border: 1px solid var(--k1s-border-soft);
+  border-radius: var(--k1s-radius);
+  padding: 10px;
+  background: #0004;
+}
+
+.peer-log p {
+  margin-bottom: 6px;
+}
+
+.peer-message-form {
+  align-items: stretch;
+}
+
+.peer-message-form input {
+  flex: 1 1 180px;
+}
+
+.peer-roster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .course-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -529,7 +643,9 @@ dialog::backdrop {
 @media (max-width: 860px) {
   .hero,
   .lesson-shell,
-  .doc-grid {
+  .doc-grid,
+  .peer-stage,
+  .peer-grid {
     grid-template-columns: 1fr;
   }
 

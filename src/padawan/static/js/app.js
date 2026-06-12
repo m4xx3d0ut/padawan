@@ -183,6 +183,247 @@ async function startDraftValidation(form) {
   }
 }
 
+const peerState = {
+  identity: null,
+  session: null,
+  token: "",
+  socket: null,
+  connection: null,
+  dataChannel: null,
+};
+
+function peerRoot() {
+  return document.querySelector("[data-peer-app]");
+}
+
+function setPeerStatus(text) {
+  const status = document.querySelector("[data-peer-status]");
+  if (status) status.textContent = text;
+}
+
+function setPeerDataStatus(text) {
+  const status = document.querySelector("[data-peer-data-status]");
+  if (status) status.textContent = text;
+}
+
+function peerFormValue(selector) {
+  const input = document.querySelector(selector);
+  return input ? input.value.trim() : "";
+}
+
+function appendPeerLog(text) {
+  const log = document.querySelector("[data-peer-chat-log]");
+  if (!log) return;
+  const line = document.createElement("p");
+  line.textContent = text;
+  log.appendChild(line);
+  log.scrollTop = log.scrollHeight;
+}
+
+function renderPeerRoster(participants) {
+  const roster = document.querySelector("[data-peer-roster]");
+  if (!roster) return;
+  roster.innerHTML = "";
+  (participants || []).forEach((participant) => {
+    const item = document.createElement("p");
+    item.className = "pill";
+    item.textContent = participant.username + " (" + participant.role + ") #" + participant.suffix;
+    roster.appendChild(item);
+  });
+}
+
+async function peerJson(url, payload) {
+  const response = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  const result = await response.json();
+  if (!response.ok || result.ok === false) {
+    throw new Error(result.error || result.detail || "Peer request failed.");
+  }
+  return result;
+}
+
+async function createPeerSession() {
+  const payload = {
+    username: peerFormValue("[data-peer-username]"),
+    role: peerFormValue("[data-peer-role]") || "padawan",
+    ice_profile: peerFormValue("[data-peer-ice-profile]") || "local-turn",
+  };
+  const result = await peerJson("/peer/sessions", payload);
+  peerState.identity = result.identity;
+  peerState.session = result.session;
+  peerState.token = result.token;
+  const token = document.querySelector("[data-peer-token]");
+  if (token) token.value = result.token;
+  renderPeerRoster(result.session.participants);
+  await connectPeerSocket(true);
+  setPeerStatus("Session token created.");
+}
+
+async function joinPeerSession() {
+  const token = peerFormValue("[data-peer-token]");
+  const payload = {
+    token,
+    username: peerFormValue("[data-peer-username]"),
+    role: peerFormValue("[data-peer-role]") || "padawan",
+  };
+  const result = await peerJson("/peer/sessions/join", payload);
+  peerState.identity = result.identity;
+  peerState.session = result.session;
+  peerState.token = token;
+  renderPeerRoster(result.session.participants);
+  await connectPeerSocket(false);
+  setPeerStatus("Joined peer session.");
+}
+
+async function connectPeerSocket(initiator) {
+  await ensurePeerConnection(initiator);
+  const scheme = window.location.protocol === "https:" ? "wss" : "ws";
+  const sessionId = encodeURIComponent(peerState.session.session_id);
+  const token = encodeURIComponent(peerState.token);
+  const peerId = encodeURIComponent(peerState.identity.peer_id);
+  peerState.socket = new WebSocket(`${scheme}://${window.location.host}/peer/ws/${sessionId}?token=${token}&peer_id=${peerId}`);
+  peerState.socket.addEventListener("open", async () => {
+    setPeerStatus("Signaling connected.");
+    if (initiator) {
+      const offer = await peerState.connection.createOffer();
+      await peerState.connection.setLocalDescription(offer);
+      peerState.socket.send(JSON.stringify({ type: "offer", description: offer }));
+    }
+  });
+  peerState.socket.addEventListener("message", (event) => {
+    handlePeerSignal(JSON.parse(event.data)).catch((error) => setPeerStatus(String(error)));
+  });
+  peerState.socket.addEventListener("close", () => setPeerStatus("Signaling disconnected."));
+}
+
+async function ensurePeerConnection(initiator) {
+  if (peerState.connection) return;
+  const profile = peerFormValue("[data-peer-ice-profile]") || "local-turn";
+  const iceResponse = await fetch("/peer/ice-config?profile=" + encodeURIComponent(profile));
+  const iceConfig = await iceResponse.json();
+  const connection = new RTCPeerConnection({ iceServers: iceConfig.ice_servers || [] });
+  peerState.connection = connection;
+  connection.addEventListener("icecandidate", (event) => {
+    if (event.candidate && peerState.socket?.readyState === WebSocket.OPEN) {
+      peerState.socket.send(JSON.stringify({ type: "candidate", candidate: event.candidate }));
+    }
+  });
+  connection.addEventListener("track", (event) => {
+    const video = document.querySelector("[data-peer-remote-video]");
+    if (video && event.streams[0]) video.srcObject = event.streams[0];
+  });
+  connection.addEventListener("datachannel", (event) => configureDataChannel(event.channel));
+  if (initiator) configureDataChannel(connection.createDataChannel("padawan-peer"));
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
+    const local = document.querySelector("[data-peer-local-video]");
+    if (local) local.srcObject = stream;
+    stream.getTracks().forEach((track) => connection.addTrack(track, stream));
+  } catch (error) {
+    appendPeerLog("Media unavailable: " + String(error));
+  }
+}
+
+function configureDataChannel(channel) {
+  peerState.dataChannel = channel;
+  channel.addEventListener("open", () => setPeerDataStatus("Open."));
+  channel.addEventListener("close", () => setPeerDataStatus("Closed."));
+  channel.addEventListener("message", (event) => handlePeerData(JSON.parse(event.data)));
+}
+
+async function handlePeerSignal(message) {
+  if (message.type === "peer-joined") {
+    renderPeerRoster(message.participants);
+    return;
+  }
+  await ensurePeerConnection(false);
+  if (message.type === "offer") {
+    await peerState.connection.setRemoteDescription(message.description);
+    const answer = await peerState.connection.createAnswer();
+    await peerState.connection.setLocalDescription(answer);
+    peerState.socket.send(JSON.stringify({ type: "answer", description: answer }));
+    return;
+  }
+  if (message.type === "answer") {
+    await peerState.connection.setRemoteDescription(message.description);
+    return;
+  }
+  if (message.type === "candidate") {
+    await peerState.connection.addIceCandidate(message.candidate);
+  }
+}
+
+function sendPeerData(payload) {
+  if (!peerState.dataChannel || peerState.dataChannel.readyState !== "open") {
+    throw new Error("Data channel is not open.");
+  }
+  peerState.dataChannel.send(JSON.stringify({ from: peerState.identity.peer_id, ...payload }));
+}
+
+function handlePeerData(message) {
+  if (message.type === "chat") {
+    appendPeerLog("Peer: " + message.text);
+    return;
+  }
+  if (message.type === "course") {
+    peerJson("/peer/courses", { peer_id: message.from, course: message.course })
+      .then((result) => appendPeerLog("Received course: " + result.course_id))
+      .catch((error) => appendPeerLog(String(error)));
+    return;
+  }
+  if (message.type === "progress") {
+    peerJson("/peer/progress", {
+      peer_id: message.from,
+      course_id: message.course_id,
+      progress: message.progress,
+    })
+      .then(() => appendPeerLog("Received progress: " + message.course_id))
+      .catch((error) => appendPeerLog(String(error)));
+  }
+}
+
+async function sendPeerChat(form) {
+  const input = form.querySelector("[data-peer-chat-input]");
+  const text = input ? input.value.trim() : "";
+  if (!text) return;
+  sendPeerData({ type: "chat", text });
+  appendPeerLog("You: " + text);
+  if (input) input.value = "";
+}
+
+async function sendPeerCourse() {
+  const courseId = peerFormValue("[data-peer-course-select]");
+  const response = await fetch("/peer/courses/" + encodeURIComponent(courseId) + "/export");
+  const result = await response.json();
+  if (!result.ok) throw new Error(result.error || "Course export failed.");
+  sendPeerData({ type: "course", course: result.course });
+  appendPeerLog("Sent course: " + courseId);
+}
+
+async function sendPeerProgress() {
+  const courseId = peerFormValue("[data-peer-progress-select]");
+  const response = await fetch("/peer/progress/" + encodeURIComponent(courseId));
+  const result = await response.json();
+  if (!result.ok) throw new Error(result.error || "Progress export failed.");
+  sendPeerData({ type: "progress", course_id: courseId, progress: result.progress });
+  appendPeerLog("Sent progress: " + courseId);
+}
+
+function wirePeerApp() {
+  if (!peerRoot()) return;
+  const create = document.querySelector("[data-peer-create]");
+  const join = document.querySelector("[data-peer-join]");
+  const course = document.querySelector("[data-peer-send-course]");
+  const progress = document.querySelector("[data-peer-send-progress]");
+  if (create) create.addEventListener("click", () => createPeerSession().catch((error) => setPeerStatus(String(error))));
+  if (join) join.addEventListener("click", () => joinPeerSession().catch((error) => setPeerStatus(String(error))));
+  if (course) course.addEventListener("click", () => sendPeerCourse().catch((error) => setPeerStatus(String(error))));
+  if (progress) progress.addEventListener("click", () => sendPeerProgress().catch((error) => setPeerStatus(String(error))));
+}
+
 document.addEventListener("click", (event) => {
   const run = event.target.closest("[data-run-lesson]");
   if (run) runLesson(run);
@@ -198,7 +439,15 @@ document.addEventListener("submit", (event) => {
     return;
   }
   const validationForm = event.target.closest("[data-validate-draft]");
+  const peerChatForm = event.target.closest("[data-peer-chat-form]");
+  if (peerChatForm) {
+    event.preventDefault();
+    sendPeerChat(peerChatForm).catch((error) => setPeerStatus(String(error)));
+    return;
+  }
   if (!validationForm) return;
   event.preventDefault();
   startDraftValidation(validationForm);
 });
+
+document.addEventListener("DOMContentLoaded", wirePeerApp);

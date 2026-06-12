@@ -257,7 +257,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             "script-src 'self'; "
             "style-src 'self' 'unsafe-inline'; "
             "img-src 'self' data:; "
-            "connect-src 'self'; "
+            "connect-src 'self' ws: wss:; "
             "form-action 'self'; "
             "frame-ancestors 'none'; "
             "base-uri 'self'",
@@ -276,6 +276,19 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         context["tracks"] = get_args(Track)
         context["levels"] = get_args(Level)
         return TEMPLATES.TemplateResponse(request, "index.html", context)
+
+    @app.get("/peer", response_class=HTMLResponse)
+    async def peer_workspace(request: Request) -> HTMLResponse:
+        courses = _courses(resolved)
+        context = _base_context(request, resolved, storage)
+        context.update(
+            {
+                "courses": storage.course_cards(courses.values()),
+                "selected_role": request.query_params.get("role", "padawan"),
+                "selected_username": request.query_params.get("username", ""),
+            }
+        )
+        return TEMPLATES.TemplateResponse(request, "peer.html", context)
 
     @app.get("/peer/ice-config")
     async def peer_ice_config(profile: str = "local-turn") -> JSONResponse:
@@ -361,12 +374,21 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 status_code=400,
             )
         parsed = Course.model_validate(course)
+        export_course(parsed, resolved.user_course_dir / f"{parsed.id}.json")
         inbox_id = storage.record_peer_course(
             peer_id=peer_id,
             course_id=parsed.id,
             course_payload=parsed.model_dump(),
+            status="imported",
         )
         return JSONResponse({"ok": True, "inbox_id": inbox_id, "course_id": parsed.id})
+
+    @app.get("/peer/courses/{course_id}/export")
+    async def peer_course_export(course_id: str) -> JSONResponse:
+        course = _courses(resolved).get(course_id)
+        if not course:
+            return JSONResponse({"ok": False, "error": "Course not found."}, status_code=404)
+        return JSONResponse({"ok": True, "course": course.model_dump()})
 
     @app.websocket("/peer/ws/{session_id}")
     async def peer_signaling_socket(websocket: WebSocket, session_id: str) -> None:

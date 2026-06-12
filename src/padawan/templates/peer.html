@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}Padawan Peer{% endblock %}
+{% block content %}
+<section
+  class="peer-workspace"
+  data-peer-app
+  data-selected-role="{{ selected_role }}"
+  data-selected-username="{{ selected_username }}"
+>
+  <section class="peer-controls panel">
+    <div>
+      <h2>Peer Mode</h2>
+      <p class="muted">Create or join a local Padawan/Jedi session.</p>
+    </div>
+    <label>
+      Username
+      <input data-peer-username value="{{ selected_username }}" placeholder="Ahsoka">
+    </label>
+    <label>
+      Mode
+      <select data-peer-role>
+        <option value="padawan" {{ 'selected' if selected_role == 'padawan' else '' }}>Padawan</option>
+        <option value="jedi" {{ 'selected' if selected_role == 'jedi' else '' }}>Jedi</option>
+      </select>
+    </label>
+    <label>
+      ICE
+      <select data-peer-ice-profile>
+        <option value="local-turn">Local TURN</option>
+        <option value="google-stun">Google public STUN</option>
+        <option value="none">No ICE server</option>
+      </select>
+    </label>
+    <div class="peer-actions">
+      <button class="primary" type="button" data-peer-create>Create Token</button>
+      <button type="button" data-peer-join>Join Token</button>
+    </div>
+    <textarea data-peer-token rows="3" placeholder="Session token"></textarea>
+    <p class="muted" data-peer-status>Idle.</p>
+  </section>
+
+  <section class="peer-stage">
+    <div class="peer-video-panel">
+      <video data-peer-local-video autoplay muted playsinline></video>
+      <span class="pill">Local</span>
+    </div>
+    <div class="peer-video-panel">
+      <video data-peer-remote-video autoplay playsinline></video>
+      <span class="pill">Remote</span>
+    </div>
+  </section>
+
+  <section class="peer-grid">
+    <section class="panel peer-chat">
+      <h3>Chat</h3>
+      <div class="peer-log" data-peer-chat-log></div>
+      <form class="peer-message-form" data-peer-chat-form>
+        <input data-peer-chat-input placeholder="Message">
+        <button type="submit">Send</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h3>Course Transfer</h3>
+      <select data-peer-course-select>
+        {% for course in courses %}
+          <option value="{{ course.id }}">{{ course.title }}</option>
+        {% endfor %}
+      </select>
+      <button type="button" data-peer-send-course>Send Course</button>
+      <h3>Progress Sync</h3>
+      <select data-peer-progress-select>
+        {% for course in courses %}
+          <option value="{{ course.id }}">{{ course.title }}</option>
+        {% endfor %}
+      </select>
+      <button type="button" data-peer-send-progress>Send Progress</button>
+    </section>
+
+    <section class="panel">
+      <h3>Roster</h3>
+      <div class="peer-roster" data-peer-roster></div>
+      <h3>Data Channel</h3>
+      <p class="muted" data-peer-data-status>Not connected.</p>
+    </section>
+  </section>
+</section>
+{% endblock %}

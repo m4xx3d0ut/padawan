@@ -19,5 +19,20 @@
   </aside>
 </section>
 
+<section class="panel mode-panel">
+  <div>
+    <h2>Peer Mode</h2>
+    <p class="muted">Start as Padawan or Jedi for local WebRTC learning sessions.</p>
+  </div>
+  <form class="peer-mode-form" action="/peer" method="get">
+    <input name="username" placeholder="Username">
+    <select name="role">
+      <option value="padawan">Padawan</option>
+      <option value="jedi">Jedi</option>
+    </select>
+    <button type="submit">Open Peer Mode</button>
+  </form>
+</section>
+
 {% include "partials/course_grid.html" %}
 {% endblock %}
