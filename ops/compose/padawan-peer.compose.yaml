@@ -20,7 +20,7 @@ services:
       - ../../.local/compose-state/padawan:/data/padawan:Z
 
   coturn:
-    image: coturn/coturn:4.12.0
+    image: docker.io/coturn/coturn:4.12.0
     command:
       - --fingerprint
       - --lt-cred-mech

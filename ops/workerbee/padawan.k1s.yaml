@@ -2,7 +2,6 @@ apiVersion: ae.dev/v1alpha1
 kind: Deployment
 metadata:
   name: padawan
-  namespace: padawan
 spec:
   image: localhost/padawan:dev
   replicas: 1
@@ -17,6 +16,9 @@ spec:
   ports:
     - name: http
       containerPort: 8787
+  service:
+    port: 8787
+    targetPort: 8787
   env:
     - name: PADAWAN_HOST
       value: "0.0.0.0"
@@ -25,7 +27,7 @@ spec:
     - name: PADAWAN_STATE_DIR
       value: /data/padawan
     - name: PADAWAN_TURN_HOST
-      value: app.padawan.workerbee.home.arpa
+      value: app.padawan-simulacra-and-simulation-ff1f1693ac.workerbee.home.arpa
     - name: PADAWAN_TURN_SECRET
       value: padawan-turn-dev
     - name: TMPDIR
@@ -54,6 +56,6 @@ spec:
       initialDelaySeconds: 10
       periodSeconds: 10
   ingress:
-    host: app.padawan.workerbee.home.arpa
+    host: app.padawan-simulacra-and-simulation-ff1f1693ac.workerbee.home.arpa
     path: /
     tls: true

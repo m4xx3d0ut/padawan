@@ -2,9 +2,8 @@ apiVersion: ae.dev/v1alpha1
 kind: Deployment
 metadata:
   name: coturn
-  namespace: padawan
 spec:
-  image: coturn/coturn:4.12.0
+  image: docker.io/coturn/coturn:4.12.0
   replicas: 1
   command:
     - turnserver
@@ -24,6 +23,17 @@ spec:
   service:
     port: 3478
     targetPort: 3478
+  health:
+    readiness:
+      tcpSocket:
+        port: 3478
+      initialDelaySeconds: 2
+      periodSeconds: 5
+    liveness:
+      tcpSocket:
+        port: 3478
+      initialDelaySeconds: 10
+      periodSeconds: 10
   resources:
     requests:
       cpu: 0.1
@@ -33,5 +43,4 @@ spec:
       memory: 512Mi
   security:
     readOnlyRootFilesystem: false
-    dropCapabilities: ["ALL"]
     seccompProfileType: RuntimeDefault
